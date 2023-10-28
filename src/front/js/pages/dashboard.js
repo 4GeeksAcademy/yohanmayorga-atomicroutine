@@ -10,16 +10,14 @@ export const Dashboard = () => {
 
     useEffect(() => {
         !store.token && navigate("/login");
+        store.token === "undefined" && navigate("/login");
     });
 
     return (
-        <div className="Private">
+        <div className="dashboard">
             <h1>Hello! {store.profile ? store.profile.name : ""}</h1>
-            <h1>Hello! {store.profile ? store.profile.name : ""}</h1>
-            <h1>Hello! {store.profile ? store.profile.name : ""}</h1>
-            <h1>Hello! {store.profile ? store.profile.name : ""}</h1>
-            <h1>Hello! {store.profile ? store.profile.name : ""}</h1>
-            <h1>Hello! {store.profile ? store.profile.name : ""}</h1>
+            <h1>Hello! {store.profile ? store.profile.email : ""}</h1>
+
         </div>
     )
 };

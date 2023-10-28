@@ -47,7 +47,10 @@ def create_token():
     # hash_password = bcrypt.hashpw(password_byte)
     if bcrypt.checkpw(password_byte, user.password.encode('utf-8')):
         return {'token': create_access_token(identity=user.email, expires_delta=timedelta(hours=3))}, 200
-    return {'message': 'you can not access'}, 501
+    else:
+        return {"token": "",
+                "message": "you can not access"}, 501
+
 
 @api.route('/profile')
 @jwt_required()

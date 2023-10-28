@@ -1,81 +1,86 @@
 #loginContainer {
-    background: rgb(190,233,252);
-background: linear-gradient(180deg, rgba(190,233,252,1) 70%, rgba(255,255,255,1) 100%);
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: rgb(190, 233, 252);
+  background: linear-gradient(180deg, rgba(190, 233, 252, 1) 70%, rgba(255, 255, 255, 1) 100%);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #loginBox {
-    border-radius: 15px;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2%;
-    margin: auto;
-    width: 40%;
-    box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
-    flex-direction: column;
+  border-radius: 15px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10%;
+  margin: auto;
+  width: min-content;
+  box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
 }
 
 #loginForm {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .FormButton {
-    background: #5fbee7;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-right: 5px;
-    box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+  background: #5fbee7;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 5px;
+  box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
 .FormButton:hover {
-    background-color: #1074a2;
-    color: white;
+  background-color: #1074a2;
+  color: white;
 }
 
 .formLine {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding: 2%;
-    border-radius: 15px;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: #cccccc;
-    box-shadow: 3px 3px 3px rgba(42,42,42,.1);
-  }
-  
-  .formEmoji {
-    margin: 0 auto;
-  }
-  
-  .enterForm {
-    font-size: 20px;
-    padding: 5px;
-    border: none;
-  outline: none;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 2%;
+  border-radius: 15px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #cccccc;
+  box-shadow: 3px 3px 3px rgba(42, 42, 42, .1);
+}
 
-  .formHeadText {
-    font-size: 14px;
-    color: #aaaaaa;
-    display: flex;
-    text-align: center;
-  }
+.formEmoji {
+  margin: 0 auto;
+}
+
+.enterForm {
+  font-size: 20px;
+  padding: 5px;
+  border: none;
+  outline: none;
+}
+
+.formHeadText {
+  font-size: 14px;
+  color: #aaaaaa;
+  display: flex;
+  text-align: center;
+}
+
+#recoverPassword {
+  margin-top: 20px;
+  font-size: 15px;
+}

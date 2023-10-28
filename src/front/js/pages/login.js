@@ -10,7 +10,7 @@ export const LogIn = () => {
     const [isShow, setIsShown] = useState(false);
 
     useEffect(() => {
-        store.token && navigate("/dashboard");
+        store.token && store.token != "undefined" && navigate("/dashboard");
     });
 
     const [user, setUser] = useState({
@@ -27,7 +27,7 @@ export const LogIn = () => {
             if (created) { alert("User registered successfully") }
         }
         else {
-            console.log("error")
+            alert("Ha ocurrido un error")
         }
     }
 

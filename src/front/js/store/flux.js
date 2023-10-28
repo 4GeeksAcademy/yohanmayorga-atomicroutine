@@ -51,12 +51,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify({ email, password })
 						})
 					const data = await resp.json()
-
-					localStorage.setItem("token", data.token)
-					setStore({ token: data.token })
-					getActions().getProfile()
-
-					return true;
+					if (data.token != "") {
+						if (data.token != undefined) {
+							localStorage.setItem("token", data.token)
+							setStore({ token: data.token })
+							getActions().getProfile()
+							return true;
+						}
+					}
 				} catch (error) {
 					return false
 				}
