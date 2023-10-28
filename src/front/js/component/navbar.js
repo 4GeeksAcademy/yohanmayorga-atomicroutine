@@ -67,18 +67,31 @@ export const Navbar = () => {
 						</a>
 					</>
 				}
+
 				{
 					store.token && <>
-						<a href="/dashboard" className="userName">
-							👤 {store.profile ? store.profile.name : ""}
-						</a>
-						<a href="/">
-							<button type="button" className="button" onClick={() => actions.logOut()}>
-								Salir
+						<div className="nav-item dropdown">
+							<button type="button" role="button" className="dropdown-toggle button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarDropdown2">
+								👤 {store.profile ? store.profile.name : ""}
 							</button>
-						</a>
+							<ul className="dropdown-menu" arial-aria-labelledby="navbarDropdown2">
+								<li>
+									<a href="/dashboard" className="dropdown-item">Escritorio</a>
+								</li>
+								<li>
+									<a href="#" className="dropdown-item">Perfil</a>
+								</li>
+								<li>
+									<a href="#" className="dropdown-item text-danger" onClick={() => actions.logOut()}>Salir</a>
+								</li>
+							</ul>
+						</div>
 					</>
 				}
+
+
+
+
 			</div>
 		</nav>
 	);
