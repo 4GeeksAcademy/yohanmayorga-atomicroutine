@@ -1,7 +1,173 @@
-/*
-    home.css: This website contains selectors only used in home.css
+/* Personalización del primer container del home */
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+#firstContainer {
+    background: rgb(190,233,252);
+background: linear-gradient(180deg, rgba(190,233,252,1) 70%, rgba(255,255,255,1) 100%);
+    height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+#mainTitle {
+    font-size: 3em;
+    max-width: 500px;
+}
+
+#mainContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%
+}
+
+#leftContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+#mainTitle {
+    font-size: 3vw;
+}
+
+#homeImg {
+    max-height: 30lvh;
+}
+
+#homeButton1 {
+    background: #5fbee7;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 5px;
+    box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+#homeButton1:hover {
+    background-color: #1074a2;
+    color: white;
+}
+
+#homeButton2 {
+    background: white;
+    color: black;
+    border-radius: 5px;
+    border: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+#homeButton2:hover {
+    background-color: #1074a2;
+    color: white;
+}
+
+/* Personalización del segundo container del home */
+
+#secondContainer {
+    display: flex;
+    justify-content: center;
+}
+
+#secondContainerTitles {
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+#secondTitle {
+    text-align: center;
+}
+
+.nav-pills .nav-item .nav-link:hover {
+    background-color: #1074a2;
+    color: white;
+}
+
+.nav-pills .nav-item .nav-link:not(.active):hover {
+    background-color: #1074a2;
+    color: white;
+}
+
+.nav-pills .nav-item .nav-link:not(.active) {
+    background-color: white;
+    color: black;
+}
+
+.nav-pills .nav-item .nav-link {
+    background: #5fbee7;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 5px;
+    box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.navTabCard {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.navTabCardButton {
+    margin-left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+}
+
+/* Personalización del tercer container del home */
+
+#thirdContainer {
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+#cardsContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cardHome {
+    background: white;
+    border-radius: 15px;
+    padding: 2%;
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
+    width: 40%;
+    margin: 1%;
+}
+
+#emoji {
+    font-size: 2vw;
+}
+
+#thirdComponentButton {
+    display: flex;
+    justify-content: center;
+}
