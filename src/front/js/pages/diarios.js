@@ -12,6 +12,10 @@ export const Diarios = () => {
         color: "",
     });
 
+    useEffect(() => {
+		actions.getJournals();
+	}, [])
+
     async function createJournal() {
         let created = await actions.createJournal(journal)
         if (created) { alert("Journal registered successfully") }
@@ -52,7 +56,7 @@ export const Diarios = () => {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" className="btn btn-primary" onClick={() => createJournal(journal)}>Guardar</button>
+                                <button type="button" className="btn btn-primary" onClick={() => createJournal()}>Guardar</button>
                             </div>
                         </div>
                     </div>
@@ -60,7 +64,7 @@ export const Diarios = () => {
 
                 <div id="heroesContainer">
 
-                    {store.journals.length == 0 && <span>Loading...</span>}
+                    {store.journals.length == 0 && <span>No se han encontrado diarios</span>}
                     {store.journals.length != 0 &&
                         store.journals.map(item => (
                             <div className="card" key={item.id}>

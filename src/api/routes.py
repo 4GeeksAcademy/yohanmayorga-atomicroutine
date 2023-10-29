@@ -77,11 +77,16 @@ def create_journal():
     return {"journal": new_journal.serialize()}, 200
 
 
+@api.route('/journals', methods=['GET'])
+def get_journals():
+    journals = Journal.query.all()
 
+    # Convertir los objetos Journal a listas
+    json_journals = []
+    for journal in journals:
+        json_journals.append(journal.serialize())
 
-
-
-
+    return jsonify(json_journals)
 
 
 @api.route('/hello', methods=['POST', 'GET'])

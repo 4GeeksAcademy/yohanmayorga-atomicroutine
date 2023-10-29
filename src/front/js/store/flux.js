@@ -5,16 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user: null,
 			profile: JSON.parse(localStorage.getItem("profile")) || null,
 			token: localStorage.getItem("token") || null,
-			journals: [{
-				name: "SECOND",
-				text: "white",
-				color: "green"
-			},
-			{
-				name: "STHIRD",
-				text: "white",
-				color: "red"
-			}],
+			journals: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -125,9 +116,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
-
-
-
+			getJournals: async () => {
+				const store = getStore()
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/journals")
+					const data = await resp.json()
+					setStore({ ...store, journals: [...store.journals, ...data] })
+					return true;
+				} catch (error) {
+					showError()
+				}
+			},
 
 
 			// Default examples
