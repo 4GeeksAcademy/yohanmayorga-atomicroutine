@@ -1,0 +1,13 @@
+input[type="color"] {
+    width: 100%;
+}
+
+.journalModalBox {
+    display: flex;
+    flex-direction: column;
+}
+
+#journalMainModal {
+    background: rgb(190, 233, 252);
+    background: linear-gradient(180deg, rgba(190, 233, 252, 1) 0%, rgba(240, 240, 240, 1) 100%);
+}
