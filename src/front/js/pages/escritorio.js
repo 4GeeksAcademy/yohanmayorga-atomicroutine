@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import "../../styles/dashboard.css";
+import "../../styles/escritorio.css";
 
 export const Escritorio = () => {
 
@@ -9,7 +10,12 @@ export const Escritorio = () => {
 
     return (
         <div className="dashboard">
-            <h1>Escritorio de {store.profile ? store.profile.name : ""}</h1>
+            <div className="dashboardContainerbox">
+                <h4>Escritorio</h4>
+                <div className="desktopHeader">
+                    <h1>Bienvenid@ {store.profile ? store.profile.name : ""}</h1>
+                </div>
+            </div>
         </div>
     )
 };

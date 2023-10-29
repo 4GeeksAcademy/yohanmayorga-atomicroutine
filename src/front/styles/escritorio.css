@@ -1,0 +1,15 @@
+.dashboardContainerbox {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: top;
+    width: 100%;
+    margin-left: 15px;
+}
+
+.desktopHeader {
+    background: #bee9fc;
+    padding: 15px;
+    border-radius: 15px;
+    height: max-content;
+}
