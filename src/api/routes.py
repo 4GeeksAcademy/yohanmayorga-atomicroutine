@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Journal
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -60,6 +60,28 @@ def get_customer_profile():
     if user is not None:
         return user.serialize(), 200
     return {"message": "Not Authorized"}, 401
+
+
+@api.route('/createjournal', methods=['POST'])
+def create_journal():
+
+    body = request.get_json()
+    name = body.get("name", None)
+    text = body.get("text", None)
+    color = body.get("color", None)
+
+    new_journal = Journal(name=name, text=text, color=color)
+    db.session.add(new_journal)
+    db.session.commit()
+
+    return {"journal": new_journal.serialize()}, 200
+
+
+
+
+
+
+
 
 
 @api.route('/hello', methods=['POST', 'GET'])

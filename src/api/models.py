@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
@@ -20,4 +21,22 @@ class User(db.Model):
             "email": self.email,
             "salt": self.salt
             # do not serialize the password, its a security breach
+        }
+
+
+class Journal(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), unique=True, nullable=False)
+    text = db.Column(db.String(120), unique=True)
+    color = db.Column(db.String(80), unique=False)
+
+    def __repr__(self):
+        return f'<User {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "text": self.text,
+            "color": self.color
         }

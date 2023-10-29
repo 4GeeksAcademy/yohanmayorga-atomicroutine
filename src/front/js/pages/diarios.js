@@ -6,6 +6,20 @@ import "../../styles/diarios.css";
 
 export const Diarios = () => {
 
+    const { store, actions } = useContext(Context);
+    const [journal, setJournal] = useState({
+        name: "",
+        color: "",
+    });
+
+    async function createJournal() {
+        let created = await actions.createJournal(journal)
+        if (created) { alert("Journal registered successfully") }
+        else {
+            alert("Ha ocurrido un error")
+        }
+    }
+
     return (
         <div className="dashboard">
             <div className="dashboardContainerbox">
@@ -30,18 +44,41 @@ export const Diarios = () => {
                                         name="fullName"
                                         id="fullName"
                                         placeholder="Nombre del diario"
+                                        onChange={(e) => setJournal({ ...journal, name: e.target.value })}
                                         required />
                                     <label for="colorpicker" class="form-label">Color principal</label>
-                                    <input type="color" id="colorpicker" />
+                                    <input type="color" id="colorpicker" onChange={(e) => setJournal({ ...journal, color: e.target.value })} />
                                 </div>
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" className="btn btn-primary">Guardar</button>
+                                <button type="button" className="btn btn-primary" onClick={() => createJournal(journal)}>Guardar</button>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
+
+
+
+
+                <div id="heroesContainer">
+
+				{store.journals.length == 0 && <span>Loading...</span>}
+				{store.journals.length != 0 &&
+					store.journals.map(item => (
+						<div className="card" key={item.id}>
+							<div className="card-body">
+								<h5 className="card-title">{item.name}</h5>
+							</div>
+						</div>
+					))
+				}
+			    </div>
+
+
             </div>
         </div>
     )

@@ -10,8 +10,6 @@
   flex-direction: row;
   align-items: center;
   height: 100vh;
-  background: rgb(240, 240, 240);
-  background: linear-gradient(180deg, rgba(240, 240, 240, 1) 0%, rgba(255, 255, 255, 0) 60%);
 }
 
 .dashboardSideBar {
