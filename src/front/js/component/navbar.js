@@ -53,13 +53,13 @@ export const Navbar = () => {
 							</a>
 							<ul className="dropdown-menu" arial-aria-labelledby="navbarDropdown">
 								<li>
-									<a href="#" className="dropdown-item">Recurso 1</a>
+									<a href="#" className="dropdown-item">F.A.Q.</a>
 								</li>
 								<li>
-									<a href="#" className="dropdown-item">Recurso 2</a>
+									<a href="#" className="dropdown-item">Blog</a>
 								</li>
 								<li>
-									<a href="#" className="dropdown-item">Recurso 3</a>
+									<a href="#" className="dropdown-item">Contacto</a>
 								</li>
 							</ul>
 						</li>

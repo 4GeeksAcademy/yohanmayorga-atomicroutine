@@ -37,7 +37,7 @@ export const Dashboard = () => {
                                 <button className="dashSideButton" id="pills-todo-tab" data-bs-toggle="pill" data-bs-target="#pills-todo" role="tab" aria-controls="pills-todo" aria-selected="false"><i class="fa-solid fa-list-check"></i>Listas</button>
                             </li>
                             <li className="nav-item" role="presentation">
-                                <button className="dashSideButton" id="pills-emotion-tab" data-bs-toggle="pill" data-bs-target="#pills-emotion" role="tab" aria-controls="pills-emotion" aria-selected="false"><i class="fa-solid fa-face-smile"></i>Ánimo</button>
+                                <button className="dashSideButton" id="pills-emotion-tab" data-bs-toggle="pill" data-bs-target="#pills-emotion" role="tab" aria-controls="pills-emotion" aria-selected="false"><i class="fa-regular fa-face-smile"></i>Ánimo</button>
                             </li>
                         </ul>
                     </div>
