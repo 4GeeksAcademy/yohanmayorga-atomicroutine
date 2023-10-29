@@ -58,25 +58,19 @@ export const Diarios = () => {
                     </div>
                 </div>
 
-
-
-
-
-
-
                 <div id="heroesContainer">
 
-				{store.journals.length == 0 && <span>Loading...</span>}
-				{store.journals.length != 0 &&
-					store.journals.map(item => (
-						<div className="card" key={item.id}>
-							<div className="card-body">
-								<h5 className="card-title">{item.name}</h5>
-							</div>
-						</div>
-					))
-				}
-			    </div>
+                    {store.journals.length == 0 && <span>Loading...</span>}
+                    {store.journals.length != 0 &&
+                        store.journals.map(item => (
+                            <div className="card" key={item.id}>
+                                <div className="card-body" style={{ background: item.color }}>
+                                    <h5 className="card-title">{item.name}</h5>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
 
 
             </div>

@@ -5,7 +5,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user: null,
 			profile: JSON.parse(localStorage.getItem("profile")) || null,
 			token: localStorage.getItem("token") || null,
-			journals: [],
+			journals: [{
+				name: "SECOND",
+				text: "white",
+				color: "green"
+			},
+			{
+				name: "STHIRD",
+				text: "white",
+				color: "red"
+			}],
 			demo: [
 				{
 					title: "FIRST",
@@ -97,6 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			createJournal: async (journal) => {
+				const store = getStore()
 				try {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/createjournal",
 						{
@@ -107,7 +117,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify(journal)
 						})
 					const data = await resp.json()
-					setStore({ ...store, journals: [...store.journals, ...data] })
+					setStore({ ...store, journals: [...store.journals, ...data.journal] })
 					return true
 				} catch (error) {
 					return false
