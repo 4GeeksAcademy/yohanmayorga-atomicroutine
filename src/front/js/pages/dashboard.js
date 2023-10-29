@@ -1,6 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { Escritorio } from "./escritorio";
+import { Habitos } from "./habitos";
+import { Diarios } from "./diarios";
+import { Listas } from "./listas";
+import { Emociones } from "./emociones";
 import "../../styles/dashboard.css";
 
 export const Dashboard = () => {
@@ -15,7 +20,57 @@ export const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <p><i className="fa-solid fa-heart"></i> Bienvenid@ a tu escritorio {store.profile ? store.profile.name : ""}</p>
+            <div className="container">
+                <div className="dashboardBox">
+                    <div className="dashboardSideBar">
+                        <ul className="nav justify-content-center nav-pills" id="pills-tab" role="tablist">
+                            <li className="nav-item" role="presentation">
+                                <button className="dashSideButton active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><i class="fa-solid fa-house"></i>Home</button>
+                            </li>
+                            <li className="nav-item" role="presentation">
+                                <button className="dashSideButton" id="pills-journal-tab" data-bs-toggle="pill" data-bs-target="#pills-habits" role="tab" aria-controls="pills-habits" aria-selected="false"><i class="fa-solid fa-chart-column"></i>Hábitos</button>
+                            </li>
+                            <li className="nav-item" role="presentation">
+                                <button className="dashSideButton" id="pills-journal-tab" data-bs-toggle="pill" data-bs-target="#pills-journal" role="tab" aria-controls="pills-journal" aria-selected="false"><i class="fa-solid fa-book"></i>Diarios</button>
+                            </li>
+                            <li className="nav-item" role="presentation">
+                                <button className="dashSideButton" id="pills-todo-tab" data-bs-toggle="pill" data-bs-target="#pills-todo" role="tab" aria-controls="pills-todo" aria-selected="false"><i class="fa-solid fa-list-check"></i>Listas</button>
+                            </li>
+                            <li className="nav-item" role="presentation">
+                                <button className="dashSideButton" id="pills-emotion-tab" data-bs-toggle="pill" data-bs-target="#pills-emotion" role="tab" aria-controls="pills-emotion" aria-selected="false"><i class="fa-solid fa-face-smile"></i>Ánimo</button>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div className="tab-content" id="pills-tabContent">
+
+                        <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                            {<Escritorio />}
+                        </div>
+
+                        <div className="tab-pane fade" id="pills-habits" role="tabpanel" aria-labelledby="pills-habits-tab" tabindex="0">
+                            {<Habitos />}
+                        </div>
+
+                        <div className="tab-pane fade" id="pills-journal" role="tabpanel" aria-labelledby="pills-journal-tab" tabindex="0">
+                            {<Diarios />}
+                        </div>
+
+                        <div className="tab-pane fade" id="pills-todo" role="tabpanel" aria-labelledby="pills-todo-tab" tabindex="0">
+                            {<Listas />}
+                        </div>
+
+                        <div className="tab-pane fade" id="pills-emotion" role="tabpanel" aria-labelledby="pills-emotion-tab" tabindex="0">
+                            {<Emociones />}
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
         </div>
     )
 };
