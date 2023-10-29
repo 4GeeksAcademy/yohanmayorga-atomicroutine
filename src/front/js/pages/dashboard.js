@@ -15,7 +15,7 @@ export const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <p><i className="fa-solid fa-heart"></i> Bienvenid@ a tu escritorio {store.profile.name}</p>
+            <p><i className="fa-solid fa-heart"></i> Bienvenid@ a tu escritorio {store.profile ? store.profile.name : ""}</p>
         </div>
     )
 };
