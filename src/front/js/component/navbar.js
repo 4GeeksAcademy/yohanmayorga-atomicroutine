@@ -7,6 +7,13 @@ export const Navbar = () => {
 
 	const { store, actions } = useContext(Context);
 
+	function logOut() {
+		let loggedOut = actions.logOut();
+		if (loggedOut) {
+			navigate("/");
+		}
+	}
+
 	return (
 		<nav className="navbar navbar-expand-sm navbar-light bg-light">
 			<div className="container">
@@ -82,15 +89,12 @@ export const Navbar = () => {
 									<a href="#" className="dropdown-item">Perfil</a>
 								</li>
 								<li>
-									<a href="#" className="dropdown-item text-danger" onClick={() => actions.logOut()}>Salir</a>
+									<a href="/" className="dropdown-item text-danger" onClick={() => logOut()}>Salir</a>
 								</li>
 							</ul>
 						</div>
 					</>
 				}
-
-
-
 
 			</div>
 		</nav>
