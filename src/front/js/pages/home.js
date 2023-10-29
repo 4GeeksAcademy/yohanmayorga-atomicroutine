@@ -24,7 +24,11 @@ export const Home = () => {
 										Registro
 									</button>
 								</a>
-							<button id="homeButton2">Saber más</button>
+								<a href="/comofunciona">
+									<button type="button" id="homeButton2" href="/comofunciona">
+										Saber más
+									</button>
+								</a>
 							</div>
 						</div>
 						<div id="rightContainer">
