@@ -121,7 +121,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/journals")
 					const data = await resp.json()
-					setStore({ ...store, journals: [...store.journals, ...data] })
+					setStore({ ...store, journals: [...data] })
 					return true;
 				} catch (error) {
 					showError()
