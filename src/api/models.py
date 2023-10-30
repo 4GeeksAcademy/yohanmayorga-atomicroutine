@@ -4,7 +4,6 @@ db = SQLAlchemy()
 
 
 class User(db.Model):
-    __tablename__ = "user"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
@@ -12,6 +11,14 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     salt = db.Column(db.String(80), unique=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+
+    def __init__(self, email, password, name, salt):
+        self.email = email
+        self.password = password
+        self.name = name
+        self.salt = salt
+        #opcional
+        self.is_active = True
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -21,8 +28,9 @@ class User(db.Model):
             "id": self.id,
             "name": self.name,
             "email": self.email,
-            "salt": self.salt
+            "salt": self.salt,
             # do not serialize the password, its a security breach
+            "journals": [journal.serialize() for journal in self.journals ]
         }
 
 
@@ -31,6 +39,15 @@ class Journal(db.Model):
     name = db.Column(db.String(120), unique=True, nullable=False)
     text = db.Column(db.String(120), unique=True)
     color = db.Column(db.String(80), unique=False)
+
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    author = db.relationship("User", backref="journals")
+
+    def __init__(self, name, text, color, author):
+        self.name = name
+        self.text = text
+        self.color = color
+        self.author = author
 
     def __repr__(self):
         return f'<Journal {self.name}>'
@@ -41,4 +58,5 @@ class Journal(db.Model):
             "name": self.name,
             "text": self.text,
             "color": self.color,
+            #"author": self.author.serialize()
         }
