@@ -61,6 +61,13 @@ def get_customer_profile():
         return user.serialize(), 200
     return {"message": "Not Authorized"}, 401
 
+@api.route('/user_journals')
+def get_customer_journals():
+    user = User.query.get(1)
+    if user is not None:
+        return user.serialize(), 200
+    return {"message": "Error"}, 500
+
 
 @api.route('/createjournal', methods=['POST'])
 def create_journal():
@@ -70,7 +77,9 @@ def create_journal():
     text = body.get("text", None)
     color = body.get("color", None)
 
-    new_journal = Journal(name=name, text=text, color=color)
+    author = User.query.get(1)
+
+    new_journal = Journal(name=name, text=text, color=color, author=author)
     db.session.add(new_journal)
     db.session.commit()
 
@@ -82,11 +91,11 @@ def get_journals():
     journals = Journal.query.all()
 
     # Convertir los objetos Journal a listas
-    json_journals = []
-    for journal in journals:
-        json_journals.append(journal.serialize())
+    # json_journals = []
+    # for journal in journals:
+    #     json_journals.append(journal.serialize())
 
-    return jsonify(json_journals)
+    return jsonify([journal.serialize() for journal in journals ])
 
 
 @api.route('/hello', methods=['POST', 'GET'])
