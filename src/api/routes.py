@@ -58,7 +58,6 @@ def create_token():
 
 @api.route('/createjournal', methods=['POST'])
 @jwt_required()
-
 def create_journal():
     body = request.get_json()
     name = body.get("name", None)
@@ -66,9 +65,11 @@ def create_journal():
     color = body.get("color", None)
     email = get_jwt_identity()
     author = User.query.filter_by(email=email).one_or_none()
-    
-    #author = User.query.get(1)  # ----------> ASIGNAR USER.ID
-    new_journal = Journal(name=name, text=text, color=color, author=author)
+    author_id = User.id
+
+    # author = User.query.get(1)  # ----------> ASIGNAR USER.ID
+    new_journal = Journal(name=name, text=text, color=color,
+                          author=author, author_id=author_id)
     db.session.add(new_journal)
     db.session.commit()
 

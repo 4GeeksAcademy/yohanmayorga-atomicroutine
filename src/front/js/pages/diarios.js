@@ -24,6 +24,8 @@ export const Diarios = () => {
         }
     }
 
+    const filteredJournals = store.journals.filter((journal) => journal.author.id === store.profile.id);
+
     return (
         <div className="dashboard">
             <div className="dashboardContainerbox">
@@ -63,9 +65,9 @@ export const Diarios = () => {
                 </div>
 
                 <div id="heroesContainer">
-                    {store.journals.length == 0 && <span>No se han encontrado diarios</span>}
-                    {store.journals.length != 0 &&
-                        store.journals.map(item => (
+                    {filteredJournals.length == 0 && <span>No se han encontrado diarios</span>}
+                    {filteredJournals.length != 0 &&
+                        filteredJournals.map(item => (
                             <div className="card" key={item.id}>
                                 <div className="card-body" style={{ background: item.color }}>
                                     <h5 className="card-title">{item.name}</h5>
