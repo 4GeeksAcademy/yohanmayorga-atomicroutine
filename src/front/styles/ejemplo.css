@@ -1,0 +1,70 @@
+/*
+    home.css: This website contains selectors only used in home.css
+
+    All pages share the styles on index.css but you should create 
+    one more css for each page that will contain the selected used 
+    on that page only (the ones not reused in other pages).
+*/
+
+.sidebar ul li:hover {
+    background-color: lightgray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sidebar ul li:hover a {
+    color: white;
+}
+
+.active {
+    background-color: lightgray;
+    border-radius: 5px;
+    color: white;
+  
+
+}
+
+.sidebar {
+    background: #bee9fc ;
+}
+
+.navbar {
+    background: #bee9fc ;
+}
+
+.card-man{
+    border-radius: 8px;
+    width: 600px;
+    margin: auto;
+    background-image: url("https://www.cancer.gov/sites/g/files/xnrzdm211/files/styles/cgov_article/public/cgov_image/media_image/100/800/8/files/ocean-sunset-view-mykonos-spanish-article.jpeg?h=190fd85d&itok=RUaJVYtB")
+}
+
+.card-task .card{
+    border-radius: 8px;
+    width: 600px;
+}
+
+.card-task img{
+    height: 50px;
+    width: 50px;
+    border-radius: 15px;
+     
+}
+
+.card-task .card:hover{
+    background-color: lightgray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.calendar img {
+    width: 600px;
+    height: 400px;
+}
+
+.perfil-image{
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+
+}
