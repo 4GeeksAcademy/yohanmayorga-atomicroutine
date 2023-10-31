@@ -4,6 +4,13 @@ import { Context } from "../store/appContext";
 import "../../styles/navbar.css";
 
 export const Navbar = () => {
+	const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Ocultar la navbar si no estamos en la página de inicio
+    setIsNavbarVisible(pathname !== "/ejemplo");
+  }, [pathname]);
 
 	const { store, actions } = useContext(Context);
 
@@ -16,8 +23,10 @@ export const Navbar = () => {
 		}
 	}
 
+	if (isNavbarVisible) {
+
 	return (
-		<nav className="navbar navbar-expand-sm navbar-light bg-light">
+		<nav className="navbar navbar-expand-sm navbar-light bg-light" >
 			<div className="container">
 				<a href="/" className="navbar-brand mb-0">
 					Atomic Routine {location.pathname}
@@ -99,6 +108,8 @@ export const Navbar = () => {
 				}
 
 			</div>
-		</nav>
-	);
+		</nav> 
+	); } else {
+		return null;
+	  }
 };
