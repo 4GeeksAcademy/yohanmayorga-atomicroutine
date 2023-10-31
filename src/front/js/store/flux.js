@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
-			user: null,
+			user: [],
 			profile: JSON.parse(localStorage.getItem("profile")) || null,
 			token: localStorage.getItem("token") || null,
 			journals: [],
@@ -33,7 +33,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify(user)
 						})
 					const data = await resp.json()
-					setStore({ "user": data.user })
+					//setStore({ "user": data.user })
+					setStore({ ...store, user: [...store.user, ...data.user] })
 					return true
 
 				} catch (error) {

@@ -6,9 +6,9 @@ db = SQLAlchemy()
 class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True, nullable=False)
+    name = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
+    password = db.Column(db.String(80), nullable=False)
     salt = db.Column(db.String(80), unique=False)
 
     def __init__(self, email, password, name, salt):
@@ -27,17 +27,16 @@ class User(db.Model):
             "email": self.email,
             "salt": self.salt,
             # do not serialize the password, its a security breach
-            "journals": [journal.serialize() for journal in self.journals ]
+            "journals": [journal.serialize() for journal in self.journals]
         }
 
 
 class Journal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True, nullable=False)
-    text = db.Column(db.String(120), unique=True)
+    name = db.Column(db.String(120), unique=False)
+    text = db.Column(db.String(120), unique=False)
     color = db.Column(db.String(80), unique=False)
-
-    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     author = db.relationship("User", backref="journals")
 
     def __init__(self, name, text, color, author):
@@ -55,5 +54,5 @@ class Journal(db.Model):
             "name": self.name,
             "text": self.text,
             "color": self.color,
-            #"author": self.author.serialize()
+            # "author": self.author.serialize()
         }

@@ -13,8 +13,8 @@ export const Diarios = () => {
     });
 
     useEffect(() => {
-		actions.getJournals();
-	}, [])
+        actions.getJournals();
+    }, [])
 
     async function createJournal() {
         let created = await actions.createJournal(journal)
@@ -63,7 +63,6 @@ export const Diarios = () => {
                 </div>
 
                 <div id="heroesContainer">
-
                     {store.journals.length == 0 && <span>No se han encontrado diarios</span>}
                     {store.journals.length != 0 &&
                         store.journals.map(item => (
