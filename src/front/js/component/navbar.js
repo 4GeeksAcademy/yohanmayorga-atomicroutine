@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/navbar.css";
 
 export const Navbar = () => {
 
 	const { store, actions } = useContext(Context);
+
+	const location = useLocation()
 
 	function logOut() {
 		let loggedOut = actions.logOut();
@@ -18,7 +20,7 @@ export const Navbar = () => {
 		<nav className="navbar navbar-expand-sm navbar-light bg-light">
 			<div className="container">
 				<a href="/" className="navbar-brand mb-0">
-					Atomic Routine
+					Atomic Routine {location.pathname}
 				</a>
 				<button
 					type="button"

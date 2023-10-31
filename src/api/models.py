@@ -37,7 +37,7 @@ class Journal(db.Model):
     text = db.Column(db.String(120), unique=True)
     color = db.Column(db.String(80), unique=False)
 
-    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     author = db.relationship("User", backref="journals")
 
     def __init__(self, name, text, color, author):

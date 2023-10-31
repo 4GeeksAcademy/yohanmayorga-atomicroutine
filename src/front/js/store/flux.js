@@ -97,13 +97,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			createJournal: async (journal) => {
-				const store = getStore()
+				let store = getStore()
 				try {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/createjournal",
 						{
 							method: "POST",
 							headers: {
 								"Content-Type": "application/json",
+								"Authorization": "Bearer " + store.token
 							},
 							body: JSON.stringify(journal)
 						})
