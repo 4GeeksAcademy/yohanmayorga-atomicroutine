@@ -20,7 +20,6 @@ export const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <div className="dashboardBox">
                 <div className="dashboardSideBar">
                     <ul className="nav justify-content-center nav-pills" id="pills-tab" role="tablist">
                         <li className="nav-item" role="presentation">
@@ -65,10 +64,6 @@ export const Dashboard = () => {
                     </div>
 
                 </div>
-
-            </div>
-
-
         </div>
     )
 };

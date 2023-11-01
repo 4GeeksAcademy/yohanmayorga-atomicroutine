@@ -14,11 +14,15 @@ export const Escritorio = () => {
     return (
         <div className="dashboard">
             <div className="dashboardContainerbox">
+
+                {/* Encabezado del escritorio principal del usuario */}
                 <h4>Escritorio</h4>
                 <div className="desktopHeader">
                     <h1>Bienvenid@ {store.profile ? store.profile.name : ""}</h1>
                     <h5>¿Qué deseas hacer hoy?</h5>
                 </div>
+
+                {/* Se muestran las cards principales del escritorio (enlaces a las herramientas) */}
                 <div className="desktopSecondHeader">
                     <div className="desktopCard me-2">
                         <div id="leftDesktopCard">

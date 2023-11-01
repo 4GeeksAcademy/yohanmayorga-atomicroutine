@@ -1,10 +1,9 @@
 .dashboardContainerbox {
-    height: 80%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: top;
-    width: 100%;
-    margin-left: 15px;
+    padding-left: 15px;
+    padding-top: 100px;
 }
 
 .desktopHeader {
