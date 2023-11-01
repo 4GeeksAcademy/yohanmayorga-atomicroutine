@@ -29,7 +29,7 @@ export const Navbar = () => {
 		<nav className="navbar navbar-expand-sm navbar-light bg-light" >
 			<div className="container">
 				<a href="/" className="navbar-brand mb-0">
-					Atomic Routine {location.pathname}
+					Atomic Routine 
 				</a>
 				<button
 					type="button"

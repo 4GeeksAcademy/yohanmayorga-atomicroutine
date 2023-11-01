@@ -15,4 +15,34 @@
     box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+    width: max-content;
+}
+
+.desktopSecondHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.desktopCard {
+    padding: 10px;
+    border-radius: 15px;
+    height: max-content;
+    box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.desktopCardImg {
+    height: 60px;
+    margin-right: 5px;
+}
+
+.rightDesktopCard {
+    display: flex;
+    flex-direction: column;
 }
