@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import "../../styles/dashboard.css";
 import "../../styles/diarios.css";
+import books from "../../img/books.png";
 
 export const Diarios = () => {
 
@@ -73,12 +74,13 @@ export const Diarios = () => {
                 </div>
 
                 {/* Acá se muestran todos los diarios del usuario */}
-                <div id="heroesContainer">
+                <div className="journalsContainer">
                     {filteredJournals.length == 0 && <span>No se han encontrado diarios</span>}
                     {filteredJournals.length != 0 &&
                         filteredJournals.map(item => (
-                            <div className="card" key={item.id}>
-                                <div className="card-body" style={{ background: item.color }}>
+                            <div className="ComponentCard" key={item.id}>
+                                <div className="cardBody" style={{ background: `linear-gradient(to bottom, ${item.color}, white)` }}>
+                                <img src={books} className="CardImg" />
                                     <h5 className="card-title">{item.name}</h5>
                                 </div>
                             </div>

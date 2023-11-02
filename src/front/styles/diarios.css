@@ -11,3 +11,27 @@ input[type="color"] {
     background: rgb(190, 233, 252);
     background: linear-gradient(180deg, rgba(190, 233, 252, 1) 0%, rgba(240, 240, 240, 1) 100%);
 }
+
+.CardImg {
+    height: 150px;
+    padding: 10px;
+}
+
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    border-radius: 15px;
+}
+
+.cardBody:hover {
+    padding: 6px;
+}
+
+.journalsContainer {
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+}
