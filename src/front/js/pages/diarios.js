@@ -18,8 +18,14 @@ export const Diarios = () => {
     }, [])
 
     async function createJournal() {
-        let created = await actions.createJournal(journal)
-        if (created) { alert("Journal registered successfully") }
+        let created = true;
+        try {await actions.createJournal(journal)}
+        catch (error) {
+            created = false;
+        };
+        if (created) {
+            alert("El diario se ha creado exitosamente");
+            location.reload(); }
         else {
             alert("Ha ocurrido un error")
         }
