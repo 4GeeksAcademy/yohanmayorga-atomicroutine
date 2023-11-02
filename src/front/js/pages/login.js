@@ -22,10 +22,18 @@ export const LogIn = () => {
     });
 
     async function addUser() {
+        let created = true;
+
         if (user.password == user.password_check) {
-            let created = await actions.createUser(user);
+            try {
+                await actions.createUser(user)
+            }
+            catch (error) {
+                created = false;
+            };
             if (created) {
-                navigate("/login")
+                alert("¡Usuario creado correctamente! Ya puede conectarse usando su usuario y contraseña.");
+                location.reload();
             }
         }
         else {
@@ -104,7 +112,7 @@ export const LogIn = () => {
                                         required />
                                 </div>
                             )}
-                            <input className="FormButton" type="submit" value={!isShow ? "Ingresar" : "Registro"} onClick={() => {
+                            <input className="FormButton" type="button" value={!isShow ? "Ingresar" : "Registro"} onClick={() => {
                                 if (!isShow) {
                                     return loginUser(user);
                                 } else {
