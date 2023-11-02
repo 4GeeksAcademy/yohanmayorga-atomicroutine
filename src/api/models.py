@@ -27,7 +27,7 @@ class User(db.Model):
             "email": self.email,
             "salt": self.salt,
             # do not serialize the password, its a security breach
-            "journals": [journal.serialize() for journal in self.journals]
+            #"journals": [journal.serialize() for journal in self.journals]
         }
 
 
@@ -44,7 +44,7 @@ class Journal(db.Model):
         self.text = text
         self.color = color
         self.author = author
-        self.author = author_id
+        self.author_id = author_id
 
     def __repr__(self):
         return f'<Journal {self.name}>'
@@ -55,5 +55,6 @@ class Journal(db.Model):
             "name": self.name,
             "text": self.text,
             "color": self.color,
-            "author": self.author.serialize()
+            "author": self.author.serialize(),
+            "author_id": self.author_id
         }

@@ -65,14 +65,15 @@ def create_journal():
     color = body.get("color", None)
     email = get_jwt_identity()
     author = User.query.filter_by(email=email).one_or_none()
-    author_id = author.id
-
-    # author = User.query.get(1)  # ----------> ASIGNAR USER.ID
-    new_journal = Journal(name=name, text=text, color=color,
-                          author=author, author_id=author_id)
-    db.session.add(new_journal)
-    db.session.commit()
-
+    author_id = User.id
+    try: 
+        # author = User.query.get(1)  # ----------> ASIGNAR USER.ID
+        new_journal = Journal(name=name, text=text, color=color,
+                            author=author, author_id=author_id)
+        db.session.add(new_journal)
+        db.session.commit()
+    except Exception as error:
+        return "error:" + str(error), 500
     return {"journal": new_journal.serialize()}, 200
 
 
