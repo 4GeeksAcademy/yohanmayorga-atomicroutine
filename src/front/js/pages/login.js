@@ -56,7 +56,7 @@ export const LogIn = () => {
                             <button className="FormButton" onClick={() => setIsShown(false)}>Ingresar</button>
                             <button className="FormButton" onClick={() => setIsShown(true)}>Registro</button>
                         </div>
-                        <form id="loginForm" onSubmit={(event) => { event.preventDefault() }} (form)>
+                        <form id="loginForm" onSubmit={(event) => { event.preventDefault() }} >
                             {isShow && (
                                 <div className="formLine">
                                     <p className="formEmoji">👤</p>
