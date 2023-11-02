@@ -27,7 +27,7 @@ class User(db.Model):
             "email": self.email,
             "salt": self.salt,
             # do not serialize the password, its a security breach
-            # "journals": [journal.serialize() for journal in self.journals]
+            "journals": [journal.serialize() for journal in self.journals]
         }
 
 
@@ -39,11 +39,12 @@ class Journal(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     author = db.relationship("User", backref="journals")
 
-    def __init__(self, name, text, color, author):
+    def __init__(self, name, text, color, author, author_id):
         self.name = name
         self.text = text
         self.color = color
         self.author = author
+        self.author = author_id
 
     def __repr__(self):
         return f'<Journal {self.name}>'

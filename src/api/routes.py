@@ -32,7 +32,7 @@ def create_user():
     db.session.add(new_user)
     db.session.commit()
 
-    return {"user": new_user.serialize()}, 200
+    return True, 200
 
 # POST PARA GENERAR TOKEN (INICIAR SESIÓN)
 
@@ -65,7 +65,7 @@ def create_journal():
     color = body.get("color", None)
     email = get_jwt_identity()
     author = User.query.filter_by(email=email).one_or_none()
-    author_id = User.id
+    author_id = author.id
 
     # author = User.query.get(1)  # ----------> ASIGNAR USER.ID
     new_journal = Journal(name=name, text=text, color=color,

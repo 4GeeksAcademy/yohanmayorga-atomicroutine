@@ -35,8 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const data = await resp.json()
 					//setStore({ "user": data.user })
 					setStore({ ...store, user: [...store.user, ...data.user] })
-					return true
-
+					return true;
 				} catch (error) {
 					return false
 				}
@@ -116,7 +115,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false
 				}
 			},
-
 
 			getJournals: async () => {
 				const store = getStore()
