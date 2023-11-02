@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/dashboard.css";
 import "../../styles/diarios.css";
 import books from "../../img/books.png";
+import { Journal } from "./../component/journal.js";
 
 export const Diarios = () => {
 
@@ -13,19 +14,27 @@ export const Diarios = () => {
         color: "",
     });
 
+        const [showJournal, setShowJournal] = useState(false);
+      
+        const handleClick = () => {
+            {showJournal ? setShowJournal(false) : setShowJournal(true)}
+        };
+      
+
     useEffect(() => {
         actions.getJournals();
     }, [])
 
     async function createJournal() {
         let created = true;
-        try {await actions.createJournal(journal)}
+        try { await actions.createJournal(journal) }
         catch (error) {
             created = false;
         };
         if (created) {
             alert("El diario se ha creado exitosamente");
-            location.reload(); }
+            location.reload();
+        }
         else {
             alert("Ha ocurrido un error")
         }
@@ -84,9 +93,10 @@ export const Diarios = () => {
                     {filteredJournals.length == 0 && <span>No se han encontrado diarios</span>}
                     {filteredJournals.length != 0 &&
                         filteredJournals.map(item => (
-                            <div className="ComponentCard" key={item.id}>
-                                <div className="cardBody" style={{ background: `linear-gradient(to bottom, ${item.color}, white)` }}>
-                                <img src={books} className="CardImg" />
+                            <div className="ComponentCard" key={item.id} onClick={handleClick}>
+                                {showJournal && <Journal />}
+                                <div className="cardBody" style={{ background: `linear-gradient(to bottom, ${item.color}, white)` }} >
+                                    <img src={books} className="CardImg" />
                                     <h5 className="card-title">{item.name}</h5>
                                 </div>
                             </div>
