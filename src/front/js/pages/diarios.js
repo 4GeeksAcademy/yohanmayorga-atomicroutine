@@ -22,6 +22,10 @@ export const Diarios = () => {
         setItemJournal(item);
     };
 
+    /* Llamada a la acción para borrar un diario específico*/
+    const callDeleteJournal = (id) => {
+        actions.deleteJournal(id)
+    }
 
     useEffect(() => {
         actions.getJournals();
@@ -95,7 +99,7 @@ export const Diarios = () => {
                 {/* Acá se muestra el diario específico que el usuario abra*/}
                 {<Journal
                     openJournal={itemJournal.id}
-                    nameJournal = {itemJournal.name}
+                    nameJournal={itemJournal.name}
                     open={showJournal}
                     close={setShowJournal} />}
 
@@ -104,11 +108,12 @@ export const Diarios = () => {
                     {filteredJournals.length == 0 && <span>No se han encontrado diarios</span>}
                     {filteredJournals.length != 0 &&
                         filteredJournals.map(item => (
-                            <div className="ComponentCard" key={item.id} onClick={() => { handleClick(item) }}>
-                                <div className="cardBody" style={{ background: `linear-gradient(to bottom, ${item.color}, white)` }} >
+                            <div className="ComponentCard" key={item.id} >
+                                <div className="cardBody" style={{ background: `linear-gradient(to bottom, ${item.color}, white)` }} onClick={() => { handleClick(item) }} >
                                     <img src={books} className="CardImg" />
                                     <h5 className="card-title">{item.name}</h5>
                                 </div>
+                                <button className="journalsCardButton" onClick={() => { callDeleteJournal(item.id) }}><i class="fa-solid fa-trash-can"></i> Borrar</button>
                             </div>
                         ))
                     }

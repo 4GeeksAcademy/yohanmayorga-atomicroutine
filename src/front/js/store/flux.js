@@ -128,7 +128,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-
 			// Default examples
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");

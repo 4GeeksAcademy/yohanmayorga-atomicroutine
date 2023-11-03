@@ -15,7 +15,9 @@ export const Journal = ({nameJournal, openJournal, open, close}) => {
             <div className="selectedjournalHeader">
                 <h4>Diario: {nameJournal}</h4>
                 <button type="button" className="closeButtonJournal" onClick={() => { close(false) }}>X</button>
+                
             </div>
+            <input type="text" className="journalInput"/>
         </div>
         </>
     );

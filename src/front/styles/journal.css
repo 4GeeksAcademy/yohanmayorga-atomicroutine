@@ -43,3 +43,8 @@
 .closeButtonJournal:hover {
     background: #1074a2;
 }
+
+.journalInput {
+    height: 40vh;
+    resize: none;
+}

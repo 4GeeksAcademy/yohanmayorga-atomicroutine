@@ -80,6 +80,9 @@ def create_journal():
         return "error:" + str(error), 500
     return {"journal": new_journal.serialize()}, 200
 
+# -----------------------MÉTODOS DELETE-----------------------#
+
+# DELETE PARA BORRAR UN DIARIO
 
 # -----------------------MÉTODOS GET-----------------------#
 
