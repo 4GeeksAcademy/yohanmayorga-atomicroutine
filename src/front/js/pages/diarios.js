@@ -14,12 +14,12 @@ export const Diarios = () => {
         color: "",
     });
     const [showJournal, setShowJournal] = useState(false);
-    const [number, setNumber] = useState("")
+    const [itemJournal, setItemJournal] = useState("");
 
     /* Esta función muestra u oculta un diario específico seleccionado*/
     const handleClick = (item) => {
         { showJournal ? setShowJournal(false) : setShowJournal(true) };
-        setNumber(item)
+        setItemJournal(item);
     };
 
 
@@ -94,8 +94,10 @@ export const Diarios = () => {
 
                 {/* Acá se muestra el diario específico que el usuario abra*/}
                 {<Journal
-                    openJournal={number.id}
-                    open={showJournal} />}
+                    openJournal={itemJournal.id}
+                    nameJournal = {itemJournal.name}
+                    open={showJournal}
+                    close={setShowJournal} />}
 
                 {/* Acá se muestra la lista completa de diarios*/}
                 <div className="journalsContainer">
