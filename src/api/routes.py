@@ -27,12 +27,16 @@ def create_user():
     bpassword = bytes(password, 'utf-8')
     salt = bcrypt.gensalt(14)
     hashed_password = bcrypt.hashpw(password=bpassword, salt=salt)
-    new_user = User(name=name, email=email, password=hashed_password.decode(
-        'utf-8'), salt=salt)
-    db.session.add(new_user)
-    db.session.commit()
-
-    return jsonify({"message":"User created success"}), 201
+    #Consultar si existe el usuario
+    user = User.query.filter_by(email=email).one_or_none()
+    if user is not None:
+        return jsonify({"message": "User exists"}), 400
+    else:
+        new_user = User(name=name, email=email, password=hashed_password.decode(
+            'utf-8'), salt=salt)
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({"message":"User created success"}), 201
 
 # POST PARA GENERAR TOKEN (INICIAR SESIÓN)
 

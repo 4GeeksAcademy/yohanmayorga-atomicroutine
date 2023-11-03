@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/comofunciona.css";
+import How1 from "../../img/How1.jpg";
 import test from "../../img/test.png";
 
 export const ComoFunciona = () => {
@@ -16,7 +17,7 @@ export const ComoFunciona = () => {
 
 					<div className="HowBoxColumn">
 						<div className="howImage1">
-							<img src={test} id="homeImg" />
+							<img src={How1} id="homeImg" />
 						</div>
 						<div className="howTextBox1">
 							<h4>Registro</h4>

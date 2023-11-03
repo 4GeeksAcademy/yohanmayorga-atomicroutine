@@ -13,18 +13,21 @@ export const Diarios = () => {
         name: "",
         color: "",
     });
+    const [showJournal, setShowJournal] = useState(false);
+    const [number, setNumber] = useState("")
 
-        const [showJournal, setShowJournal] = useState(false);
-      
-        const handleClick = () => {
-            {showJournal ? setShowJournal(false) : setShowJournal(true)}
-        };
-      
+    /* Esta función muestra u oculta un diario específico seleccionado*/
+    const handleClick = (item) => {
+        { showJournal ? setShowJournal(false) : setShowJournal(true) };
+        setNumber(item)
+    };
+
 
     useEffect(() => {
         actions.getJournals();
     }, [])
 
+    /* Función para la creación de un diario nuevo (action)*/
     async function createJournal() {
         let created = true;
         try { await actions.createJournal(journal) }
@@ -40,6 +43,7 @@ export const Diarios = () => {
         }
     }
 
+    /* Filtro que se aplica para mostrar sólo los diarios que corresponden al usuario*/
     const filteredJournals = store.journals.filter((journal) => journal.author.id === store.profile.id);
 
     return (
@@ -88,13 +92,17 @@ export const Diarios = () => {
                     </div>
                 </div>
 
-                {/* Acá se muestran todos los diarios del usuario */}
+                {/* Acá se muestra el diario específico que el usuario abra*/}
+                {<Journal
+                    openJournal={number.id}
+                    open={showJournal} />}
+
+                {/* Acá se muestra la lista completa de diarios*/}
                 <div className="journalsContainer">
                     {filteredJournals.length == 0 && <span>No se han encontrado diarios</span>}
                     {filteredJournals.length != 0 &&
                         filteredJournals.map(item => (
-                            <div className="ComponentCard" key={item.id} onClick={handleClick}>
-                                {showJournal && <Journal />}
+                            <div className="ComponentCard" key={item.id} onClick={() => { handleClick(item) }}>
                                 <div className="cardBody" style={{ background: `linear-gradient(to bottom, ${item.color}, white)` }} >
                                     <img src={books} className="CardImg" />
                                     <h5 className="card-title">{item.name}</h5>

@@ -1,10 +1,11 @@
 import React from "react";
 
 
-export const Journal = () => {
+export const Journal = ({openJournal, open}) => {
+    if (!open) return null;
     return (
         <>
-        <h1>Prueba para mostrar funcionamiento del diario</h1>
+        <h1>Diario {openJournal}</h1>
         </>
     );
 };
