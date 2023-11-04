@@ -50,14 +50,16 @@ export const Diarios = () => {
             <div className="dashboardContainerbox">
 
                 {/* Encabezado del componente de los diarios */}
-                <h4>Diarios</h4>
+                <h4><i class="fa-solid fa-book"/> Diarios</h4>
                 <div className="desktopHeader">
                     <h1>Bienvenid@ {store.profile ? store.profile.name : ""}</h1>
+                    <p>Aquí podrás crear y consultar diarios personales. Crea un nuevo diario, asignale un nombre, personalízalo con un color y ¡listo! Podrás verlo en esta pantalla. Seleccionalo y comienza a escribir. ¡Puedes crear tantos diarios como desees, y cada uno será un espacio único para ti! Los diarios personales son una forma perfecta para registrar tus pensamientos, sentimientos y experiencias.</p>
+                    <p>{filteredJournals.length == 0 ? <p>Actualmente no tienes ningún diario.</p> : <p>Actualmente tienes {filteredJournals.length} {filteredJournals.length == 1 ? "diario creado." : "diarios creados."}</p>}</p>
                 </div>
                 <div className="desktopMainButton">
                     {/* Boton para crear diario nuevo */}
-                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Crear diario nuevo
+                    <button type="button" className="deskMainButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Crear diario nuevo
                     </button>
                 </div>
 
@@ -103,11 +105,11 @@ export const Diarios = () => {
 
                 {/* Acá se muestra la lista completa de diarios*/}
                 <div className="journalsContainer">
-                    {filteredJournals.length == 0 && <span>No se han encontrado diarios</span>}
+                    {filteredJournals.length == 0 && <h1 className="emptyAlert">No se han encontrado diarios</h1>}
                     {filteredJournals.length != 0 &&
                         filteredJournals.map(item => (
                             <div className="ComponentCard" key={item.id} >
-                                <div className="cardBody" style={{ background: `linear-gradient(to bottom, ${item.color}, white)` }} onClick={() => { handleClick(item) }} >
+                                <div className="cardBody" style={{ background: `linear-gradient(to bottom, ${item.color} 0,1%, white)` }} onClick={() => { handleClick(item) }} >
                                     <h5 className="card-title">{item.name}</h5>
                                     <img src={books} className="CardImg" />
                                     <div className="journalTextPreview">

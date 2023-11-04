@@ -96,32 +96,56 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ token: null, profile: null })
 			},
 
-			updateJournal: async (idJournal, textJournal) =>  {
+			deleteJournal: async (journal_id) => {
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/deletejournal", {
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ journal_id }),
+					});
+
+					if (resp.status === 200) {
+						// El diario se eliminó correctamente
+						return true;
+					} else {
+						// Hubo un error al eliminar el diario
+						throw new Error(resp.statusText);
+					}
+				} catch (error) {
+					// Hubo un error al hacer el fetch
+					return false;
+				}
+			},
+
+			updateJournal: async (idJournal, textJournal) => {
 				let store = getStore();
 				try {
-				  const resp = await fetch(process.env.BACKEND_URL + `/api/updatejournal`,
-					{
-					  method: "PUT",
-					  headers: {
-						"Content-Type": "application/json",
-					  },
-					  body: JSON.stringify({ idJournal, textJournal }),
-					}
-				  );
-				  const data = await resp.json();
-				  setStore({...store, journals: store.journals.map((journal) => {
-					  if (journal.id === idJournal) {
-						return { ...journal, textJournal };
-					  } else {
-						return journal;
-					  }
-					}),
-				  });
-				  return true;
+					const resp = await fetch(process.env.BACKEND_URL + `/api/updatejournal`,
+						{
+							method: "PUT",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({ idJournal, textJournal }),
+						}
+					);
+					const data = await resp.json();
+					setStore({
+						...store, journals: store.journals.map((journal) => {
+							if (journal.id === idJournal) {
+								return { ...journal, textJournal };
+							} else {
+								return journal;
+							}
+						}),
+					});
+					return true;
 				} catch (error) {
-				  return false;
+					return false;
 				}
-			  },
+			},
 
 			createJournal: async (journal) => {
 				let store = getStore()
@@ -154,6 +178,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					showError()
 				}
 			},
+
+
+
+
+
+
+			
 
 			// Default examples
 			exampleFunction: () => {

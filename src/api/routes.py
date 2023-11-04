@@ -93,6 +93,19 @@ def create_journal():
 # -----------------------MÉTODOS DELETE-----------------------#
 
 # DELETE PARA BORRAR UN DIARIO
+@api.route('/deletejournal', methods=['DELETE'])
+def delete_journal():
+    text = request.json.get("journal_id")
+    id = Journal.query.get(text)
+    if id is None:
+        return "Journal not found", 404
+    try:
+        db.session.delete(id)
+        db.session.commit()
+    except Exception as error:
+        return "error:" + str(error), 500
+
+    return "Journal deleted successfully", 200
 
 # -----------------------MÉTODOS GET-----------------------#
 

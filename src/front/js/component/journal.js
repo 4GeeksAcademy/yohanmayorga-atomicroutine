@@ -26,23 +26,38 @@ export const Journal = ({ nameJournal, idJournal, open, close, textJournal }) =>
         }
     }
 
+    async function deleteJournal() {
+        let deleted = true;
+        try { await actions.deleteJournal(idJournal) }
+        catch (error) {
+            deleted = false;
+        };
+        if (deleted) {
+            alert("El diario se ha eliminado exitosamente.");
+            location.reload();
+        }
+        else {
+            alert("Ha ocurrido un error")
+        }
+    }
+
     return (
         <>
             <div className="selectedJournalBackground"></div>
             <div className="selectedJournalBox">
                 <div className="selectedjournalHeader">
-                    <h4>{nameJournal}</h4>
+                    <h4><i class="fa-solid fa-book"></i> {nameJournal}</h4>
                     <button type="button" className="closeButtonJournal" onClick={() => { close(false) }}>X</button>
                 </div>
                 <textarea
                     type="text"
                     className="journalInput"
                     placeholder={textJournal != null ? "" : "Comience a escribir aquí."}
-                    onChange={(e) => setNowText(e.target.value )}
-                    value={nowText}/>
+                    onChange={(e) => setNowText(e.target.value)}
+                    value={nowText} />
                 <div className="selectedjournalBottom">
-                    <button className="me-2"><i class="fa-solid fa-trash-can"></i> Borrar</button>
-                    <button onClick={() => updateJournal(idJournal, nowText)}><i class="fa-regular fa-floppy-disk"></i> Guardar</button>
+                    <button className="deleteButton me-2" onClick={() => deleteJournal(idJournal)}><i class="fa-solid fa-trash-can"></i> Borrar</button>
+                    <button className="saveButton" onClick={() => updateJournal(idJournal, nowText)}><i class="fa-regular fa-floppy-disk"></i> Guardar</button>
                 </div>
             </div>
         </>
