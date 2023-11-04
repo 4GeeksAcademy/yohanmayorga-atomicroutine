@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   flex-direction: row;
+  max-width: 100%;
 }
 
 .dashboardSideBar {

@@ -37,7 +37,11 @@
     border-radius: 50%;
     border: none;
     color: white;
-    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
 }
 
 .closeButtonJournal:hover {
@@ -47,4 +51,11 @@
 .journalInput {
     height: 40vh;
     resize: none;
+}
+
+.selectedjournalBottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-top: 5px;
 }

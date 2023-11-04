@@ -96,6 +96,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ token: null, profile: null })
 			},
 
+			updateJournal: async (idJournal, textJournal) =>  {
+				let store = getStore();
+				try {
+				  const resp = await fetch(process.env.BACKEND_URL + `/api/updatejournal`,
+					{
+					  method: "PUT",
+					  headers: {
+						"Content-Type": "application/json",
+					  },
+					  body: JSON.stringify({ idJournal, textJournal }),
+					}
+				  );
+				  const data = await resp.json();
+				  setStore({...store, journals: store.journals.map((journal) => {
+					  if (journal.id === idJournal) {
+						return { ...journal, textJournal };
+					  } else {
+						return journal;
+					  }
+					}),
+				  });
+				  return true;
+				} catch (error) {
+				  return false;
+				}
+			  },
+
 			createJournal: async (journal) => {
 				let store = getStore()
 				try {

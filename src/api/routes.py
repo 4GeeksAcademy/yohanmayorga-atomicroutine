@@ -12,6 +12,16 @@ from datetime import timedelta
 
 api = Blueprint('api', __name__)
 
+# -----------------------MÉTODOS PUT-----------------------#
+@api.route("/updatejournal", methods=["PUT"])
+def update_journal():
+    text = request.json.get("textJournal")
+    id = request.json.get("idJournal")
+    journal = Journal.query.get(id)
+    journal.text = text
+    db.session.commit()
+    return jsonify({"success": True}), 200
+
 # -----------------------MÉTODOS POST-----------------------#
 
 # POST PARA CREAR USUARIO

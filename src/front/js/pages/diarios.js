@@ -22,11 +22,6 @@ export const Diarios = () => {
         setItemJournal(item);
     };
 
-    /* Llamada a la acción para borrar un diario específico*/
-    const callDeleteJournal = (id) => {
-        actions.deleteJournal(id)
-    }
-
     useEffect(() => {
         actions.getJournals();
     }, [])
@@ -58,13 +53,15 @@ export const Diarios = () => {
                 <h4>Diarios</h4>
                 <div className="desktopHeader">
                     <h1>Bienvenid@ {store.profile ? store.profile.name : ""}</h1>
-                    <h5>¿Qué deseas hacer hoy?</h5>
+                </div>
+                <div className="desktopMainButton">
+                    {/* Boton para crear diario nuevo */}
+                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Crear diario nuevo
+                    </button>
                 </div>
 
-                {/* Boton para crear diario nuevo */}
-                <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Crear diario nuevo
-                </button>
+
 
                 {/* Modal que se abre para crear diario nuevo */}
                 <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,8 +95,9 @@ export const Diarios = () => {
 
                 {/* Acá se muestra el diario específico que el usuario abra*/}
                 {<Journal
-                    openJournal={itemJournal.id}
+                    idJournal={itemJournal.id}
                     nameJournal={itemJournal.name}
+                    textJournal={itemJournal.text}
                     open={showJournal}
                     close={setShowJournal} />}
 
@@ -110,10 +108,12 @@ export const Diarios = () => {
                         filteredJournals.map(item => (
                             <div className="ComponentCard" key={item.id} >
                                 <div className="cardBody" style={{ background: `linear-gradient(to bottom, ${item.color}, white)` }} onClick={() => { handleClick(item) }} >
-                                    <img src={books} className="CardImg" />
                                     <h5 className="card-title">{item.name}</h5>
+                                    <img src={books} className="CardImg" />
+                                    <div className="journalTextPreview">
+                                            {item.text != null ? item.text.substr(0, 20) + " ...leer más." : "Selecciona para comenzar a escribir."}
+                                    </div>
                                 </div>
-                                <button className="journalsCardButton" onClick={() => { callDeleteJournal(item.id) }}><i class="fa-solid fa-trash-can"></i> Borrar</button>
                             </div>
                         ))
                     }
