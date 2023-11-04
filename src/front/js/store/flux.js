@@ -161,6 +161,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify(journal)
 						})
 					const data = await resp.json()
+					console.log(data)
 					setStore({ ...store, journals: [...store.journals, ...data.journal] })
 					return true
 				} catch (error) {

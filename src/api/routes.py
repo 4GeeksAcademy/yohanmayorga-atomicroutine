@@ -106,7 +106,7 @@ def create_list():
         db.session.commit()
     except Exception as error:
         return "error:" + str(error), 500
-    return {"journal": list.serialize()}, 200
+    return {"list": new_list.serialize()}, 200
 
 # -----------------------MÉTODOS DELETE-----------------------#
 
