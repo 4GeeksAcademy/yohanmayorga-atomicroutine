@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			profile: JSON.parse(localStorage.getItem("profile")) || null,
 			token: localStorage.getItem("token") || null,
 			journals: [],
+			lists: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -161,6 +162,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})
 					const data = await resp.json()
 					setStore({ ...store, journals: [...store.journals, ...data.journal] })
+					return true
+				} catch (error) {
+					return false
+				}
+			},
+
+			createList: async (list) => {
+				let store = getStore()
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/createlist",
+						{
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+								"Authorization": "Bearer " + store.token
+							},
+							body: JSON.stringify(list)
+						})
+					const data = await resp.json()
+					setStore({ ...store, lists: [...store.lists, ...data.list] })
 					return true
 				} catch (error) {
 					return false

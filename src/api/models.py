@@ -58,3 +58,26 @@ class Journal(db.Model):
             "author": self.author.serialize(),
             "author_id": self.author_id
         }
+
+class TodoList(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    author = db.relationship("User", backref="todos")
+
+    def __init__(self, name, author, author_id):
+        self.name = name
+        self.author = author
+        self.author_id = author_id
+
+    def __repr__(self):
+        return f'<TodoList {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "author": self.author.serialize(),
+            "author_id": self.author_id
+        }
+

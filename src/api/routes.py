@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Journal
+from api.models import db, User, Journal, TodoList
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -89,6 +89,24 @@ def create_journal():
     except Exception as error:
         return "error:" + str(error), 500
     return {"journal": new_journal.serialize()}, 200
+
+# POST PARA CREAR UNA NUEVA LISTA
+
+@api.route('/createlist', methods=['POST'])
+@jwt_required()
+def create_list():
+    body = request.get_json()
+    name = body.get("name", None)
+    email = get_jwt_identity()
+    author = User.query.filter_by(email=email).one_or_none()
+    author_id = User.id
+    try: 
+        new_list = TodoList(name=name, author=author, author_id=author_id)
+        db.session.add(new_list)
+        db.session.commit()
+    except Exception as error:
+        return "error:" + str(error), 500
+    return {"journal": list.serialize()}, 200
 
 # -----------------------MÉTODOS DELETE-----------------------#
 
