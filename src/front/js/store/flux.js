@@ -121,7 +121,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			updateJournal: async (idJournal, textJournal) => {
-				let store = getStore();
+				const store = getStore();
 				try {
 					const resp = await fetch(process.env.BACKEND_URL + `/api/updatejournal`,
 						{
@@ -149,7 +149,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			createJournal: async (journal) => {
-				let store = getStore()
+				const store = getStore()
 				try {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/createjournal",
 						{
@@ -161,7 +161,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify(journal)
 						})
 					const data = await resp.json()
-					console.log(data)
 					setStore({ ...store, journals: [...store.journals, ...data.journal] })
 					return true
 				} catch (error) {
@@ -170,7 +169,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			createList: async (list) => {
-				let store = getStore()
+				const store = getStore()
 				try {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/createlist",
 						{
@@ -182,11 +181,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify(list)
 						})
 					const data = await resp.json()
-					setStore({ ...store, lists: [...store.lists, ...data.list] })
+					console.log(data.list)
+					setStore({ ...store, lists: [...store.lists, data.list] })
 					return true
 				} catch (error) {
-					return false
-				}
+					return false}
 			},
 
 			getJournals: async () => {
@@ -195,6 +194,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/journals")
 					const data = await resp.json()
 					setStore({ ...store, journals: [...data] })
+					return true;
+				} catch (error) {
+					showError()
+				}
+			},
+
+			getLists: async () => {
+				const store = getStore()
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/lists")
+					const data = await resp.json()
+					setStore({ ...store, lists: [...data] })
 					return true;
 				} catch (error) {
 					showError()

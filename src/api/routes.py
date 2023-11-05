@@ -81,7 +81,6 @@ def create_journal():
     author = User.query.filter_by(email=email).one_or_none()
     author_id = User.id
     try: 
-        # author = User.query.get(1)  # ----------> ASIGNAR USER.ID
         new_journal = Journal(name=name, text=text, color=color,
                             author=author, author_id=author_id)
         db.session.add(new_journal)
@@ -154,6 +153,13 @@ def get_customer_journals():
 def get_journals():
     journals = Journal.query.all()
     return jsonify([journal.serialize() for journal in journals])
+
+# GET PARA OBTENER TODAS LAS LISTAS
+
+@api.route('/lists', methods=['GET'])
+def get_lists():
+    lists = TodoList.query.all()
+    return jsonify([list.serialize() for list in lists])
 
 # GET PARA OBTENER TODOS LOS USUARIOS
 

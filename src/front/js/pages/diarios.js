@@ -105,7 +105,7 @@ export const Diarios = () => {
 
                 {/* Acá se muestra la lista completa de diarios*/}
                 <div className="journalsContainer">
-                    {filteredJournals.length == 0 && <h1 className="emptyAlert">No se han encontrado diarios</h1>}
+                    {filteredJournals.length == 0 && <h1 className="emptyAlert">No se han encontrado diarios.</h1>}
                     {filteredJournals.length != 0 &&
                         filteredJournals.map(item => (
                             <div className="ComponentCard" key={item.id} >

@@ -3,18 +3,20 @@ import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import "../../styles/dashboard.css";
 import "../../styles/diarios.css";
+import "../../styles/listas.css";
 import books from "../../img/books.png";
+import check from "../../img/check.png";
 import { Journal } from "./../component/journal.js";
 
 export const Listas = () => {
 
     const { store, actions } = useContext(Context);
     const [list, setList] = useState({
-        name: "",
+        name: ""
     });
 
     useEffect(() => {
-        actions.getJournals();
+        actions.getLists();
     }, [])
 
     /* Función para la creación de un diario nuevo (action)*/
@@ -59,8 +61,30 @@ export const Listas = () => {
                 <label for="fullName" class="form-label">Nombre</label>
                 <input className="enterForm"
                     type="text"
+                    name="fullName"
                     onChange={(e) => setList({ ...list, name: e.target.value })}
                     required />
+
+                 {/* Acá se muestra la lista completa de listas*/}
+                 <div className="listsContainer">
+                    {filteredLists.length == 0 && <h1 className="emptyAlert">No se han encontrado listas.</h1>}
+                    {filteredLists.length != 0 &&
+                        filteredLists.map(item => (
+                            <div className="ComponentList" key={item.id} >
+                                <div className="cardListBody">
+                                    <div className="cardListHeader">
+                                        <h5 className="cardListHeaderTitle">To do list</h5>
+                                        <h5 className="cardListHeaderTitle"><i class="fa-solid fa-circle-check"></i></h5>
+                                    </div>
+                                    <div className="cardListBox">
+                                        <h5 className="card-title">{item.name}</h5>
+                                        <img src={books} className="CardImg" />
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
         </div>
     )
