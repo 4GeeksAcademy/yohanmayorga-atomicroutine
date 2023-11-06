@@ -208,7 +208,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ ...store, lists: [...data] })
 					return true;
 				} catch (error) {
-					showError()
+					console.log(error)
 				}
 			},
 

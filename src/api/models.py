@@ -81,3 +81,26 @@ class TodoList(db.Model):
             "author_id": self.author_id
         }
 
+class TodoItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    completed = db.Column(db.Boolean, nullable=False)
+    list_id = db.Column(db.Integer, db.ForeignKey('TodoList.id'))
+    list = db.relationship("TodoList", backref="items")
+
+    def __init__(self, name, completed, list_id, list):
+        self.name = name
+        self.completed = completed
+        self.list_id = list_id
+        self.list = list
+
+    def __repr__(self):
+        return f'<TodoItem {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "completed": self.completed,
+            "tlist_id": self.list_id
+        }

@@ -113,7 +113,7 @@ export const Diarios = () => {
                                     <h5 className="card-title">{item.name}</h5>
                                     <img src={books} className="CardImg" />
                                     <div className="journalTextPreview">
-                                            {item.text != null ? item.text.substr(0, 20) + " ...leer más." : "Selecciona para comenzar a escribir."}
+                                            <p className="journalTextPreview">{item.text != null ? item.text.substr(0, 20) + "\n" + " ...leer más." : "Selecciona para comenzar a escribir."}</p>
                                     </div>
                                 </div>
                             </div>

@@ -11,6 +11,10 @@ export const Escritorio = () => {
 
     const { store, actions } = useContext(Context);
 
+    /* Filtro que se aplica para mostrar sólo los diarios que corresponden al usuario*/
+    const filteredJournals = store.journals.filter((journal) => journal.author.id === store.profile.id);
+    const filteredLists = store.lists.filter((list) => list.author.id === store.profile.id);
+
     return (
         <div className="dashboard">
             <div className="dashboardContainerbox">
@@ -40,6 +44,7 @@ export const Escritorio = () => {
                         <div id="rightDesktopCard">
                             <h4 className="desktopCardTitle">Diarios</h4>
                             <p className="desktopCardText"> Llevar un diario siempre es una buena práctica para tu día a día. </p>
+                            <p>{filteredJournals.length == 0 ? <p>No tienes ningún diario.</p> : <p>Tienes {filteredJournals.length} {filteredJournals.length == 1 ? "diario creado." : "diarios creados."}</p>}</p>
                         </div>
                     </div>
                     <div className="desktopCard me-2">
@@ -49,6 +54,7 @@ export const Escritorio = () => {
                         <div id="rightDesktopCard">
                             <h4 className="desktopCardTitle">Listas</h4>
                             <p className="desktopCardText"> ¡Que no se te olvide nada! Lleva listas de tus tareas pendientes. </p>
+                            <p>{filteredLists.length == 0 ? <p>No tienes ninguna lista creada.</p> : <p>Tienes {filteredLists.length} {filteredLists.length == 1 ? "lista creada." : "listas creadas."}</p>}</p>
                         </div>
                     </div>
                     <div className="desktopCard">

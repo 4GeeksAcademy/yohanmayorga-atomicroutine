@@ -51,6 +51,10 @@
 .journalInput {
     height: 40vh;
     resize: none;
+    border: none;
+    background: rgb(190,233,252);
+    background: linear-gradient(180deg, rgba(190,233,252,0.5) 70%, rgba(255,255,255,1) 100%);
+    border-radius: 5px;
 }
 
 .selectedjournalBottom {

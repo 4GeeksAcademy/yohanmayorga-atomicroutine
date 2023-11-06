@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/dashboard.css";
 import "../../styles/diarios.css";
 import "../../styles/listas.css";
-import books from "../../img/books.png";
-import check from "../../img/check.png";
+import listImg from "../../img/list.png";
 import { Journal } from "./../component/journal.js";
 
 export const Listas = () => {
@@ -65,8 +64,8 @@ export const Listas = () => {
                     onChange={(e) => setList({ ...list, name: e.target.value })}
                     required />
 
-                 {/* Acá se muestra la lista completa de listas*/}
-                 <div className="listsContainer">
+                {/* Acá se muestra la lista completa de listas*/}
+                <div className="listsContainer">
                     {filteredLists.length == 0 && <h1 className="emptyAlert">No se han encontrado listas.</h1>}
                     {filteredLists.length != 0 &&
                         filteredLists.map(item => (
@@ -78,7 +77,7 @@ export const Listas = () => {
                                     </div>
                                     <div className="cardListBox">
                                         <h5 className="card-title">{item.name}</h5>
-                                        <img src={books} className="CardImg" />
+                                        {/*<img src={listImg} className="CardImg" />*/}
                                     </div>
                                 </div>
                             </div>
