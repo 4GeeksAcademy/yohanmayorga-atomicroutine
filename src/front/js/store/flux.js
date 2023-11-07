@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: localStorage.getItem("token") || null,
 			journals: [],
 			lists: [],
+			items: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -196,7 +197,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ ...store, journals: [...data] })
 					return true;
 				} catch (error) {
-					showError()
+					console.log(error)
 				}
 			},
 

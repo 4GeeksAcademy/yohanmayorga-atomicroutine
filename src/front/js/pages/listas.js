@@ -4,12 +4,11 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/dashboard.css";
 import "../../styles/diarios.css";
 import "../../styles/listas.css";
-import listImg from "../../img/list.png";
-import { Journal } from "./../component/journal.js";
 
 export const Listas = () => {
 
     const { store, actions } = useContext(Context);
+    const [showList, setShowList] = useState(false);
     const [list, setList] = useState({
         name: ""
     });
@@ -84,9 +83,6 @@ export const Listas = () => {
                         </div>
                     </div>
                 </div>
-
-
-
 
                 {/* Acá se muestra la lista completa de listas*/}
                 <div className="listsContainer">
