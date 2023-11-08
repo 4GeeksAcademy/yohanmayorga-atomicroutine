@@ -8,14 +8,17 @@ import "../../styles/listas.css";
 export const Listas = () => {
 
     const { store, actions } = useContext(Context);
-    const [showList, setShowList] = useState(false);
     const [list, setList] = useState({
         name: ""
+    });
+    const [todo, setTodo] = useState({
+        name: "",
     });
 
     useEffect(() => {
         actions.getLists();
     }, [])
+
 
     /* Función para la creación de un diario nuevo (action)*/
     async function createList() {
@@ -26,6 +29,22 @@ export const Listas = () => {
         };
         if (created) {
             alert("La lista se ha creado exitosamente");
+            location.reload();
+        }
+        else {
+            alert("Ha ocurrido un error")
+        }
+    }
+
+    /* Función para la creación de una tarea nueva (action)*/
+    async function addTodo() {
+        let created = true;
+        try { await actions.addTodo(todo) }
+        catch (error) {
+            created = false;
+        };
+        if (created) {
+            alert("La tarea se ha añadido exitosamente");
             location.reload();
         }
         else {
@@ -84,6 +103,34 @@ export const Listas = () => {
                     </div>
                 </div>
 
+                {/* Modal que se abre para crear tarea nueva */}
+                <div className="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content" id="journalMainModal">
+                            <div className="modal-header">
+                                <h1 className="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-list-check"></i> Nueva tarea</h1>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                                <div className="journalModalBox">
+                                    <label for="fullName" class="form-label">Tarea</label>
+                                    <input className="enterForm"
+                                        type="text"
+                                        name="fullName"
+                                        id="fullName"
+                                        placeholder="Tarea a agregar"
+                                        onChange={(e) => setTodo({ ...todo, name: e.target.value })}
+                                        required />
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" className="btn btn-primary" onClick={() => addTodo()}>Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Acá se muestra la lista completa de listas*/}
                 <div className="listsContainer">
                     {filteredLists.length == 0 && <h1 className="emptyAlert">No se han encontrado listas.</h1>}
@@ -99,7 +146,7 @@ export const Listas = () => {
                                         <h5 className="card-title">{item.name}</h5>
                                         {/*<img src={listImg} className="CardImg" />*/}
                                     </div>
-                                    <p className="addItemButton"><i class="fa-solid fa-circle-plus"></i></p>
+                                    <p className="addItemButton" data-bs-toggle="modal" data-bs-target="#exampleModal3"><i class="fa-solid fa-circle-plus"></i></p>
                                 </div>
                             </div>
                         ))

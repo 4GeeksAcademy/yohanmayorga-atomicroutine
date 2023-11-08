@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: localStorage.getItem("token") || null,
 			journals: [],
 			lists: [],
-			items: [],
+			todos: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -187,6 +187,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return true
 				} catch (error) {
 					return false}
+			},
+
+			addTodo: async (todo) => {
+				const store = getStore()
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/addtodo",
+						{
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json"
+							},
+							body: JSON.stringify(todo)
+						})
+					const data = await resp.json()
+					console.log(data.todo)
+					setStore({ ...store, todos: [...store.todos, data.todo] })
+					return true
+				} catch (error) {
+					return console.log(error)}
 			},
 
 			getJournals: async () => {

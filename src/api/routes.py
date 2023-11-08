@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Journal, TodoList
+from api.models import db, User, Journal, TodoList, TodoItem
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -106,6 +106,24 @@ def create_list():
     except Exception as error:
         return "error:" + str(error), 500
     return {"list": new_list.serialize()}, 200
+
+# POST PARA CREAR UNA NUEVA TAREA
+
+@api.route('/addtodo', methods=['POST'])
+def create_todo():
+    body = request.get_json()
+    name = body.get("name", None)
+    completed = False
+    listName = None
+    list_id = None
+    try: 
+        new_todo = TodoItem(name=name, listName=listName, list_id=list_id, completed=completed)
+        print(new_todo)
+        db.session.add(new_todo)
+        db.session.commit()
+    except Exception as error:
+        return "error:" + str(error), 500
+    return {"todo": new_todo.serialize()}, 200
 
 # -----------------------MÉTODOS DELETE-----------------------#
 
