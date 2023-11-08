@@ -189,7 +189,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false}
 			},
 
-			addTodo: async (todo) => {
+			addTodo: async (todo, list_id) => {
 				const store = getStore()
 				try {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/addtodo",
@@ -198,7 +198,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							headers: {
 								"Content-Type": "application/json"
 							},
-							body: JSON.stringify(todo)
+							body: JSON.stringify({todo, list_id})
 						})
 					const data = await resp.json()
 					console.log(data.todo)

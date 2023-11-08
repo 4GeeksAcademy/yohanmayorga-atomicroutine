@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/dashboard.css";
 import "../../styles/diarios.css";
 import "../../styles/listas.css";
+import { NewTodo } from "./../component/newTodo.js";
 
 export const Listas = () => {
 
@@ -11,9 +12,14 @@ export const Listas = () => {
     const [list, setList] = useState({
         name: ""
     });
-    const [todo, setTodo] = useState({
-        name: "",
-    });
+    const [showAddTask, setShowAddTask] = useState(false);
+    const [itemList, setItemList] = useState("");
+
+    /* Esta función muestra u oculta la creación de una tarea*/
+    const handleClick = (item) => {
+        { showAddTask ? setShowAddTask(false) : setShowAddTask(true) };
+        setItemList(item);
+    };
 
     useEffect(() => {
         actions.getLists();
@@ -29,22 +35,6 @@ export const Listas = () => {
         };
         if (created) {
             alert("La lista se ha creado exitosamente");
-            location.reload();
-        }
-        else {
-            alert("Ha ocurrido un error")
-        }
-    }
-
-    /* Función para la creación de una tarea nueva (action)*/
-    async function addTodo() {
-        let created = true;
-        try { await actions.addTodo(todo) }
-        catch (error) {
-            created = false;
-        };
-        if (created) {
-            alert("La tarea se ha añadido exitosamente");
             location.reload();
         }
         else {
@@ -103,33 +93,12 @@ export const Listas = () => {
                     </div>
                 </div>
 
-                {/* Modal que se abre para crear tarea nueva */}
-                <div className="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered">
-                        <div className="modal-content" id="journalMainModal">
-                            <div className="modal-header">
-                                <h1 className="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-list-check"></i> Nueva tarea</h1>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div className="modal-body">
-                                <div className="journalModalBox">
-                                    <label for="fullName" class="form-label">Tarea</label>
-                                    <input className="enterForm"
-                                        type="text"
-                                        name="fullName"
-                                        id="fullName"
-                                        placeholder="Tarea a agregar"
-                                        onChange={(e) => setTodo({ ...todo, name: e.target.value })}
-                                        required />
-                                </div>
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="button" className="btn btn-primary" onClick={() => addTodo()}>Agregar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {/* Acá se muestra el diario específico que el usuario abra*/}
+                {<NewTodo
+                    list_id={itemList.id}
+                    listName={itemList.name}
+                    open={showAddTask}
+                    close={setShowAddTask} />}
 
                 {/* Acá se muestra la lista completa de listas*/}
                 <div className="listsContainer">
@@ -146,7 +115,7 @@ export const Listas = () => {
                                         <h5 className="card-title">{item.name}</h5>
                                         {/*<img src={listImg} className="CardImg" />*/}
                                     </div>
-                                    <p className="addItemButton" data-bs-toggle="modal" data-bs-target="#exampleModal3"><i class="fa-solid fa-circle-plus"></i></p>
+                                    <p className="addItemButton" onClick={() => { handleClick(item) }}><i class="fa-solid fa-circle-plus"></i></p>
                                 </div>
                             </div>
                         ))

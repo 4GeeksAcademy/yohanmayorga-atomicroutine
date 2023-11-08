@@ -112,10 +112,11 @@ def create_list():
 @api.route('/addtodo', methods=['POST'])
 def create_todo():
     body = request.get_json()
-    name = body.get("name", None)
+    name = body.get("todo", None)
     completed = False
-    listName = None
-    list_id = None
+    list_id = body.get("list_id", None)
+    listName = TodoList.query.filter_by(id=list_id).one_or_none()
+    
     try: 
         new_todo = TodoItem(name=name, listName=listName, list_id=list_id, completed=completed)
         print(new_todo)

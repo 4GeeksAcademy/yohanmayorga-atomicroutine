@@ -92,7 +92,6 @@ class TodoItem(db.Model):
         self.name = name
         self.completed = completed
         self.list_id = list_id
-        self.listName = listName
 
     def __repr__(self):
         return f'<TodoItem {self.name}>'
@@ -103,5 +102,4 @@ class TodoItem(db.Model):
             "name": self.name,
             "completed": self.completed,
             "list_id": self.list_id,
-            "listName": self.listName
         }
