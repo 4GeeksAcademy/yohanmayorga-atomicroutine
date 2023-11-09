@@ -1,0 +1,27 @@
+.selectedAddedBox {
+    position: fixed;
+    background: rgb(190, 233, 252);
+    background: linear-gradient(180deg, rgba(190, 233, 252, 1) 0%, rgba(240, 240, 240, 1) 100%);
+    width: 40%;
+    border-radius: 5px;
+    padding: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    box-shadow: 1px 1px 116px 100px rgba(162, 29, 204, 0.05);
+    -webkit-box-shadow: 1px 1px 116px 100px rgba(162, 29, 204, 0.05);
+    -moz-box-shadow: 1px 1px 116px 100px rgba(162, 29, 204, 0.05);
+}
+
+.selectedAddedBackground {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 50%;
+}
