@@ -47,7 +47,7 @@ export const NewTodo = ({list_id, open, close}) => {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="button" className="btn btn-primary" onClick={() => addTodo(todo, list_id, listName)}>Agregar</button>
+                                <button type="button" className="btn btn-primary" onClick={() => addTodo(todo, list_id)}>Agregar</button>
                             </div>
                         </div>
                     </div>

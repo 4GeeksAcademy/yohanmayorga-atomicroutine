@@ -110,15 +110,19 @@ def create_list():
 # POST PARA CREAR UNA NUEVA TAREA
 
 @api.route('/addtodo', methods=['POST'])
+@jwt_required()
 def create_todo():
     body = request.get_json()
     name = body.get("todo", None)
+    email = get_jwt_identity()
+    author = User.query.filter_by(email=email).one_or_none()
+    author_id = User.id
     completed = False
     list_id = body.get("list_id", None)
     listName = TodoList.query.filter_by(id=list_id).one_or_none()
     
     try: 
-        new_todo = TodoItem(name=name, listName=listName, list_id=list_id, completed=completed)
+        new_todo = TodoItem(name=name, listName=listName, author=author, author_id=author_id, list_id=list_id, completed=completed)
         print(new_todo)
         db.session.add(new_todo)
         db.session.commit()
@@ -179,6 +183,13 @@ def get_journals():
 def get_lists():
     lists = TodoList.query.all()
     return jsonify([list.serialize() for list in lists])
+
+# GET PARA OBTENER TODAS LAS TAREAS
+
+@api.route('/tasks', methods=['GET'])
+def get_tasks():
+    tasks = TodoItem.query.all()
+    return jsonify([task.serialize() for task in tasks])
 
 # GET PARA OBTENER TODOS LOS USUARIOS
 

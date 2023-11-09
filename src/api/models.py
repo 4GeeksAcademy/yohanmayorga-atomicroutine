@@ -87,11 +87,15 @@ class TodoItem(db.Model):
     completed = db.Column(db.Boolean, nullable=False)
     list_id = db.Column(db.Integer, db.ForeignKey('todo_list.id'))
     listName = db.relationship("TodoList", backref="items")
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    author = db.relationship("User", backref="items")
 
-    def __init__(self, name, completed, list_id, listName):
+    def __init__(self, name, completed, list_id, listName, author, author_id):
         self.name = name
         self.completed = completed
         self.list_id = list_id
+        self.author = author
+        self.author_id = author_id
 
     def __repr__(self):
         return f'<TodoItem {self.name}>'
@@ -102,4 +106,6 @@ class TodoItem(db.Model):
             "name": self.name,
             "completed": self.completed,
             "list_id": self.list_id,
+            "author": self.author.serialize(),
+            "author_id": self.author_id
         }

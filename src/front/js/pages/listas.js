@@ -23,6 +23,7 @@ export const Listas = () => {
 
     useEffect(() => {
         actions.getLists();
+        actions.getTasks();
     }, [])
 
 
@@ -44,6 +45,18 @@ export const Listas = () => {
 
     /* Filtro que se aplica para mostrar sólo las listas que corresponden al usuario*/
     const filteredLists = store.lists.filter((list) => list.author.id === store.profile.id);
+    const filteredTasks = store.todos.filter((todo) => todo.author.id === store.profile.id);
+
+    /* Filtro que se aplica para mostrar sólo las listas que corresponden al usuario
+    const filteredTasks = store.todos.filter((todo) => {
+        for (const list of store.lists) {
+          if (todo.list_id === list.id) {
+            return true;
+          }
+        }
+      
+        return false;
+      });*/
 
     return (
         <div className="dashboard">
@@ -56,11 +69,11 @@ export const Listas = () => {
                     <p>Aquí podrás crear y consultar listas de pendientes. Crea una nueva lista, asignale un título, agrega tareas y ¡listo! Podrás verla en esta pantalla. Seleccionala y comienza a trabajar en ella. ¡Puedes crear tantas listas como desees! Las listas de pendientes son una forma perfecta para organizar tus tareas y mantenerte al día con tus objetivos.</p>
                     <p>{filteredLists.length == 0 ? <p>Actualmente no tienes ninguna lista creada.</p> : <p>Actualmente tienes {filteredLists.length} {filteredLists.length == 1 ? "lista creada." : "listas creadas."}</p>}</p>
                 </div>
-              
+
                 <div className="desktopMainButton">
                     {/* Boton para crear lista nueva */}
                     <button type="button" className="deskMainButton" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                    Crear lista nueva
+                        Crear lista nueva
                     </button>
                 </div>
 
@@ -115,7 +128,8 @@ export const Listas = () => {
                                         <h5 className="card-title">{item.name}</h5>
                                         {/*<img src={listImg} className="CardImg" />*/}
                                     </div>
-                                    <p className="addItemButton" onClick={() => { handleClick(item) }}><i class="fa-solid fa-circle-plus"></i></p>
+                                    <p className="addItemButton" onClick={() => { handleClick(item), console.log(filteredTasks)}}><i class="fa-solid fa-circle-plus"></i></p>
+
                                 </div>
                             </div>
                         ))

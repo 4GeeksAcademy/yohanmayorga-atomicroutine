@@ -196,7 +196,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						{
 							method: "POST",
 							headers: {
-								"Content-Type": "application/json"
+								"Content-Type": "application/json",
+								"Authorization": "Bearer " + store.token
 							},
 							body: JSON.stringify({todo, list_id})
 						})
@@ -226,6 +227,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/lists")
 					const data = await resp.json()
 					setStore({ ...store, lists: [...data] })
+					return true;
+				} catch (error) {
+					console.log(error)
+				}
+			},
+
+			getTasks: async () => {
+				const store = getStore()
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/tasks")
+					const data = await resp.json()
+					setStore({ ...store, todos: [...data] })
 					return true;
 				} catch (error) {
 					console.log(error)
