@@ -134,7 +134,25 @@ export const Listas = () => {
                                             <button className="nav-link2" id="pills-true-tab" data-bs-toggle="pill" data-bs-target={`#pills-true-${item.id}`} type="button" role="tab" aria-controls="pills-true" aria-selected="false">Hechas</button>
                                         </li>
                                     </ul>
-                                    <div className="tab-content" id="pills-tabContent">
+
+                                    {filteredTasks.filter((todo) => {
+                                                return todo.list_id === item.id
+                                            }).length > 0 && (
+                                                    <p className="emptyAlert">
+                                                        Total cumplido: {
+                                                            ((
+                                                                filteredTasks.filter((todo) => {return (todo.list_id === item.id && todo.completed)}).length 
+
+                                                                / 
+
+                                                                filteredTasks.filter((todo) => {return (todo.list_id === item.id)}).length) 
+                                                                
+                                                                * 100).toFixed(2)
+                                                        }%.
+                                                    </p>
+                                                )}
+
+                                    <div className="tab-content2" id="pills-tabContent">
                                         <div className="tab-pane fade show active" id={`pills-false-${item.id}`} role="tabpanel" aria-labelledby="pills-false-tab" tabindex="0">
                                             {filteredTasks.filter((todo) => {
                                                 return todo.list_id === item.id && !todo.completed;
@@ -143,7 +161,7 @@ export const Listas = () => {
                                                 return todo.list_id === item.id && !todo.completed;
                                             }).map(todo => (
                                                 <div className="tasksList" key={todo.id} >
-                                                    <p className="tasksListText">{todo.name}</p>
+                                                    <p className="tasksListText me-2">{todo.name}</p>
                                                     <input
                                                         type="radio"
                                                         name="task"
@@ -154,6 +172,8 @@ export const Listas = () => {
                                                 </div>
                                             ))}
                                         </div>
+
+
                                         <div className="tab-pane fade" id={`pills-true-${item.id}`} role="tabpanel" aria-labelledby="pills-true-tab" tabindex="0">
                                             {filteredTasks.filter((todo) => {
                                                 return todo.list_id === item.id && todo.completed;
@@ -174,15 +194,6 @@ export const Listas = () => {
                                             ))}
                                         </div>
                                     </div>
-
-
-
-
-
-
-
-
-
                                 </div>
                             </div>
                         ))
