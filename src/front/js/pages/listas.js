@@ -21,10 +21,22 @@ export const Listas = () => {
         setItemList(item);
     };
 
-    /* AQQQQQQQQQQQQQQQQQQQQQQQQQQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII*/
-    function handleTaskClick(taskId) {
-        const task = filteredTasks.find((task) => task.id === taskId);
-        task.completed = true;
+
+    /* Función para marcar hecha una tarea (action)*/
+    async function handleTaskClick(taskId, completed) {
+
+        let done = true;
+        try { await actions.markCompleted(taskId, !completed) }
+        catch (error) {
+            done = false;
+        };
+        if (done) {
+            alert("La lista se ha actualizado exitosamente");
+            location.reload();
+        }
+        else {
+            alert("Ha ocurrido un error")
+        }
     }
 
     useEffect(() => {
@@ -32,6 +44,20 @@ export const Listas = () => {
         actions.getTasks();
     }, [])
 
+    async function deleteList(listId) {
+        let deleted = true;
+        try { await actions.deleteList(listId) }
+        catch (error) {
+            deleted = false;
+        };
+        if (deleted) {
+            alert("La lista se ha eliminado exitosamente.");
+            location.reload();
+        }
+        else {
+            alert("Ha ocurrido un error")
+        }
+    }
 
     /* Función para la creación de un diario nuevo (action)*/
     async function createList() {
@@ -125,7 +151,6 @@ export const Listas = () => {
                                     </div>
                                     <p className="addItemButton" onClick={() => { handleClick(item), console.log(filteredTasks) }}><i class="fa-solid fa-circle-plus"></i></p>
 
-
                                     <ul className="nav justify-content-center nav-pills2" id="pills-tab" role="tablist">
                                         <li className="nav-item2" role="presentation">
                                             <button className="nav-link2 active" id="pills-false-tab" data-bs-toggle="pill" data-bs-target={`#pills-false-${item.id}`} type="button" role="tab" aria-controls="pills-false" aria-selected="true">Pendientes</button>
@@ -162,13 +187,10 @@ export const Listas = () => {
                                             }).map(todo => (
                                                 <div className="tasksList" key={todo.id} >
                                                     <p className="tasksListText me-2">{todo.name}</p>
-                                                    <input
-                                                        type="radio"
-                                                        name="task"
-                                                        value={todo.id}
-                                                        checked={todo.completed}
-                                                        onChange={() => handleTaskClick(todo.id)}
-                                                    />
+                                                    <div class="custom-radio">
+                                                        <input type="checkbox" name="task" value={todo.id} checked={todo.completed} onChange={() => handleTaskClick(todo.id, todo.completed)} />
+                                                        <div class="checkmark"></div>
+                                                    </div>
                                                 </div>
                                             ))}
                                         </div>
@@ -183,17 +205,21 @@ export const Listas = () => {
                                             }).map(todo => (
                                                 <div className="tasksList" key={todo.id} >
                                                     <p className="tasksListText">{todo.name}</p>
-                                                    <input
-                                                        type="radio"
-                                                        name="task"
-                                                        value={todo.id}
-                                                        checked={todo.completed}
-                                                        onChange={() => handleTaskClick(todo.id)}
-                                                    />
+                                                    <div class="custom-radio">
+                                                        <input type="checkbox" name="task" value={todo.id} checked={todo.completed} onChange={() => handleTaskClick(todo.id, todo.completed)} />
+                                                        <div class="checkmark"></div>
+                                                    </div>
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
+
+                                    <div className="deleteListButtonContainer">
+                                        <button className="deleteListButton" onClick={() => deleteList(item.id)}>
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </div>
+
                                 </div>
                             </div>
                         ))

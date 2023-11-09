@@ -22,6 +22,17 @@ def update_journal():
     db.session.commit()
     return jsonify({"success": True}), 200
 
+
+@api.route("/markcompleted", methods=["PUT"])
+def mark_completed():
+    completed = request.json.get("completed")
+    id = request.json.get("taskId")
+    todo = TodoItem.query.get(id)
+    todo.completed = completed
+    db.session.commit()
+    return jsonify({"success": True}), 200
+
+
 # -----------------------MÉTODOS POST-----------------------#
 
 # POST PARA CREAR USUARIO
@@ -146,6 +157,21 @@ def delete_journal():
         return "error:" + str(error), 500
 
     return "Journal deleted successfully", 200
+
+# DELETE PARA BORRAR UNA LISTA
+@api.route('/deletelist', methods=['DELETE'])
+def delete_list():
+    text = request.json.get("listId")
+    id = TodoList.query.get(text)
+    if id is None:
+        return "List not found", 404
+    try:
+        db.session.delete(id)
+        db.session.commit()
+    except Exception as error:
+        return "error:" + str(error), 500
+
+    return "List deleted successfully", 200
 
 # -----------------------MÉTODOS GET-----------------------#
 

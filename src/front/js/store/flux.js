@@ -121,6 +121,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			deleteList: async (listId) => {
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/deletelist", {
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ listId }),
+					});
+
+					if (resp.status === 200) {
+						// La lista se eliminó correctamente
+						return true;
+					} else {
+						// Hubo un error al eliminar la lista
+						throw new Error(resp.statusText);
+					}
+				} catch (error) {
+					// Hubo un error al hacer el fetch
+					return false;
+				}
+			},
+
+
 			updateJournal: async (idJournal, textJournal) => {
 				const store = getStore();
 				try {
@@ -140,6 +164,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 								return { ...journal, textJournal };
 							} else {
 								return journal;
+							}
+						}),
+					});
+					return true;
+				} catch (error) {
+					return false;
+				}
+			},
+
+			markCompleted: async (taskId, completed) => {
+				const store = getStore();
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + `/api/markcompleted`,
+						{
+							method: "PUT",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({ taskId, completed }),
+						}
+					);
+					const data = await resp.json();
+					setStore({
+						...store, todos: store.todos.map((todo) => {
+							if (todo.id === taskId) {
+								return { ...todo, completed };
+							} else {
+								return todo;
 							}
 						}),
 					});

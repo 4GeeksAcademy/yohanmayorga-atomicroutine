@@ -66,8 +66,9 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 96%;
-    margin: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 28vh;
     padding-left: 2%;
     padding-right: 2%;
     box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.1);
@@ -103,4 +104,28 @@
     -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
     width: 100%;
     margin-bottom: 15px;
+}
+
+.deleteListButtonContainer {
+    display: flex;
+    justify-content: end;
+    width: 28vh;
+}
+
+.deleteListButton {
+    background: rgb(255, 117, 117);
+    color: white;
+    padding: 5px;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2%;
+}
+
+.deleteListButton:hover {
+    background: red;
 }
