@@ -146,7 +146,7 @@ export const Listas = () => {
                                         <h5 className="cardListHeaderTitle"><i class="fa-solid fa-circle-check"></i></h5>
                                     </div>
                                     <div className="cardListBox">
-                                        <h5 className="card-title">{item.name}</h5>
+                                        <h5 className="card-title2">{item.name}</h5>
                                         {/*<img src={listImg} className="CardImg" />*/}
                                     </div>
                                     <p className="addItemButton" onClick={() => { handleClick(item), console.log(filteredTasks) }}><i class="fa-solid fa-circle-plus"></i></p>
