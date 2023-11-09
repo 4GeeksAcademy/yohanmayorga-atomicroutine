@@ -21,6 +21,12 @@ export const Listas = () => {
         setItemList(item);
     };
 
+    /* AQQQQQQQQQQQQQQQQQQQQQQQQQQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII*/
+    function handleTaskClick(taskId) {
+        const task = filteredTasks.find((task) => task.id === taskId);
+        task.completed = true;
+      }
+
     useEffect(() => {
         actions.getLists();
         actions.getTasks();
@@ -46,17 +52,6 @@ export const Listas = () => {
     /* Filtro que se aplica para mostrar sólo las listas que corresponden al usuario*/
     const filteredLists = store.lists.filter((list) => list.author.id === store.profile.id);
     const filteredTasks = store.todos.filter((todo) => todo.author.id === store.profile.id);
-
-    /* Filtro que se aplica para mostrar sólo las listas que corresponden al usuario
-    const filteredTasks = store.todos.filter((todo) => {
-        for (const list of store.lists) {
-          if (todo.list_id === list.id) {
-            return true;
-          }
-        }
-      
-        return false;
-      });*/
 
     return (
         <div className="dashboard">
@@ -128,7 +123,20 @@ export const Listas = () => {
                                         <h5 className="card-title">{item.name}</h5>
                                         {/*<img src={listImg} className="CardImg" />*/}
                                     </div>
-                                    <p className="addItemButton" onClick={() => { handleClick(item), console.log(filteredTasks)}}><i class="fa-solid fa-circle-plus"></i></p>
+                                    <p className="addItemButton" onClick={() => { handleClick(item), console.log(filteredTasks) }}><i class="fa-solid fa-circle-plus"></i></p>
+                                    {filteredTasks.filter((todo) => todo.list_id === item.id).length == 0 && (<h5 className="emptyAlert">No hay tareas agregadas.</h5>)}
+                                    {filteredTasks.filter((todo) => todo.list_id === item.id).map(todo => (
+                                        <div className="task" key={todo.id} >
+                                            <h5>{todo.name}</h5>
+                                            <input
+                                                type="radio"
+                                                name="task"
+                                                value={todo.id}
+                                                checked={todo.completed}
+                                                onChange={() => handleTaskClick(todo.id)}
+                                            />
+                                        </div>
+                                    ))}
 
                                 </div>
                             </div>
