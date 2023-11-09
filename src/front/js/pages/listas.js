@@ -136,21 +136,21 @@ export const Listas = () => {
                                     </ul>
 
                                     {filteredTasks.filter((todo) => {
-                                                return todo.list_id === item.id
-                                            }).length > 0 && (
-                                                    <p className="emptyAlert">
-                                                        Total cumplido: {
-                                                            ((
-                                                                filteredTasks.filter((todo) => {return (todo.list_id === item.id && todo.completed)}).length 
+                                        return todo.list_id === item.id
+                                    }).length > 0 && (
+                                            <p className="emptyAlert">
+                                                Total cumplido: {
+                                                    ((
+                                                        filteredTasks.filter((todo) => { return (todo.list_id === item.id && todo.completed) }).length
 
-                                                                / 
+                                                        /
 
-                                                                filteredTasks.filter((todo) => {return (todo.list_id === item.id)}).length) 
-                                                                
-                                                                * 100).toFixed(2)
-                                                        }%.
-                                                    </p>
-                                                )}
+                                                        filteredTasks.filter((todo) => { return (todo.list_id === item.id) }).length)
+
+                                                        * 100).toFixed(2)
+                                                }%.
+                                            </p>
+                                        )}
 
                                     <div className="tab-content2" id="pills-tabContent">
                                         <div className="tab-pane fade show active" id={`pills-false-${item.id}`} role="tabpanel" aria-labelledby="pills-false-tab" tabindex="0">
