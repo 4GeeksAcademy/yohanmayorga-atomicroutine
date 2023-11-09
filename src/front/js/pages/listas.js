@@ -25,7 +25,7 @@ export const Listas = () => {
     function handleTaskClick(taskId) {
         const task = filteredTasks.find((task) => task.id === taskId);
         task.completed = true;
-      }
+    }
 
     useEffect(() => {
         actions.getLists();
@@ -124,19 +124,64 @@ export const Listas = () => {
                                         {/*<img src={listImg} className="CardImg" />*/}
                                     </div>
                                     <p className="addItemButton" onClick={() => { handleClick(item), console.log(filteredTasks) }}><i class="fa-solid fa-circle-plus"></i></p>
-                                    {filteredTasks.filter((todo) => todo.list_id === item.id).length == 0 && (<h5 className="emptyAlert">No hay tareas agregadas.</h5>)}
-                                    {filteredTasks.filter((todo) => todo.list_id === item.id).map(todo => (
-                                        <div className="task" key={todo.id} >
-                                            <h5>{todo.name}</h5>
-                                            <input
-                                                type="radio"
-                                                name="task"
-                                                value={todo.id}
-                                                checked={todo.completed}
-                                                onChange={() => handleTaskClick(todo.id)}
-                                            />
+
+
+                                    <ul className="nav justify-content-center nav-pills2" id="pills-tab" role="tablist">
+                                        <li className="nav-item2" role="presentation">
+                                            <button className="nav-link2 active" id="pills-false-tab" data-bs-toggle="pill" data-bs-target={`#pills-false-${item.id}`} type="button" role="tab" aria-controls="pills-false" aria-selected="true">Pendientes</button>
+                                        </li>
+                                        <li className="nav-item2" role="presentation">
+                                            <button className="nav-link2" id="pills-true-tab" data-bs-toggle="pill" data-bs-target={`#pills-true-${item.id}`} type="button" role="tab" aria-controls="pills-true" aria-selected="false">Hechas</button>
+                                        </li>
+                                    </ul>
+                                    <div className="tab-content" id="pills-tabContent">
+                                        <div className="tab-pane fade show active" id={`pills-false-${item.id}`} role="tabpanel" aria-labelledby="pills-false-tab" tabindex="0">
+                                            {filteredTasks.filter((todo) => {
+                                                return todo.list_id === item.id && !todo.completed;
+                                            }).length == 0 && (<p className="emptyAlert">No hay tareas pendientes.</p>)}
+                                            {filteredTasks.filter((todo) => {
+                                                return todo.list_id === item.id && !todo.completed;
+                                            }).map(todo => (
+                                                <div className="tasksList" key={todo.id} >
+                                                    <p className="tasksListText">{todo.name}</p>
+                                                    <input
+                                                        type="radio"
+                                                        name="task"
+                                                        value={todo.id}
+                                                        checked={todo.completed}
+                                                        onChange={() => handleTaskClick(todo.id)}
+                                                    />
+                                                </div>
+                                            ))}
                                         </div>
-                                    ))}
+                                        <div className="tab-pane fade" id={`pills-true-${item.id}`} role="tabpanel" aria-labelledby="pills-true-tab" tabindex="0">
+                                            {filteredTasks.filter((todo) => {
+                                                return todo.list_id === item.id && todo.completed;
+                                            }).length == 0 && (<p className="emptyAlert">No hay tareas hechas.</p>)}
+                                            {filteredTasks.filter((todo) => {
+                                                return todo.list_id === item.id && todo.completed;
+                                            }).map(todo => (
+                                                <div className="tasksList" key={todo.id} >
+                                                    <p className="tasksListText">{todo.name}</p>
+                                                    <input
+                                                        type="radio"
+                                                        name="task"
+                                                        value={todo.id}
+                                                        checked={todo.completed}
+                                                        onChange={() => handleTaskClick(todo.id)}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
 
                                 </div>
                             </div>
