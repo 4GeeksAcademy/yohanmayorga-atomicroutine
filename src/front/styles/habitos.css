@@ -1,0 +1,21 @@
+.habitsBoxUnderHeader {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%
+}
+
+.leftHabitsSide {
+    flex-grow: 1;
+}
+
+.rightHabitsSide {
+    width: auto;
+    background: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+    border-radius: 15px;
+}
+
