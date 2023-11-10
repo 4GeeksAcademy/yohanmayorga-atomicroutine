@@ -292,6 +292,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			getHabits: async () => {
+				const store = getStore()
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/habits")
+					const data = await resp.json()
+					setStore({ ...store, habits: [...data] })
+					return true;
+				} catch (error) {
+					console.log(error)
+				}
+			},
+
 			getLists: async () => {
 				const store = getStore()
 				try {

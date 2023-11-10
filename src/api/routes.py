@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Journal, TodoList, TodoItem
+from api.models import db, User, Journal, TodoList, TodoItem, Habit
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -99,6 +99,29 @@ def create_journal():
     except Exception as error:
         return "error:" + str(error), 500
     return {"journal": new_journal.serialize()}, 200
+
+# POST PARA CREAR UN NUEVO HÁBITO
+
+
+@api.route('/createhabit', methods=['POST'])
+@jwt_required()
+def create_habit():
+    body = request.get_json()
+    name = body.get("name", None)
+    description = body.get("description", None)
+    date = body.get("date", None)
+    completed = body.get("completed", None)
+    email = get_jwt_identity()
+    author = User.query.filter_by(email=email).one_or_none()
+    author_id = User.id
+    try: 
+        new_habit = Habit(name=name, description=description, date=date, completed=completed, author=author, author_id=author_id)
+        db.session.add(new_habit)
+        db.session.commit()
+    except Exception as error:
+        return "error:" + str(error), 500
+    return {"habit": new_habit.serialize()}, 200
+
 
 # POST PARA CREAR UNA NUEVA LISTA
 
@@ -209,6 +232,13 @@ def get_journals():
 def get_lists():
     lists = TodoList.query.all()
     return jsonify([list.serialize() for list in lists])
+
+# GET PARA OBTENER TODOS LOS HÁBITOS
+
+@api.route('/habits', methods=['GET'])
+def get_habits():
+    habits = Habit.query.all()
+    return jsonify([habit.serialize() for habit in habits])
 
 # GET PARA OBTENER TODAS LAS TAREAS
 

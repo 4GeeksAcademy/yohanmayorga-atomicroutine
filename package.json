@@ -73,6 +73,7 @@
 		]
 	},
 	"dependencies": {
+		"moment": "^2.29.4",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
 		"react-calendar": "^4.6.1",

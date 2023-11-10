@@ -22,14 +22,18 @@ export const Habitos = () => {
         setDate(date)
     }
 
-    
+    useEffect(() => {
+        actions.getHabits();
+    }, [])
+
+
     function updateDate(habitItem) {
         const date = new Date(habitItem.date);
         date.setDate(date.getDate() + 1);
         habitItem.date = date.toISOString();
         return habitItem;
     }
-    
+
     /* Función para la creación de un hábito nuevo (action)*/
     async function createHabit(habitSet) {
         let created = true;
@@ -40,13 +44,17 @@ export const Habitos = () => {
                 created = false;
             }
         }
-    
+
         if (created) {
             alert("El hábito se ha creado exitosamente");
+            location.reload();
         } else {
             alert("Ha ocurrido un error");
         }
     }
+
+    /* Filtro que se aplica para mostrar sólo los hábitos que corresponden al usuario*/
+    const filteredHabits = store.habits.filter((habit) => habit.author.id === store.profile.id);
 
     return (
         <div className="dashboard">
@@ -94,7 +102,7 @@ export const Habitos = () => {
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div className="modal-body">
-                                    
+
                                     <div className="journalModalBox">
                                         {/*Nombre del hábito*/}
                                         <label for="fullName" className="form-label">Hábito</label>
@@ -105,7 +113,7 @@ export const Habitos = () => {
                                             placeholder="Hábito a crear"
                                             onChange={(e) => setHabitItem({ ...habitItem, name: e.target.value })}
                                             required />
-                                        
+
                                         {/*Descripción del hábito*/}
                                         <label for="description" className="form-label">Descripción</label>
                                         <input className="enterForm"
@@ -113,12 +121,12 @@ export const Habitos = () => {
                                             name="description"
                                             id="description"
                                             placeholder="(Opcional)"
-                                            onChange={(e) => setHabitItem({ ...habitItem, description: e.target.value })}/>
+                                            onChange={(e) => setHabitItem({ ...habitItem, description: e.target.value })} />
 
                                         {/*Fecha de inicio*/}
                                         <label for="date" className="form-label">Fecha de inicio</label>
-                                        <input className="enterForm" type="date" name="date" id="date" pattern="\d{4}-\d{2}-\d{2}" onChange={(e) => setHabitItem({ ...habitItem, date: e.target.value })} required/>
-                                        
+                                        <input className="enterForm" type="date" name="date" id="date" pattern="\d{4}-\d{2}-\d{2}" onChange={(e) => setHabitItem({ ...habitItem, date: e.target.value })} required />
+
                                         {/*Cantidad de veces*/}
                                         <label for="quantity">Repeticiones (máximo 30)</label>
                                         <input className="enterForm" type="number" id="quantity" name="quantity" min="1" max="30" onChange={(e) => setHabitSet(e.target.value)}></input>
@@ -127,7 +135,7 @@ export const Habitos = () => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                    <button type="button" className="btn btn-primary" onClick={() => createHabit()}>Guardar</button>
+                                    <button type="button" className="btn btn-primary" onClick={() => createHabit(habitSet)}>Guardar</button>
                                 </div>
                             </div>
                         </div>
