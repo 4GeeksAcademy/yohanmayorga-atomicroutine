@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			journals: [],
 			lists: [],
 			todos: [],
+			habits: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -234,8 +235,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify(list)
 						})
 					const data = await resp.json()
-					console.log(data.list)
 					setStore({ ...store, lists: [...store.lists, data.list] })
+					return true
+				} catch (error) {
+					return false}
+			},
+
+			createHabit: async (habitItem) => {
+				const store = getStore()
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/createhabit",
+						{
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+								"Authorization": "Bearer " + store.token
+							},
+							body: JSON.stringify(habitItem)
+						})
+					const data = await resp.json()
+					setStore({ ...store, habits: [...store.habits, data.habit] })
 					return true
 				} catch (error) {
 					return false}

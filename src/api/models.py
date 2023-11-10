@@ -109,3 +109,34 @@ class TodoItem(db.Model):
             "author": self.author.serialize(),
             "author_id": self.author_id
         }
+
+class Habit(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False, unique=True)
+    description = db.Column(db.String(5000))
+    completed = db.Column(db.Boolean, nullable=False)
+    date = db.Column(db.Date, nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    author = db.relationship("User", backref="habits")
+
+    def __init__(self, name, completed, author, author_id, description, date):
+        self.name = name
+        self.completed = completed
+        self.author = author
+        self.author_id = author_id
+        self.description = description
+        self.date = date
+
+    def __repr__(self):
+        return f'<TodoItem {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "completed": self.completed,
+            "author": self.author.serialize(),
+            "author_id": self.author_id,
+            "description": self.description,
+            "date": self.date
+        }
