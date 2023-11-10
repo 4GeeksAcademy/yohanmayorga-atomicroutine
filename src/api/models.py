@@ -112,7 +112,7 @@ class TodoItem(db.Model):
 
 class Habit(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), nullable=False, unique=True)
+    name = db.Column(db.String(120), nullable=False)
     description = db.Column(db.String(5000))
     completed = db.Column(db.Boolean, nullable=False)
     date = db.Column(db.Date, nullable=False)

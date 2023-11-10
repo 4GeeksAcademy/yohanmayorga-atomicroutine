@@ -87,6 +87,26 @@ export const Habitos = () => {
                         <div className="rightSideDateBox">
                             <p className="rightSideDate">Hoy es {date.toLocaleDateString()} </p>
                         </div>
+
+                        {filteredHabits.filter((habit) => {
+                            return habit.date == date.toUTCString();
+                        }).map(habit => (
+                            <div className="tasksList" key={habit.id} >
+                                <p className="tasksListText">{habit.name}</p>
+                                <p className="tasksListText">{habit.date}</p>
+                            </div>
+                        ))}
+
+
+
+                        {filteredHabits.map(habit => (
+                            <div className="tasksList" key={habit.id} >
+                                <p className="tasksListText">{date.toUTCString()}</p>
+                                <p className="tasksListText">{habit.date}</p>
+                            </div>
+                        ))}
+
+
                     </div>
 
 
