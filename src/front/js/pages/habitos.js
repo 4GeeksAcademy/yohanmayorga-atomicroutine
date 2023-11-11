@@ -18,11 +18,13 @@ export const Habitos = () => {
     });
     const [habitSet, setHabitSet] = useState("")
 
-    const onChange = date => {
+    const onChange = (date) => {
         setDate(date)
     }
 
     useEffect(() => {
+        console.log(date)
+        onChange(date);
         actions.getHabits();
     }, [])
 
@@ -89,24 +91,17 @@ export const Habitos = () => {
                         </div>
 
                         {filteredHabits.filter((habit) => {
-                            return habit.date == date.toUTCString();
-                        }).map(habit => (
+                            return habit.date?.slice(0,16) == date.toUTCString()?.slice(0,16); //AQUI LAS FECHAS SE COMPARAN, PERO LA LOCAL -NO LA DEL HABITO- VIENE CON HORAS DE MAS (CUANDO AQUI SON LAS 8 DE LA NOCHE, YA PARA ELLA ES MAÑANA)
+                        }).map(habit => ( <>
                             <div className="tasksList" key={habit.id} >
                                 <p className="tasksListText">{habit.name}</p>
-                                <p className="tasksListText">{habit.date}</p>
                             </div>
-                        ))}
-
-
-
-                        {filteredHabits.map(habit => (
-                            <div className="tasksList" key={habit.id} >
-                                <p className="tasksListText">{date.toUTCString()}</p>
-                                <p className="tasksListText">{habit.date}</p>
+                            <div>
+                                <p className="tasksListText">{habit.date.toLocaleString()}</p> {/*FECHA DEL HABITO, ESTA NO VA A CAMBIAR PORQUE ASI SE AGREGA POR DEFECTO*/}
+                                <p className="tasksListText">{date.toString()}</p> {/*FECHA DEL CALENDARIO, ESTA ES LA QUE TIENES QUE CAMBIAR PARA QUE SE PAREZCA A LA DEL HABITO*/}
                             </div>
+                            </>
                         ))}
-
-
                     </div>
 
 
