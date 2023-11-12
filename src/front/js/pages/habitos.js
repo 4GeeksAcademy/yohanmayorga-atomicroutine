@@ -55,6 +55,23 @@ export const Habitos = () => {
         }
     }
 
+    /* Función para marcar hecho un hábito (action)*/
+    async function handleHabitClick(habitId, completed) {
+
+        let done = true;
+        try { await actions.markHabitCompleted(habitId, !completed) }
+        catch (error) {
+            done = false;
+        };
+        if (done) {
+            alert("El hábito se ha actualizado exitosamente");
+            location.reload();
+        }
+        else {
+            alert("Ha ocurrido un error")
+        }
+    }
+
     /* Filtro que se aplica para mostrar sólo los hábitos que corresponden al usuario*/
     const filteredHabits = store.habits.filter((habit) => habit.author.id === store.profile.id);
 
@@ -79,6 +96,14 @@ export const Habitos = () => {
                                 Crear hábito nuevo
                             </button>
                         </div>
+                        <div className="leftHabitsSideBox">
+                        <div className="leftHabitsSideBoxHeader">
+                        <div className="HeaderStatistics">
+                            <h5>Resumen de progreso</h5>
+                            <p>Este es un ejemplo de texto para organizar el cuadro de estadísticas de la aplicación.</p>
+                            </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="rightHabitsSide">
@@ -87,21 +112,32 @@ export const Habitos = () => {
                             <Calendar onChange={onChange} value={date} />
                         </div>
                         <div className="rightSideDateBox">
-                            <p className="rightSideDate">Hoy es {date.toLocaleDateString()} </p>
+                            <p className="rightSideDate">{date.toLocaleDateString()} </p>
                         </div>
 
+                        <div className="habitsContainer">
+                        <div>
+                                
+
+                                {filteredHabits.filter((habit) => {
+                                    return habit.date?.slice(0, 16) == date.toUTCString()?.slice(0, 16)})?.length > 0 ? <h5 className="habitListTitle">Programado para hoy</h5> : <h5 className="emptyHabitAlert">No hay nada programado para hoy</h5>}
+                            </div>
                         {filteredHabits.filter((habit) => {
                             return habit.date?.slice(0,16) == date.toUTCString()?.slice(0,16); //AQUI LAS FECHAS SE COMPARAN, PERO LA LOCAL -NO LA DEL HABITO- VIENE CON HORAS DE MAS (CUANDO AQUI SON LAS 8 DE LA NOCHE, YA PARA ELLA ES MAÑANA)
                         }).map(habit => ( <>
-                            <div className="tasksList" key={habit.id} >
-                                <p className="tasksListText">{habit.name}</p>
+                            <div className="habitList" key={habit.id} >
+                                <p className="habitListText">{habit.name}</p>
+                                <div class="custom-radio">
+                                                        <input type="checkbox" name="task" value={habit.id} checked={habit.completed} onChange={() => handleHabitClick(habit.id, habit.completed)} />
+                                                    </div>
                             </div>
-                            <div>
-                                <p className="tasksListText">{habit.date.toLocaleString()}</p> {/*FECHA DEL HABITO, ESTA NO VA A CAMBIAR PORQUE ASI SE AGREGA POR DEFECTO*/}
-                                <p className="tasksListText">{date.toString()}</p> {/*FECHA DEL CALENDARIO, ESTA ES LA QUE TIENES QUE CAMBIAR PARA QUE SE PAREZCA A LA DEL HABITO*/}
-                            </div>
+                            {/*<div>
+                                <p className="tasksListText">{habit.date.toLocaleString()}</p> FECHA DEL HABITO, ESTA NO VA A CAMBIAR PORQUE ASI SE AGREGA POR DEFECTO
+                                <p className="tasksListText">{date.toString()}</p> FECHA DEL CALENDARIO, ESTA ES LA QUE TIENES QUE CAMBIAR PARA QUE SE PAREZCA A LA DEL HABITO
+                            </div>*/}
                             </>
                         ))}
+                        </div>
                     </div>
 
 

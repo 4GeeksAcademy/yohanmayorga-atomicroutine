@@ -32,6 +32,15 @@ def mark_completed():
     db.session.commit()
     return jsonify({"success": True}), 200
 
+@api.route("/markhabitcompleted", methods=["PUT"])
+def mark_habit_completed():
+    completed = request.json.get("completed")
+    id = request.json.get("habitId")
+    habit = Habit.query.get(id)
+    habit.completed = completed
+    db.session.commit()
+    return jsonify({"success": True}), 200
+
 
 # -----------------------MÉTODOS POST-----------------------#
 

@@ -19,3 +19,44 @@
     border-radius: 15px;
 }
 
+.habitsContainer {
+    background: #bee9fc;
+    width: 100%;
+    padding: 3%;
+    border-radius: 15px
+}
+
+p.habitListText {
+    margin-bottom: 0;
+}
+
+.emptyHabitAlert {
+    color: red;
+    display: flex;
+    justify-content: center;
+}
+
+.leftHabitsSideBox {
+    width: 100%;
+    margin-right: 15px;
+}
+
+.HeaderStatistics {
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 15px;
+    width: 30%;
+}
+
+.habitList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.habitList:hover {
+    background-color: #1074a2;
+    color: white;
+}

@@ -202,6 +202,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			markHabitCompleted: async (habitId, completed) => {
+				const store = getStore();
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + `/api/markhabitcompleted`,
+						{
+							method: "PUT",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({ habitId, completed }),
+						}
+					);
+					const data = await resp.json();
+					setStore({
+						...store, habits: store.habits.map((habit) => {
+							if (habit.id === habitId) {
+								return { ...habit, completed };
+							} else {
+								return habit;
+							}
+						}),
+					});
+					return true;
+				} catch (error) {
+					return false;
+				}
+			},
+
 			createJournal: async (journal) => {
 				const store = getStore()
 				try {
