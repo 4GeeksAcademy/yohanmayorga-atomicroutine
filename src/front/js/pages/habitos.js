@@ -88,7 +88,7 @@ export const Habitos = () => {
                 <div className="desktopHeader">
                     <h1>Bienvenid@ {store.profile ? store.profile.name : ""}</h1>
                     <p>En esta sección, podrás crear y hacer seguimiento a tus hábitos. Para crear un nuevo hábito, haz clic en el botón "crear hábito nuevo". A continuación, ingresa un nombre para tu hábito, una descripción opcional y la frecuencia con la que deseas realizarlo.</p>
-                    {totalPercentage !== NaN ? <p>Hasta la fecha, tu porcentaje de eficiencia es del {totalPercentage}%.</p> : <p>No hay estadísticas disponibles.</p>}
+                    {!isNaN(totalPercentage) ? <p>Hasta la fecha, tu porcentaje de eficiencia es del {totalPercentage}%.</p> : <p>No hay estadísticas disponibles.</p>}
                     {habitsToday.length == 0 ? <p>No tienes tareas pendientes para hoy.</p> : <p>Tienes {habitsToday.length} {habitsToday.length == 1 ? "tarea pendiente para hoy." : "tareas pendientes para hoy."}</p>}
                 </div>
 
@@ -101,8 +101,8 @@ export const Habitos = () => {
                             <div className="leftHabitsSideBoxHeader">
                                 <div className="HeaderStatistics">
                                     <h5>Resumen de progreso</h5>
-                                    {totalPercentage !== NaN ? <h1 className="habitsPercentage">{totalPercentage}%</h1> : <h5>No hay datos</h5>}
-                                    {totalPercentage !== NaN ? <p className="habitsSummary">{store.profile ? store.profile.name : "Hola"}, hasta la fecha, tu porcentaje de eficiencia con respecto al cumplimiento de tus hábitos es del {totalPercentage}%. Este cálculo se realiza tomando en cuenta todos los hábitos programados hasta la fecha actual y aquellos ya marcados como hechos. </p> : <p className="habitsSummary">No se han encontrado resultados de progreso de cumplimiento de hábitos. Esto puede deberse a que todavía no has creado un hábito nuevo para hacerle seguimiento, o de un error en el cálculo.</p>}
+                                    {!isNaN(totalPercentage) ? <h1 className="habitsPercentage">{totalPercentage}%</h1> : <h5>No hay datos</h5>}
+                                    {!isNaN(totalPercentage) ? <p className="habitsSummary">{store.profile ? store.profile.name : "Hola"}, hasta la fecha, tu porcentaje de eficiencia con respecto al cumplimiento de tus hábitos es del {totalPercentage}%. Este cálculo se realiza tomando en cuenta todos los hábitos programados hasta la fecha actual y aquellos ya marcados como hechos. </p> : <p className="habitsSummary">No se han encontrado resultados de progreso de cumplimiento de hábitos. Esto puede deberse a que todavía no has creado un hábito nuevo para hacerle seguimiento, que no has marcado ninguno como hecho, o de un error en el cálculo.</p>}
                                 </div>
 
                                 <div className="HeaderButtons">
