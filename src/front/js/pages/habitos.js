@@ -39,22 +39,22 @@ export const Habitos = () => {
     /* Función para la creación de un hábito nuevo (action)*/
     async function createHabit(habitSet) {
         let created = true;
-      
+
         for (let i = 0; i < habitSet; i++) {
-          if (i === 0) {
-            await actions.createHabit(habitItem);
-          } else {
-            await actions.createHabit(updateDate(habitItem));
-          }
+            if (i === 0) {
+                await actions.createHabit(habitItem);
+            } else {
+                await actions.createHabit(updateDate(habitItem));
+            }
         }
-      
+
         if (created) {
-          alert("El hábito se ha creado exitosamente");
-          location.reload();
+            alert("El hábito se ha creado exitosamente");
+            location.reload();
         } else {
-          alert("Ha ocurrido un error");
+            alert("Ha ocurrido un error");
         }
-      }
+    }
 
     /* Función para marcar hecho un hábito (action)*/
     async function handleHabitClick(habitId, completed) {
@@ -75,15 +75,14 @@ export const Habitos = () => {
 
     /* Filtro que se aplica para mostrar sólo los hábitos que corresponden al usuario*/
     const filteredHabits = store.habits.filter((habit) => habit.author.id === store.profile.id);
-    const filteredCompletedHabits = store.habits.filter((habit) => habit.author.id === store.profile.id && habit.completed === true && habit.date?.slice(0, 16) <= new Date().toUTCString()?.slice(0, 16));
-    const filteredToDateHabits = store.habits.filter((habit) => habit.author.id === store.profile.id && habit.date?.slice(0, 16) < new Date().toUTCString()?.slice(0, 16));
+    const filteredCompletedHabits = store.habits.filter((habit) => habit.author.id === store.profile.id && habit.completed === true && new Date(habit.date).toLocaleDateString('es-VE', {timeZone: "UTC"}) <= new Date().toLocaleDateString());
+    const filteredToDateHabits = store.habits.filter((habit) => habit.author.id === store.profile.id && new Date(habit.date).toLocaleDateString('es-VE', {timeZone: "UTC"}) <= new Date().toLocaleDateString());
     const totalPercentage = ((filteredCompletedHabits.length / (filteredToDateHabits.length)) * 100).toFixed(0)
-    const habitsToday = store.habits.filter((habit) => habit.author.id === store.profile.id && habit.date?.slice(0, 16) === new Date().toUTCString()?.slice(0, 16) && habit.completed === false)
+    const habitsToday = store.habits.filter((habit) => habit.author.id === store.profile.id && new Date(habit.date).toLocaleDateString('es-VE', {timeZone: "UTC"}) === new Date().toLocaleDateString() && habit.completed === false)
 
     return (
         <div className="dashboard">
             <div className="dashboardContainerbox">
-
                 {/* Encabezado del componente de los hábitos*/}
                 <h4><i className="fa-solid fa-chart-column"></i> Hábitos</h4>
                 <div className="desktopHeader">
@@ -95,7 +94,7 @@ export const Habitos = () => {
 
                 <div className="habitsBoxUnderHeader">
 
-                    
+
                     <div className="leftHabitsSide">
                         <div className="desktopMainButton">
                         </div>
@@ -141,7 +140,6 @@ export const Habitos = () => {
                             <Calendar onChange={onChange} value={date} />
                         </div>
                         <div className="rightSideDateBox">
-                        <p className="rightSideDate">{date.toLocaleDateString()} </p>
                             <p className="rightSideDate">{date.toLocaleDateString()} </p>
                         </div>
 
@@ -150,17 +148,17 @@ export const Habitos = () => {
 
 
                                 {filteredHabits.filter((habit) => {
-                                    return habit.date?.slice(0, 16) == date.toUTCString()?.slice(0, 16)
+                                    return new Date(habit.date).toLocaleDateString('es-VE', {timeZone: "UTC"}) == date.toLocaleDateString()
                                 })?.length > 0 ? <h5 className="habitListTitle">Tareas programadas</h5> : <h5 className="emptyHabitAlert">No hay nada programado para hoy</h5>}
                             </div>
 
 
                             {filteredHabits.filter((habit) => {
-                                return habit.date?.slice(0, 16) == date.toUTCString()?.slice(0, 16); //AQUI LAS FECHAS SE COMPARAN, PERO LA LOCAL -NO LA DEL HABITO- VIENE CON HORAS DE MAS (CUANDO AQUI SON LAS 8 DE LA NOCHE, YA PARA ELLA ES MAÑANA)
+                                return new Date(habit.date).toLocaleDateString('es-VE', {timeZone: "UTC"}) == date.toLocaleDateString();
                             }).map((habit) => (<>
                                 <div className="habitList" key={habit.id} >
                                     <p className="habitListText">{habit.name}</p>
-                                     <p className="habitListText">{habit.date}</p>
+                                    <p className="habitListText">{new Date(habit.date).toLocaleDateString('es-VE', {timeZone: "UTC"})}</p>
                                     <div className="custom-radio">
                                         <input
                                             type="checkbox"
@@ -171,13 +169,6 @@ export const Habitos = () => {
                                         />
                                     </div>
                                 </div>
-
-
-
-                                {/*<div>
-                                <p className="tasksListText">{habit.date.toLocaleString()}</p> FECHA DEL HABITO, ESTA NO VA A CAMBIAR PORQUE ASI SE AGREGA POR DEFECTO
-                                <p className="tasksListText">{date.toString()}</p> FECHA DEL CALENDARIO, ESTA ES LA QUE TIENES QUE CAMBIAR PARA QUE SE PAREZCA A LA DEL HABITO
-                            </div>*/}
                             </>
                             ))}
                         </div>
