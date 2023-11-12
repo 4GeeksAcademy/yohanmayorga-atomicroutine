@@ -26,6 +26,7 @@ export const Habitos = () => {
         console.log(date)
         onChange(date);
         actions.getHabits();
+        
     }, [])
 
 
@@ -74,6 +75,10 @@ export const Habitos = () => {
 
     /* Filtro que se aplica para mostrar sólo los hábitos que corresponden al usuario*/
     const filteredHabits = store.habits.filter((habit) => habit.author.id === store.profile.id);
+    const filteredCompletedHabits = store.habits.filter((habit) => habit.author.id === store.profile.id &&  habit.completed === true && habit.date?.slice(0,16) <= new Date().toUTCString()?.slice(0,16));
+    const filteredToDateHabits = store.habits.filter((habit) =>  habit.author.id === store.profile.id && habit.date?.slice(0,16) < new Date().toUTCString()?.slice(0,16));
+    const totalPercentage = ((filteredCompletedHabits.length / (filteredToDateHabits.length - 1) ) * 100).toFixed(0)
+    const habitsToday = store.habits.filter((habit) =>  habit.author.id === store.profile.id && habit.date?.slice(0,16) === new Date().toUTCString()?.slice(0,16) && habit.completed === false)
 
     return (
         <div className="dashboard">
@@ -85,6 +90,8 @@ export const Habitos = () => {
                     <h1>Bienvenid@ {store.profile ? store.profile.name : ""}</h1>
                     <p>En esta sección, podrás crear y hacer seguimiento a tus hábitos. Para crear un nuevo hábito, haz clic en el botón "crear hábito nuevo". A continuación, ingresa un nombre para tu hábito, una descripción opcional y la frecuencia con la que deseas realizarlo.</p>
                     {/*<p>{filteredLists.length == 0 ? <p>Actualmente no tienes ninguna lista creada.</p> : <p>Actualmente tienes {filteredLists.length} {filteredLists.length == 1 ? "lista creada." : "listas creadas."}</p>}</p>*/}
+                    {totalPercentage !== NaN ? <p>Hasta la fecha, tu porcentaje de eficiencia es del {totalPercentage}%.</p> : <p>No hay estadísticas disponibles.</p>}
+                    {habitsToday.length == 0 ? <p>No tienes tareas programadas para hoy.</p> : <p>Tienes {habitsToday.length} {habitsToday.length == 1 ? "tarea programada para hoy." : "tareas programadas para hoy."}</p>}
                 </div>
 
                 <div className="habitsBoxUnderHeader">
@@ -100,7 +107,10 @@ export const Habitos = () => {
                         <div className="leftHabitsSideBoxHeader">
                         <div className="HeaderStatistics">
                             <h5>Resumen de progreso</h5>
-                            <p>Este es un ejemplo de texto para organizar el cuadro de estadísticas de la aplicación.</p>
+                            {totalPercentage !== NaN ? <h1 className="habitsPercentage">{totalPercentage}%</h1> : <h5>No hay datos</h5>}
+                            {totalPercentage !== NaN ? <p>{store.profile ? store.profile.name:"Hola"}, hasta la fecha, tu porcentaje de eficiencia con respecto al cumplimiento de tus hábitos es del {totalPercentage}%. Este cálculo se realiza tomando en cuenta todos los hábitos programados hasta la fecha actual y aquellos ya marcados como hechos. </p> : <p>No se han encontrado resultados de progreso de cumplimiento de hábitos. Esto puede deberse a que todavía no has creado un hábito nuevo para hacerle seguimiento, o de un error en el cálculo.</p>}
+                            {console.log(filteredCompletedHabits)}
+                            {console.log(filteredToDateHabits)}
                             </div>
                             </div>
                         </div>
@@ -120,7 +130,7 @@ export const Habitos = () => {
                                 
 
                                 {filteredHabits.filter((habit) => {
-                                    return habit.date?.slice(0, 16) == date.toUTCString()?.slice(0, 16)})?.length > 0 ? <h5 className="habitListTitle">Programado para hoy</h5> : <h5 className="emptyHabitAlert">No hay nada programado para hoy</h5>}
+                                    return habit.date?.slice(0, 16) == date.toUTCString()?.slice(0, 16)})?.length > 0 ? <h5 className="habitListTitle">Tareas programadas</h5> : <h5 className="emptyHabitAlert">No hay nada programado para hoy</h5>}
                             </div>
                         {filteredHabits.filter((habit) => {
                             return habit.date?.slice(0,16) == date.toUTCString()?.slice(0,16); //AQUI LAS FECHAS SE COMPARAN, PERO LA LOCAL -NO LA DEL HABITO- VIENE CON HORAS DE MAS (CUANDO AQUI SON LAS 8 DE LA NOCHE, YA PARA ELLA ES MAÑANA)

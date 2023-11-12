@@ -14,6 +14,7 @@ export const Escritorio = () => {
     /* Filtro que se aplica para mostrar sólo los diarios que corresponden al usuario*/
     const filteredJournals = store.journals.filter((journal) => journal.author.id === store.profile.id);
     const filteredLists = store.lists.filter((list) => list.author.id === store.profile.id);
+    const habitsToday = store.habits.filter((habit) =>  habit.author.id === store.profile.id && habit.date?.slice(0,16) === new Date().toUTCString()?.slice(0,16) && habit.completed === false)
 
     return (
         <div className="dashboard">
@@ -35,6 +36,7 @@ export const Escritorio = () => {
                         <div id="rightDesktopCard">
                             <h4 className="desktopCardTitle">Hábitos</h4>
                             <p className="desktopCardText"> Incorpora hábitos positivos a tu vida y hazles seguimiento. </p>
+                            <p>{habitsToday.length == 0 ? <p>No tienes tareas programadas para hoy.</p> : <p>Tienes {habitsToday.length} {habitsToday.length == 1 ? "tarea programada para hoy." : "tareas programadas para hoy."}</p>}</p>
                         </div>
                     </div>
                     <div className="desktopCard me-2">
