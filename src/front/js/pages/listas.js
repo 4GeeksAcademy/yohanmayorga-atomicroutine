@@ -84,11 +84,11 @@ export const Listas = () => {
             <div className="dashboardContainerbox">
 
                 {/* Encabezado del componente de las listas */}
-                <h4><i class="fa-solid fa-list-check"></i> Listas</h4>
+                <h4><i className="fa-solid fa-list-check"></i> Listas</h4>
                 <div className="desktopHeader">
                     <h1>Bienvenid@ {store.profile ? store.profile.name : ""}</h1>
                     <p>Aquí podrás crear y consultar listas de pendientes. Crea una nueva lista, asignale un título, agrega tareas y ¡listo! Podrás verla en esta pantalla. Seleccionala y comienza a trabajar en ella. ¡Puedes crear tantas listas como desees! Las listas de pendientes son una forma perfecta para organizar tus tareas y mantenerte al día con tus objetivos.</p>
-                    <p>{filteredLists.length == 0 ? <p>Actualmente no tienes ninguna lista creada.</p> : <p>Actualmente tienes {filteredLists.length} {filteredLists.length == 1 ? "lista creada." : "listas creadas."}</p>}</p>
+                    {filteredLists.length == 0 ? <p>Actualmente no tienes ninguna lista creada.</p> : <p>Actualmente tienes {filteredLists.length} {filteredLists.length == 1 ? "lista creada." : "listas creadas."}</p>}
                 </div>
 
                 <div className="desktopMainButton">
@@ -100,16 +100,16 @@ export const Listas = () => {
 
 
                 {/* Modal que se abre para crear lista nueva */}
-                <div className="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content" id="journalMainModal">
                             <div className="modal-header">
-                                <h1 className="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-list-check"></i> Nueva lista</h1>
+                                <h1 className="modal-title fs-5" id="exampleModalLabel"><i className="fa-solid fa-list-check"></i> Nueva lista</h1>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
                                 <div className="journalModalBox">
-                                    <label for="fullName" class="form-label">Nombre</label>
+                                    <label htmlFor="fullName" className="form-label">Nombre</label>
                                     <input className="enterForm"
                                         type="text"
                                         name="fullName"
@@ -143,13 +143,13 @@ export const Listas = () => {
                                 <div className="cardListBody">
                                     <div className="cardListHeader">
                                         <h5 className="cardListHeaderTitle">To do list</h5>
-                                        <h5 className="cardListHeaderTitle"><i class="fa-solid fa-circle-check"></i></h5>
+                                        <h5 className="cardListHeaderTitle"><i className="fa-solid fa-circle-check"></i></h5>
                                     </div>
                                     <div className="cardListBox">
                                         <h5 className="card-title2">{item.name}</h5>
                                         {/*<img src={listImg} className="CardImg" />*/}
                                     </div>
-                                    <p className="addItemButton" onClick={() => { handleClick(item), console.log(filteredTasks) }}><i class="fa-solid fa-circle-plus"></i></p>
+                                    <p className="addItemButton" onClick={() => { handleClick(item), console.log(filteredTasks) }}><i className="fa-solid fa-circle-plus"></i></p>
 
                                     <ul className="nav justify-content-center nav-pills2" id="pills-tab" role="tablist">
                                         <li className="nav-item2" role="presentation">
@@ -178,7 +178,7 @@ export const Listas = () => {
                                         )}
 
                                     <div className="tab-content2" id="pills-tabContent">
-                                        <div className="tab-pane fade show active" id={`pills-false-${item.id}`} role="tabpanel" aria-labelledby="pills-false-tab" tabindex="0">
+                                        <div className="tab-pane fade show active" id={`pills-false-${item.id}`} role="tabpanel" aria-labelledby="pills-false-tab" tabIndex="0">
                                             {filteredTasks.filter((todo) => {
                                                 return todo.list_id === item.id && !todo.completed;
                                             }).length == 0 && (<p className="emptyAlert">No hay tareas pendientes.</p>)}
@@ -187,16 +187,16 @@ export const Listas = () => {
                                             }).map(todo => (
                                                 <div className="tasksList" key={todo.id} >
                                                     <p className="tasksListText me-2">{todo.name}</p>
-                                                    <div class="custom-radio">
+                                                    <div className="custom-radio">
                                                         <input type="checkbox" name="task" value={todo.id} checked={todo.completed} onChange={() => handleTaskClick(todo.id, todo.completed)} />
-                                                        <div class="checkmark"></div>
+                                                        <div className="checkmark"></div>
                                                     </div>
                                                 </div>
                                             ))}
                                         </div>
 
 
-                                        <div className="tab-pane fade" id={`pills-true-${item.id}`} role="tabpanel" aria-labelledby="pills-true-tab" tabindex="0">
+                                        <div className="tab-pane fade" id={`pills-true-${item.id}`} role="tabpanel" aria-labelledby="pills-true-tab" tabIndex="0">
                                             {filteredTasks.filter((todo) => {
                                                 return todo.list_id === item.id && todo.completed;
                                             }).length == 0 && (<p className="emptyAlert">No hay tareas hechas.</p>)}
@@ -205,9 +205,9 @@ export const Listas = () => {
                                             }).map(todo => (
                                                 <div className="tasksList" key={todo.id} >
                                                     <p className="tasksListText">{todo.name}</p>
-                                                    <div class="custom-radio">
+                                                    <div className="custom-radio">
                                                         <input type="checkbox" name="task" value={todo.id} checked={todo.completed} onChange={() => handleTaskClick(todo.id, todo.completed)} />
-                                                        <div class="checkmark"></div>
+                                                        <div className="checkmark"></div>
                                                     </div>
                                                 </div>
                                             ))}
@@ -216,7 +216,7 @@ export const Listas = () => {
 
                                     <div className="deleteListButtonContainer">
                                         <button className="deleteListButton" onClick={() => deleteList(item.id)}>
-                                            <i class="fa-solid fa-trash-can"></i>
+                                            <i className="fa-solid fa-trash-can"></i>
                                         </button>
                                     </div>
 

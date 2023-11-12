@@ -36,7 +36,7 @@ export const Escritorio = () => {
                         <div id="rightDesktopCard">
                             <h4 className="desktopCardTitle">Hábitos</h4>
                             <p className="desktopCardText"> Incorpora hábitos positivos a tu vida y hazles seguimiento. </p>
-                            <p>{habitsToday.length == 0 ? <p>No tienes tareas programadas para hoy.</p> : <p>Tienes {habitsToday.length} {habitsToday.length == 1 ? "tarea programada para hoy." : "tareas programadas para hoy."}</p>}</p>
+                            {habitsToday.length == 0 ? <p>No tienes tareas programadas para hoy.</p> : <p>Tienes {habitsToday.length} {habitsToday.length == 1 ? "tarea programada para hoy." : "tareas programadas para hoy."}</p>}
                         </div>
                     </div>
                     <div className="desktopCard me-2">
@@ -46,7 +46,7 @@ export const Escritorio = () => {
                         <div id="rightDesktopCard">
                             <h4 className="desktopCardTitle">Diarios</h4>
                             <p className="desktopCardText"> Llevar un diario siempre es una buena práctica para tu día a día. </p>
-                            <p>{filteredJournals.length == 0 ? <p>No tienes ningún diario.</p> : <p>Tienes {filteredJournals.length} {filteredJournals.length == 1 ? "diario creado." : "diarios creados."}</p>}</p>
+                            {filteredJournals.length == 0 ? <p>No tienes ningún diario.</p> : <p>Tienes {filteredJournals.length} {filteredJournals.length == 1 ? "diario creado." : "diarios creados."}</p>}
                         </div>
                     </div>
                     <div className="desktopCard me-2">
@@ -56,7 +56,7 @@ export const Escritorio = () => {
                         <div id="rightDesktopCard">
                             <h4 className="desktopCardTitle">Listas</h4>
                             <p className="desktopCardText"> ¡Que no se te olvide nada! Lleva listas de tus tareas pendientes. </p>
-                            <p>{filteredLists.length == 0 ? <p>No tienes ninguna lista creada.</p> : <p>Tienes {filteredLists.length} {filteredLists.length == 1 ? "lista creada." : "listas creadas."}</p>}</p>
+                            {filteredLists.length == 0 ? <p>No tienes ninguna lista creada.</p> : <p>Tienes {filteredLists.length} {filteredLists.length == 1 ? "lista creada." : "listas creadas."}</p>}
                         </div>
                     </div>
                     <div className="desktopCard">

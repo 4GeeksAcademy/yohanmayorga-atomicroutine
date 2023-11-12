@@ -84,7 +84,7 @@ export const Habitos = () => {
             <div className="dashboardContainerbox">
 
                 {/* Encabezado del componente de las listas */}
-                <h4><i class="fa-solid fa-chart-column"></i> Hábitos</h4>
+                <h4><i className="fa-solid fa-chart-column"></i> Hábitos</h4>
                 <div className="desktopHeader">
                     <h1>Bienvenid@ {store.profile ? store.profile.name : ""}</h1>
                     <p>En esta sección, podrás crear y hacer seguimiento a tus hábitos. Para crear un nuevo hábito, haz clic en el botón "crear hábito nuevo". A continuación, ingresa un nombre para tu hábito, una descripción opcional y la frecuencia con la que deseas realizarlo.</p>
@@ -106,29 +106,29 @@ export const Habitos = () => {
                                 </div>
 
                                 <div className="HeaderButtons">
-                                    <div className="cardHabitButton" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal4">
+                                    <div className="cardHabitButton" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal4">
                                         <div className="cardHabitButtonHeader">
-                                            <p className="cardHabitButtonIcon"><i class="fa-solid fa-feather"></i></p>
+                                            <p className="cardHabitButtonIcon"><i className="fa-solid fa-feather"></i></p>
                                         </div>
                                         <h5>Agregar nuevo hábito</h5>
                                         <p className="cardHabitButtonBottom">Haz click para agregar un hábito nuevo.</p>
                                     </div>
                                     <div className="cardHabitButton">
                                         <div className="cardHabitButtonHeader">
-                                            <p className="cardHabitButtonIcon"><i class="fa-solid fa-clipboard-question"></i></p>
+                                            <p className="cardHabitButtonIcon"><i className="fa-solid fa-clipboard-question"></i></p>
                                         </div>
                                         <h5>Preguntas frecuentes</h5>
                                         <p className="cardHabitButtonBottom">Haz click para revisar las F.A.Q. de los hábitos.</p>
                                     </div>
                                     <div className="cardHabitButton">
                                         <div className="cardHabitButtonHeader">
-                                            <p className="cardHabitButtonIcon"><i class="fa-solid fa-bars-progress"></i></p>
+                                            <p className="cardHabitButtonIcon"><i className="fa-solid fa-bars-progress"></i></p>
                                         </div>
                                         <h5>Estadísticas</h5>
                                         <p className="cardHabitButtonBottom">Haz click para ver el resumen de tus estadísticas.</p>
                                     </div>
                                 </div>
-                            </div>            
+                            </div>
                         </div>
 
                     </div>
@@ -150,15 +150,26 @@ export const Habitos = () => {
                                     return habit.date?.slice(0, 16) == date.toUTCString()?.slice(0, 16)
                                 })?.length > 0 ? <h5 className="habitListTitle">Tareas programadas</h5> : <h5 className="emptyHabitAlert">No hay nada programado para hoy</h5>}
                             </div>
+
+
                             {filteredHabits.filter((habit) => {
                                 return habit.date?.slice(0, 16) == date.toUTCString()?.slice(0, 16); //AQUI LAS FECHAS SE COMPARAN, PERO LA LOCAL -NO LA DEL HABITO- VIENE CON HORAS DE MAS (CUANDO AQUI SON LAS 8 DE LA NOCHE, YA PARA ELLA ES MAÑANA)
-                            }).map(habit => (<>
+                            }).map((habit) => (<>
                                 <div className="habitList" key={habit.id} >
                                     <p className="habitListText">{habit.name}</p>
-                                    <div class="custom-radio">
-                                        <input type="checkbox" name="task" value={habit.id} checked={habit.completed} onChange={() => handleHabitClick(habit.id, habit.completed)} />
+                                    <div className="custom-radio">
+                                        <input
+                                            type="checkbox"
+                                            name="task"
+                                            value={habit.id}
+                                            checked={habit.completed}
+                                            onChange={() => handleHabitClick(habit.id, habit.completed)}
+                                        />
                                     </div>
                                 </div>
+
+
+
                                 {/*<div>
                                 <p className="tasksListText">{habit.date.toLocaleString()}</p> FECHA DEL HABITO, ESTA NO VA A CAMBIAR PORQUE ASI SE AGREGA POR DEFECTO
                                 <p className="tasksListText">{date.toString()}</p> FECHA DEL CALENDARIO, ESTA ES LA QUE TIENES QUE CAMBIAR PARA QUE SE PAREZCA A LA DEL HABITO
@@ -173,28 +184,28 @@ export const Habitos = () => {
 
 
                     {/* Modal que se abre para crear hábito nuevo */}
-                    <div className="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal fade" id="exampleModal4" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog modal-dialog-centered">
                             <div className="modal-content" id="journalMainModal">
                                 <div className="modal-header">
-                                    <h1 className="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-chart-column"></i> Nuevo hábito</h1>
+                                    <h1 className="modal-title fs-5" id="exampleModalLabel"><i className="fa-solid fa-chart-column"></i> Nuevo hábito</h1>
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div className="modal-body">
 
                                     <div className="journalModalBox">
                                         {/*Nombre del hábito*/}
-                                        <label for="fullName" className="form-label">Hábito</label>
+                                        <label htmlFor="fullName2" className="form-label">Hábito</label>
                                         <input className="enterForm"
                                             type="text"
-                                            name="fullName"
-                                            id="fullName"
+                                            name="fullName2"
+                                            id="fullName2"
                                             placeholder="Hábito a crear"
                                             onChange={(e) => setHabitItem({ ...habitItem, name: e.target.value })}
                                             required />
 
                                         {/*Descripción del hábito*/}
-                                        <label for="description" className="form-label">Descripción</label>
+                                        <label htmlFor="description" className="form-label">Descripción</label>
                                         <input className="enterForm"
                                             type="text"
                                             name="description"
@@ -203,11 +214,11 @@ export const Habitos = () => {
                                             onChange={(e) => setHabitItem({ ...habitItem, description: e.target.value })} />
 
                                         {/*Fecha de inicio*/}
-                                        <label for="date" className="form-label">Fecha de inicio</label>
+                                        <label htmlFor="date" className="form-label">Fecha de inicio</label>
                                         <input className="enterForm" type="date" name="date" id="date" pattern="\d{4}-\d{2}-\d{2}" onChange={(e) => setHabitItem({ ...habitItem, date: e.target.value })} required />
 
                                         {/*Cantidad de veces*/}
-                                        <label for="quantity">Repeticiones (máximo 30)</label>
+                                        <label htmlFor="quantity">Repeticiones (máximo 30)</label>
                                         <input className="enterForm" type="number" id="quantity" name="quantity" min="1" max="30" onChange={(e) => setHabitSet(e.target.value)}></input>
 
                                     </div>

@@ -50,11 +50,11 @@ export const Diarios = () => {
             <div className="dashboardContainerbox">
 
                 {/* Encabezado del componente de los diarios */}
-                <h4><i class="fa-solid fa-book"/> Diarios</h4>
+                <h4><i className="fa-solid fa-book"/> Diarios</h4>
                 <div className="desktopHeader">
                     <h1>Bienvenid@ {store.profile ? store.profile.name : ""}</h1>
                     <p>Aquí podrás crear y consultar diarios personales. Crea un nuevo diario, asignale un nombre, personalízalo con un color y ¡listo! Podrás verlo en esta pantalla. Seleccionalo y comienza a escribir. ¡Puedes crear tantos diarios como desees, y cada uno será un espacio único para ti! Los diarios personales son una forma perfecta para registrar tus pensamientos, sentimientos y experiencias.</p>
-                    <p>{filteredJournals.length == 0 ? <p>Actualmente no tienes ningún diario.</p> : <p>Actualmente tienes {filteredJournals.length} {filteredJournals.length == 1 ? "diario creado." : "diarios creados."}</p>}</p>
+                    {filteredJournals.length == 0 ? <p>Actualmente no tienes ningún diario.</p> : <p>Actualmente tienes {filteredJournals.length} {filteredJournals.length == 1 ? "diario creado." : "diarios creados."}</p>}
                 </div>
                 <div className="desktopMainButton">
                     {/* Boton para crear diario nuevo */}
@@ -66,24 +66,24 @@ export const Diarios = () => {
 
 
                 {/* Modal que se abre para crear diario nuevo */}
-                <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content" id="journalMainModal">
                             <div className="modal-header">
-                                <h1 className="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-book"></i> Nuevo diario</h1>
+                                <h1 className="modal-title fs-5" id="exampleModalLabel"><i className="fa-solid fa-book"></i> Nuevo diario</h1>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
                                 <div className="journalModalBox">
-                                    <label for="fullName" class="form-label">Nombre</label>
+                                    <label htmlFor="fullName3" className="form-label">Nombre</label>
                                     <input className="enterForm"
                                         type="text"
-                                        name="fullName"
-                                        id="fullName"
+                                        name="fullName3"
+                                        id="fullName3"
                                         placeholder="Nombre del diario"
                                         onChange={(e) => setJournal({ ...journal, name: e.target.value })}
                                         required />
-                                    <label for="colorpicker" class="form-label">Color principal</label>
+                                    <label htmlFor="colorpicker" className="form-label">Color principal</label>
                                     <input type="color" id="colorpicker" onChange={(e) => setJournal({ ...journal, color: e.target.value })} />
                                 </div>
                             </div>
