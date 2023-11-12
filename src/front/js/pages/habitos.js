@@ -39,21 +39,22 @@ export const Habitos = () => {
     /* Función para la creación de un hábito nuevo (action)*/
     async function createHabit(habitSet) {
         let created = true;
+      
         for (let i = 0; i < habitSet; i++) {
-            try {
-                await actions.createHabit(updateDate(habitItem));
-            } catch (error) {
-                created = false;
-            }
+          if (i === 0) {
+            await actions.createHabit(habitItem);
+          } else {
+            await actions.createHabit(updateDate(habitItem));
+          }
         }
-
+      
         if (created) {
-            alert("El hábito se ha creado exitosamente");
-            location.reload();
+          alert("El hábito se ha creado exitosamente");
+          location.reload();
         } else {
-            alert("Ha ocurrido un error");
+          alert("Ha ocurrido un error");
         }
-    }
+      }
 
     /* Función para marcar hecho un hábito (action)*/
     async function handleHabitClick(habitId, completed) {
@@ -76,14 +77,14 @@ export const Habitos = () => {
     const filteredHabits = store.habits.filter((habit) => habit.author.id === store.profile.id);
     const filteredCompletedHabits = store.habits.filter((habit) => habit.author.id === store.profile.id && habit.completed === true && habit.date?.slice(0, 16) <= new Date().toUTCString()?.slice(0, 16));
     const filteredToDateHabits = store.habits.filter((habit) => habit.author.id === store.profile.id && habit.date?.slice(0, 16) < new Date().toUTCString()?.slice(0, 16));
-    const totalPercentage = ((filteredCompletedHabits.length / (filteredToDateHabits.length - 1)) * 100).toFixed(0)
+    const totalPercentage = ((filteredCompletedHabits.length / (filteredToDateHabits.length)) * 100).toFixed(0)
     const habitsToday = store.habits.filter((habit) => habit.author.id === store.profile.id && habit.date?.slice(0, 16) === new Date().toUTCString()?.slice(0, 16) && habit.completed === false)
 
     return (
         <div className="dashboard">
             <div className="dashboardContainerbox">
 
-                {/* Encabezado del componente de las listas */}
+                {/* Encabezado del componente de los hábitos*/}
                 <h4><i className="fa-solid fa-chart-column"></i> Hábitos</h4>
                 <div className="desktopHeader">
                     <h1>Bienvenid@ {store.profile ? store.profile.name : ""}</h1>
@@ -94,6 +95,7 @@ export const Habitos = () => {
 
                 <div className="habitsBoxUnderHeader">
 
+                    
                     <div className="leftHabitsSide">
                         <div className="desktopMainButton">
                         </div>
@@ -139,6 +141,7 @@ export const Habitos = () => {
                             <Calendar onChange={onChange} value={date} />
                         </div>
                         <div className="rightSideDateBox">
+                        <p className="rightSideDate">{date.toLocaleDateString()} </p>
                             <p className="rightSideDate">{date.toLocaleDateString()} </p>
                         </div>
 
@@ -157,6 +160,7 @@ export const Habitos = () => {
                             }).map((habit) => (<>
                                 <div className="habitList" key={habit.id} >
                                     <p className="habitListText">{habit.name}</p>
+                                     <p className="habitListText">{habit.date}</p>
                                     <div className="custom-radio">
                                         <input
                                             type="checkbox"
