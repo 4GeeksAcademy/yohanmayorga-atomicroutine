@@ -6,6 +6,7 @@ import "../../styles/habitos.css";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import How1 from "../../img/How1.jpg";
+import { HabitDetail } from "./../component/habitdetail.js";
 
 export const Habitos = () => {
 
@@ -18,6 +19,15 @@ export const Habitos = () => {
         completed: false
     });
     const [habitSet, setHabitSet] = useState("")
+
+    const [showHabit, setShowHabit] = useState(false);
+    const [itemHabit, setItemHabit] = useState("");
+
+    /* Esta función muestra u oculta un hábito específico seleccionado*/
+    const handleClick = (habit) => {
+        { showHabit ? setShowHabit(false) : setShowHabit(true) };
+        setItemHabit(habit);
+    };
 
     const onChange = (date) => {
         setDate(date)
@@ -75,10 +85,10 @@ export const Habitos = () => {
 
     /* Filtro que se aplica para mostrar sólo los hábitos que corresponden al usuario*/
     const filteredHabits = store.habits.filter((habit) => habit.author.id === store.profile.id);
-    const filteredCompletedHabits = store.habits.filter((habit) => habit.author.id === store.profile.id && habit.completed === true && new Date(habit.date).toLocaleDateString('es-VE', {timeZone: "UTC"}) <= new Date().toLocaleDateString());
-    const filteredToDateHabits = store.habits.filter((habit) => habit.author.id === store.profile.id && new Date(habit.date).toLocaleDateString('es-VE', {timeZone: "UTC"}) <= new Date().toLocaleDateString());
+    const filteredCompletedHabits = store.habits.filter((habit) => habit.author.id === store.profile.id && habit.completed === true && new Date(habit.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) <= new Date().toLocaleDateString());
+    const filteredToDateHabits = store.habits.filter((habit) => habit.author.id === store.profile.id && new Date(habit.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) <= new Date().toLocaleDateString());
     const totalPercentage = ((filteredCompletedHabits.length / (filteredToDateHabits.length)) * 100).toFixed(0)
-    const habitsToday = store.habits.filter((habit) => habit.author.id === store.profile.id && new Date(habit.date).toLocaleDateString('es-VE', {timeZone: "UTC"}) === new Date().toLocaleDateString() && habit.completed === false)
+    const habitsToday = store.habits.filter((habit) => habit.author.id === store.profile.id && new Date(habit.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) === new Date().toLocaleDateString() && habit.completed === false)
 
     return (
         <div className="dashboard">
@@ -91,6 +101,17 @@ export const Habitos = () => {
                     {!isNaN(totalPercentage) ? <p>Hasta la fecha, tu porcentaje de eficiencia es del {totalPercentage}%.</p> : <p>No hay estadísticas disponibles.</p>}
                     {habitsToday.length == 0 ? <p>No tienes tareas pendientes para hoy.</p> : <p>Tienes {habitsToday.length} {habitsToday.length == 1 ? "tarea pendiente para hoy." : "tareas pendientes para hoy."}</p>}
                 </div>
+
+                {/* Acá se muestra el hábito específico que el usuario abra*/}
+                {<HabitDetail
+                    habitId={itemHabit.id}
+                    habitName={itemHabit.name}
+                    habitDescription={itemHabit.description}
+                    habitCompleted={itemHabit.completed}
+                    open={showHabit}
+                    close={setShowHabit} />}
+
+
 
                 <div className="habitsBoxUnderHeader">
 
@@ -144,21 +165,24 @@ export const Habitos = () => {
                         </div>
 
                         <div className="habitsContainer">
-                            <div>
+                            <div >
 
 
                                 {filteredHabits.filter((habit) => {
-                                    return new Date(habit.date).toLocaleDateString('es-VE', {timeZone: "UTC"}) == date.toLocaleDateString()
+                                    return new Date(habit.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) == date.toLocaleDateString()
                                 })?.length > 0 ? <h5 className="habitListTitle">Tareas programadas</h5> : <h5 className="emptyHabitAlert">No hay nada programado para hoy</h5>}
                             </div>
 
 
                             {filteredHabits.filter((habit) => {
-                                return new Date(habit.date).toLocaleDateString('es-VE', {timeZone: "UTC"}) == date.toLocaleDateString();
+                                return new Date(habit.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) == date.toLocaleDateString();
                             }).map((habit) => (<>
-                                <div className="habitList" key={habit.id} >
+                                <div className="habitList" key={habit.id} onClick={(e) => {
+                                    if (e.target !== e.currentTarget.querySelector('input[type="checkbox"]')) {
+                                        handleClick(habit);
+                                    }
+                                }}>
                                     <p className="habitListText">{habit.name}</p>
-                                    <p className="habitListText">{new Date(habit.date).toLocaleDateString('es-VE', {timeZone: "UTC"})}</p>
                                     <div className="custom-radio">
                                         <input
                                             type="checkbox"

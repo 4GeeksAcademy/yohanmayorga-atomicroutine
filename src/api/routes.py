@@ -205,6 +205,21 @@ def delete_list():
 
     return "List deleted successfully", 200
 
+# DELETE PARA BORRAR UN HÁBITO
+@api.route('/deletehabit', methods=['DELETE'])
+def delete_habit():
+    text = request.json.get("habitId")
+    id = Habit.query.get(text)
+    if id is None:
+        return "Habit not found", 404
+    try:
+        db.session.delete(id)
+        db.session.commit()
+    except Exception as error:
+        return "error:" + str(error), 500
+
+    return "Habit deleted successfully", 200
+
 # -----------------------MÉTODOS GET-----------------------#
 
 # GET PROFILE (PERFIL DEL USUARIO)

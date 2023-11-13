@@ -122,6 +122,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			deleteHabit: async (habitId) => {
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/deletehabit", {
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ habitId }),
+					});
+
+					if (resp.status === 200) {
+						// El hábito se eliminó correctamente
+						return true;
+					} else {
+						// Hubo un error al eliminar el hábito
+						throw new Error(resp.statusText);
+					}
+				} catch (error) {
+					// Hubo un error al hacer el fetch
+					return false;
+				}
+			},
+
 			deleteList: async (listId) => {
 				try {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/deletelist", {
