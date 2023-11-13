@@ -46,7 +46,7 @@ export const Journal = ({ nameJournal, idJournal, open, close, textJournal }) =>
             <div className="selectedJournalBackground"></div>
             <div className="selectedJournalBox">
                 <div className="selectedjournalHeader">
-                    <h4><i class="fa-solid fa-book"></i> {nameJournal}</h4>
+                    <h4><i className="fa-solid fa-book"></i> {nameJournal}</h4>
                     <button type="button" className="closeButtonJournal" onClick={() => { close(false) }}>X</button>
                 </div>
                 <textarea
@@ -56,8 +56,8 @@ export const Journal = ({ nameJournal, idJournal, open, close, textJournal }) =>
                     onChange={(e) => setNowText(e.target.value)}
                     value={nowText} />
                 <div className="selectedjournalBottom">
-                    <button className="deleteButton me-2" onClick={() => deleteJournal(idJournal)}><i class="fa-solid fa-trash-can"></i> Borrar</button>
-                    <button className="saveButton" onClick={() => updateJournal(idJournal, nowText)}><i class="fa-regular fa-floppy-disk"></i> Guardar</button>
+                    <button className="deleteButton me-2" onClick={() => deleteJournal(idJournal)}><i className="fa-solid fa-trash-can"></i> Borrar</button>
+                    <button className="saveButton" onClick={() => updateJournal(idJournal, nowText)}><i className="fa-regular fa-floppy-disk"></i> Guardar</button>
                 </div>
             </div>
         </>

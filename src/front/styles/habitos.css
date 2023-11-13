@@ -85,6 +85,11 @@ p.habitListText {
     background: rgb(255, 255, 184)
 }
 
+.cardHabitButton:hover {
+    margin-top: -5px;
+    margin-bottom: 5px;
+}
+
 .cardHabitButtonHeader {
     background: #1074a2;  
     color: white;

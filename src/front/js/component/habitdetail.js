@@ -49,13 +49,13 @@ export const HabitDetail = ({ habitName, habitDescription, habitId, open, close,
                     <button type="button" className="closeButtonJournal" onClick={() => { close(false) }}>X</button>
                 </div>
                 <div className="selectedhabitDescription">
-                    <h5>Descripción</h5>
+                    <h5>Descripción:</h5>
                     <p>{habitDescription ? habitDescription : "No se ha encontrado descripción para este hábito."}</p>
                 </div>
 
                 <div className="selectedjournalBottom">
                     <button className="deleteButton me-2" onClick={() => deleteHabit(habitId)}><i className="fa-solid fa-trash-can"></i> Borrar hábito</button>
-                    <button className="saveButton" onClick={() => handleHabitClick(habitId, habitCompleted)}><i className="fa-solid fa-check"></i>{habitCompleted ? "Desmarcar" : "Confirmar"}</button>
+                    <button className="saveButton" onClick={() => handleHabitClick(habitId, habitCompleted)}><i className="fa-solid fa-check"></i>{habitCompleted ? " Desmarcar" : " Confirmar"}</button>
                 </div>
             </div>
         </>

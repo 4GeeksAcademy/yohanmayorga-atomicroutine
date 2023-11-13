@@ -144,7 +144,7 @@ export const Habitos = () => {
                                     </div>
                                     <div className="cardHabitButton">
                                         <div className="cardHabitButtonHeader">
-                                            <p className="cardHabitButtonIcon"><i className="fa-solid fa-bars-progress"></i></p>
+                                            <p className="cardHabitButtonIcon"><i className="fa-solid fa-chart-pie"></i></p>
                                         </div>
                                         <h5>Estadísticas</h5>
                                         <p className="cardHabitButtonBottom">Haz click para ver el resumen de tus estadísticas.</p>
