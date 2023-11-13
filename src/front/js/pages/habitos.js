@@ -8,6 +8,7 @@ import 'react-calendar/dist/Calendar.css';
 import How1 from "../../img/How1.jpg";
 import { HabitDetail } from "./../component/habitdetail.js";
 import { HabitsFAQ } from "./../component/habitsfaq.js";
+import { HabitStacs } from "./../component/habitsstacs.js";
 
 export const Habitos = () => {
 
@@ -23,6 +24,7 @@ export const Habitos = () => {
 
     const [showHabit, setShowHabit] = useState(false);
     const [showHabitFaq, setShowHabitFaq] = useState(false);
+    const [showHabitStacs, setShowHabitStacs] = useState(false);
     const [itemHabit, setItemHabit] = useState("");
 
     /* Esta función muestra u oculta un hábito específico seleccionado*/
@@ -30,6 +32,7 @@ export const Habitos = () => {
         { showHabit ? setShowHabit(false) : setShowHabit(true) };
         setItemHabit(habit);
     };
+
 
     const onChange = (date) => {
         setDate(date)
@@ -85,6 +88,8 @@ export const Habitos = () => {
         }
     }
 
+    
+
     /* Filtro que se aplica para mostrar sólo los hábitos que corresponden al usuario*/
     const filteredHabits = store.habits.filter((habit) => habit.author.id === store.profile.id);
     const filteredCompletedHabits = store.habits.filter((habit) => habit.author.id === store.profile.id && habit.completed === true && new Date(habit.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) <= new Date().toLocaleDateString());
@@ -118,6 +123,17 @@ export const Habitos = () => {
                     open={showHabitFaq}
                     close={setShowHabitFaq} />}
 
+                     {/* Acá se muestra las estadísticas*/}
+                {<HabitStacs
+                    proSummary={totalPercentage}
+                    toToday={filteredToDateHabits.length}
+                    toTodayDone={filteredCompletedHabits.length}
+                    toTodayPen={filteredToDateHabits.length - filteredCompletedHabits.length}
+                    toFuture={filteredHabits.length - filteredToDateHabits.length}
+                    penToday={habitsToday.length}
+                    open={showHabitStacs}
+                    close={setShowHabitStacs} />}
+
 
 
                 <div className="habitsBoxUnderHeader">
@@ -149,7 +165,7 @@ export const Habitos = () => {
                                         <h5>Preguntas frecuentes</h5>
                                         <p className="cardHabitButtonBottom">Haz click para revisar las F.A.Q. de los hábitos.</p>
                                     </div>
-                                    <div className="cardHabitButton">
+                                    <div className="cardHabitButton" onClick={() => { showHabitStacs ? setShowHabitStacs(false) : setShowHabitStacs(true) }}>  
                                         <div className="cardHabitButtonHeader">
                                             <p className="cardHabitButtonIcon"><i className="fa-solid fa-chart-pie"></i></p>
                                         </div>
