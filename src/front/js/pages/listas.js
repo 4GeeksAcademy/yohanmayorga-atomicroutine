@@ -46,7 +46,14 @@ export const Listas = () => {
 
     async function deleteList(listId) {
         let deleted = true;
-        try { await actions.deleteList(listId) }
+        const todoItems = filteredTasks;
+        try { await 
+            todoItems.forEach((todoItem) => {
+                if (todoItem.list_id === listId) {
+                    actions.deletetodo(todoItem.id);
+                }
+              });
+            actions.deleteList(listId) }
         catch (error) {
             deleted = false;
         };

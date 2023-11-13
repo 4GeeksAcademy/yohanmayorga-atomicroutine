@@ -205,6 +205,21 @@ def delete_list():
 
     return "List deleted successfully", 200
 
+# DELETE PARA BORRAR UNA TAREA DE LISTA
+@api.route('/deletetodo', methods=['DELETE'])
+def delete_todo():
+    text = request.json.get("todoId")
+    id = TodoItem.query.get(text)
+    if id is None:
+        return "Todo not found", 404
+    try:
+        db.session.delete(id)
+        db.session.commit()
+    except Exception as error:
+        return "error:" + str(error), 500
+
+    return "Todo deleted successfully", 200
+
 # DELETE PARA BORRAR UN HÁBITO
 @api.route('/deletehabit', methods=['DELETE'])
 def delete_habit():

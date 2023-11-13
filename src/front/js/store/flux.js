@@ -168,6 +168,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			deletetodo: async (todoId) => {
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/deletetodo", {
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ todoId }),
+					});
+
+					if (resp.status === 200) {
+						// La lista se eliminó correctamente
+						return true;
+					} else {
+						// Hubo un error al eliminar la lista
+						throw new Error(resp.statusText);
+					}
+				} catch (error) {
+					// Hubo un error al hacer el fetch
+					return false;
+				}
+			},
+
 
 			updateJournal: async (idJournal, textJournal) => {
 				const store = getStore();
