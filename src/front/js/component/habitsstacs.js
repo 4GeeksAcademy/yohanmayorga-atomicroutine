@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import "../../styles/journal.css";
 import "../../styles/habitdetail.css";
+import "../../styles/habitsstacs.css";
 import { Context } from "../store/appContext";
 import { ProgressBar } from 'react-bootstrap';
 
@@ -34,60 +35,60 @@ export const HabitStacs = ({ open, close, proSummary, toToday, toTodayDone, toTo
                 <div className="stacsMainBox">
                     <div className="stacsBox">
                         <div className="stacsBoxIcon">
-                            <p></p>
+                        <i className="fa-solid fa-calendar-days"></i>
                         </div>
                         <div className="stacsBoxTitle">
                             <h5>Hasta la fecha</h5>
                         </div>
-                        <div className="stacsBoxBody">
+                        <div className="stacsBoxTitle">
                             <p>Hasta hoy, el total de hábitos en tu historial es de {toToday}. </p>
                         </div>
                     </div>
 
                     <div className="stacsBox">
                         <div className="stacsBoxIcon">
-                            <p></p>
+                        <i className="fa-solid fa-square-check"></i>
                         </div>
                         <div className="stacsBoxTitle">
                             <h5>Hechos hasta la fecha</h5>
                         </div>
-                        <div className="stacsBoxBody">
+                        <div className="stacsBoxTitle">
                             <p>El total de hábitos en tu historial (hasta hoy), marcados como completados, es de {toTodayDone}. </p>
                         </div>
                     </div>
 
                     <div className="stacsBox">
                         <div className="stacsBoxIcon">
-                            <p></p>
+                        <i className="fa-solid fa-spinner"></i>
                         </div>
                         <div className="stacsBoxTitle">
                             <h5>Pendientes hasta la fecha</h5>
                         </div>
-                        <div className="stacsBoxBody">
+                        <div className="stacsBoxTitle">
                             <p>Hasta hoy, el total de hábitos en tu historial, no completados, es de {toTodayPen}. </p>
                         </div>
                     </div>
 
                     <div className="stacsBox">
                         <div className="stacsBoxIcon">
-                            <p></p>
+                        <i className="fa-regular fa-clock"></i>
                         </div>
                         <div className="stacsBoxTitle">
                             <h5>A futuro</h5>
                         </div>
-                        <div className="stacsBoxBody">
+                        <div className="stacsBoxTitle">
                             <p>El total de hábitos programados para las próximas fechas es de {toFuture}. </p>
                         </div>
                     </div>
 
                     <div className="stacsBox">
                         <div className="stacsBoxIcon">
-                            <p></p>
+                        <i className="fa-solid fa-calendar-day"></i>
                         </div>
                         <div className="stacsBoxTitle">
                             <h5>Para hoy</h5>
                         </div>
-                        <div className="stacsBoxBody">
+                        <div className="stacsBoxTitle">
                         {penToday == 0 ? 
                         <p>No tienes tareas pendientes para hoy.</p> 
                         : 

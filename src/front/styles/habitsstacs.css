@@ -1,0 +1,30 @@
+.stacsMainBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.stacsBox {
+    background: rgb(190,233,252);
+    background: linear-gradient(180deg, rgba(190,233,252,1) 70%, rgba(255,255,255,1) 100%);
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    margin: 2px;
+}
+
+.stacsBox:hover {
+    background: rgb(16,116,162);
+    color: white;
+}
+
+.stacsBoxTitle {
+    text-align: center;
+}
+
+.stacsBoxIcon {
+    font-size: 30px;
+    color: white;
+}
