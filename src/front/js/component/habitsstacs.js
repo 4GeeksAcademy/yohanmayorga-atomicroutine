@@ -40,7 +40,7 @@ export const HabitStacs = ({ open, close, proSummary, toToday, toTodayDone, toTo
                             <h5>Hasta la fecha</h5>
                         </div>
                         <div className="stacsBoxBody">
-                            <p>Hasta hoy, el total de hábitos en tu histotial es de {toToday} </p>
+                            <p>Hasta hoy, el total de hábitos en tu historial es de {toToday}. </p>
                         </div>
                     </div>
 
@@ -52,7 +52,7 @@ export const HabitStacs = ({ open, close, proSummary, toToday, toTodayDone, toTo
                             <h5>Hechos hasta la fecha</h5>
                         </div>
                         <div className="stacsBoxBody">
-                            <p>El total de hábitos en tu histotial (hasta hoy), marcados como completados, es de {toTodayDone} </p>
+                            <p>El total de hábitos en tu historial (hasta hoy), marcados como completados, es de {toTodayDone}. </p>
                         </div>
                     </div>
 
@@ -64,7 +64,7 @@ export const HabitStacs = ({ open, close, proSummary, toToday, toTodayDone, toTo
                             <h5>Pendientes hasta la fecha</h5>
                         </div>
                         <div className="stacsBoxBody">
-                            <p>Hasta hoy, el total de hábitos en tu historial, no completados, es de {toTodayPen} </p>
+                            <p>Hasta hoy, el total de hábitos en tu historial, no completados, es de {toTodayPen}. </p>
                         </div>
                     </div>
 
@@ -76,7 +76,7 @@ export const HabitStacs = ({ open, close, proSummary, toToday, toTodayDone, toTo
                             <h5>A futuro</h5>
                         </div>
                         <div className="stacsBoxBody">
-                            <p>El total de hábitos programados para las próximas fechas es de {toFuture} </p>
+                            <p>El total de hábitos programados para las próximas fechas es de {toFuture}. </p>
                         </div>
                     </div>
 
