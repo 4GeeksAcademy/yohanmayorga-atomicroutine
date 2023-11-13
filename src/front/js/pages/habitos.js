@@ -147,7 +147,12 @@ export const Habitos = () => {
                                 <div className="HeaderStatistics">
                                     <h5>Resumen de progreso</h5>
                                     {!isNaN(totalPercentage) ? <h1 className="habitsPercentage">{totalPercentage}%</h1> : <h5>No hay datos</h5>}
-                                    {!isNaN(totalPercentage) ? <p className="habitsSummary">{store.profile ? store.profile.name : "Hola"}, hasta la fecha, tu porcentaje de eficiencia con respecto al cumplimiento de tus hábitos es del {totalPercentage}%. Este cálculo se realiza tomando en cuenta todos los hábitos programados hasta la fecha actual y aquellos ya marcados como hechos. </p> : <p className="habitsSummary">No se han encontrado resultados de progreso de cumplimiento de hábitos. Esto puede deberse a que todavía no has creado un hábito nuevo para hacerle seguimiento, que no has marcado ninguno como hecho, o de un error en el cálculo.</p>}
+                                    {!isNaN(totalPercentage) ? <p className="habitsSummary">{store.profile ? store.profile.name : "Hola"}, hasta la fecha,
+                                    tu porcentaje de eficiencia con respecto al cumplimiento de tus hábitos es del {totalPercentage}%. Este cálculo se
+                                    realiza tomando en cuenta todos los hábitos programados hasta la fecha actual y aquellos ya marcados como hechos. </p> :
+                                    <p className="habitsSummary">No se han encontrado resultados de progreso de cumplimiento de hábitos. Esto puede deberse
+                                    a que todavía no has creado un hábito nuevo para hacerle seguimiento, que no has marcado ninguno como hecho, o de un
+                                    error en el cálculo.</p>}
                                 </div>
 
                                 <div className="HeaderButtons">
