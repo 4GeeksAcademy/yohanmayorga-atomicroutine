@@ -10,10 +10,6 @@ export const HabitStacs = ({ open, close, proSummary, toToday, toTodayDone, toTo
 
     const { store, actions } = useContext(Context);
 
-    function BasicExample() {
-        return <ProgressBar now={proSummary} />;
-    }
-
     return (
         <>
             <div className="selectedJournalBackground"></div>

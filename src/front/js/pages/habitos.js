@@ -137,11 +137,7 @@ export const Habitos = () => {
 
 
                 <div className="habitsBoxUnderHeader">
-
-
                     <div className="leftHabitsSide">
-                        <div className="desktopMainButton">
-                        </div>
                         <div className="leftHabitsSideBox">
                             <div className="leftHabitsSideBoxHeader">
                                 <div className="HeaderStatistics">

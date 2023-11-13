@@ -133,3 +133,19 @@
 .deleteListButton:hover {
     background: red;
 }
+
+.rightListsSide {
+    max-width: 20%;
+    background: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.listsStacsBox {
+    align-items: start;
+    text-align: justify;
+    width: 100%;
+}
