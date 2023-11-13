@@ -7,6 +7,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import How1 from "../../img/How1.jpg";
 import { HabitDetail } from "./../component/habitdetail.js";
+import { HabitsFAQ } from "./../component/habitsfaq.js";
 
 export const Habitos = () => {
 
@@ -21,6 +22,7 @@ export const Habitos = () => {
     const [habitSet, setHabitSet] = useState("")
 
     const [showHabit, setShowHabit] = useState(false);
+    const [showHabitFaq, setShowHabitFaq] = useState(false);
     const [itemHabit, setItemHabit] = useState("");
 
     /* Esta función muestra u oculta un hábito específico seleccionado*/
@@ -111,6 +113,11 @@ export const Habitos = () => {
                     open={showHabit}
                     close={setShowHabit} />}
 
+                    {/* Acá se muestra el hábito específico que el usuario abra*/}
+                {<HabitsFAQ
+                    open={showHabitFaq}
+                    close={setShowHabitFaq} />}
+
 
 
                 <div className="habitsBoxUnderHeader">
@@ -135,7 +142,7 @@ export const Habitos = () => {
                                         <h5>Agregar nuevo hábito</h5>
                                         <p className="cardHabitButtonBottom">Haz click para agregar un hábito nuevo.</p>
                                     </div>
-                                    <div className="cardHabitButton">
+                                    <div className="cardHabitButton" onClick={() => { showHabitFaq ? setShowHabitFaq(false) : setShowHabitFaq(true) }}>
                                         <div className="cardHabitButtonHeader">
                                             <p className="cardHabitButtonIcon"><i className="fa-solid fa-clipboard-question"></i></p>
                                         </div>
