@@ -48,7 +48,7 @@ export const Home = () => {
 
 			{/* Segundo container del Home */}
 			<div id="secondContainer">
-				<div class="container">
+				<div className="container">
 					<ul className="nav justify-content-center nav-pills" id="pills-tab" role="tablist">
 						<li className="nav-item" role="presentation">
 							<button className="nav-link active" id="pills-habits-tab" data-bs-toggle="pill" data-bs-target="#pills-habits" type="button" role="tab" aria-controls="pills-habits" aria-selected="true">Hábitos</button>
