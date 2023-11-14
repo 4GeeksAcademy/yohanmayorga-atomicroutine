@@ -43,13 +43,12 @@ export const LogIn = () => {
 
     async function loginUser({ email, password }) {
         let isValid = true;
-        try { actions.loginUser(email, password)}
-        catch (error) { isValid = false};
+        try { actions.loginUser(email, password) }
+        catch (error) { isValid = false };
         if (isValid) {
             navigate("/dashboard");
         } else {
-            console.log(isValid);
-            alert(`No se ha podido iniciar sesión.`)
+            alert(`No se ha podido iniciar sesión.`);
         }
     }
 
