@@ -1,20 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/navbar.css";
 
 export const Navbar = () => {
 	const [isNavbarVisible, setIsNavbarVisible] = useState(true);
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    // Ocultar la navbar si no estamos en la página de inicio
-    setIsNavbarVisible(pathname !== "/ejemplo");
-  }, [pathname]);
 
 	const { store, actions } = useContext(Context);
-
-	const location = useLocation()
 
 	function logOut() {
 		let loggedOut = actions.logOut();

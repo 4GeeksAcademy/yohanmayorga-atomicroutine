@@ -55,6 +55,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify({ email, password })
 						})
 					const data = await resp.json()
+			
 					if (data.token != "") {
 						if (data.token != undefined) {
 							localStorage.setItem("token", data.token)
@@ -64,7 +65,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					}
 				} catch (error) {
-					return false
+					// Return an error message
+					return { error: error.message };
 				}
 			},
 

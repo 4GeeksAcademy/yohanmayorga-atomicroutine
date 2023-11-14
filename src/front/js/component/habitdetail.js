@@ -8,8 +8,8 @@ export const HabitDetail = ({ habitName, habitDescription, habitId, open, close,
 
     const { store, actions } = useContext(Context);
 
-     /* Función para marcar hecho un hábito (action)*/
-     async function handleHabitClick() {
+    /* Función para marcar hecho un hábito (action)*/
+    async function handleHabitClick() {
 
         let done = true;
         try { await actions.markHabitCompleted(habitId, !habitCompleted) }
@@ -26,18 +26,25 @@ export const HabitDetail = ({ habitName, habitDescription, habitId, open, close,
     }
 
     async function deleteHabit() {
-        let deleted = true;
-        try { await actions.deleteHabit(habitId) }
-        catch (error) {
-            deleted = false;
-        };
-        if (deleted) {
-            alert("La tarea se ha eliminado exitosamente.");
-            location.reload();
+        if (confirm("¿Confirmas que quieres borrar este hábito?") == true) {
+            let deleted = true;
+            try { await actions.deleteHabit(habitId) }
+            catch (error) {
+                deleted = false;
+            };
+            if (deleted) {
+                alert("El hábito se ha eliminado exitosamente.");
+                location.reload();
+            }
+            else {
+                alert("Ha ocurrido un error")
+            }
+        } else {
+            alert("No se borró el hábito.")
         }
-        else {
-            alert("Ha ocurrido un error")
-        }
+
+
+
     }
 
     return (

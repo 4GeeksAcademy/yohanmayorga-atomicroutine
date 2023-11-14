@@ -76,16 +76,16 @@ def create_token():
     email = request.json.get('email', None)
     password = request.json.get('password', None)
     if email is None or password is None:
-        return {'message': 'parameters missing'}, 400
+        return {'error': 'parameters missing'}, 400
     user = User.query.filter_by(email=email).one_or_none()
     if user is None:
-        return {'message': "User doesn't exist"}, 400
+        return {'error': "User doesn't exist"}, 400
     password_byte = bytes(password, 'utf-8')
     if bcrypt.checkpw(password_byte, user.password.encode('utf-8')):
         return {'token': create_access_token(identity=user.email, expires_delta=timedelta(hours=3))}, 200
     else:
         return {"token": "",
-                "message": "you can not access"}, 501
+                "error": "you can not access"}, 501
 
 # POST PARA CREAR UN NUEVO DIARIO
 

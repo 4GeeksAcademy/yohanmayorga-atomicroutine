@@ -44,26 +44,31 @@ export const Listas = () => {
     }, [])
 
     async function deleteList(listId) {
-        let deleted = true;
-        const todoItems = filteredTasks;
-        try {
-            await
-                todoItems.forEach((todoItem) => {
-                    if (todoItem.list_id === listId) {
-                        actions.deletetodo(todoItem.id);
-                    }
-                });
-            actions.deleteList(listId)
-        }
-        catch (error) {
-            deleted = false;
-        };
-        if (deleted) {
-            alert("La lista se ha eliminado exitosamente.");
-            location.reload();
+        if (confirm("¿Confirmas que quieres borrar esta lista y las tareas que contenga?") == true) {
+            let deleted = true;
+            const todoItems = filteredTasks;
+            try {
+                await
+                    todoItems.forEach((todoItem) => {
+                        if (todoItem.list_id === listId) {
+                            actions.deletetodo(todoItem.id);
+                        }
+                    });
+                actions.deleteList(listId)
+            }
+            catch (error) {
+                deleted = false;
+            };
+            if (deleted) {
+                alert("La lista se ha eliminado exitosamente.");
+                location.reload();
+            }
+            else {
+                alert("Ha ocurrido un error")
+            }
         }
         else {
-            alert("Ha ocurrido un error")
+            alert("No se borró la lista.")
         }
     }
 
@@ -252,8 +257,8 @@ export const Listas = () => {
                         {filteredLists.length != 0 && filteredTasks.length > 0 && (<><div className="habitsContainer">
                             <h4 className="card-title2">Porcentaje de cumplimiento:</h4>
                             <ProgressBar variant="info" now={tasksPercentage} label={`${tasksPercentage}%`} />
-                            {!isNaN(tasksPercentage) ? <p className="habitsSummary">{store.profile ? store.profile.name : "Hola"}, 
-                            tu porcentaje de cumplimiento con respecto a tus tareas es del {tasksPercentage}%. Este cálculo se
+                            {!isNaN(tasksPercentage) ? <p className="habitsSummary">{store.profile ? store.profile.name : "Hola"},
+                                tu porcentaje de cumplimiento con respecto a tus tareas es del {tasksPercentage}%. Este cálculo se
                                 realiza tomando en cuenta todas las tareas pendientes por hacer y aquellas ya marcadas como hechas. </p> :
                                 <p className="habitsSummary">No se han encontrado resultados de progreso de cumplimiento de tareas. Esto puede deberse
                                     a que todavía no has creado una tarea nueva para hacerle seguimiento, que no has marcado ninguna como hecha, o de un

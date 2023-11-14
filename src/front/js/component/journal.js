@@ -27,17 +27,22 @@ export const Journal = ({ nameJournal, idJournal, open, close, textJournal }) =>
     }
 
     async function deleteJournal() {
-        let deleted = true;
-        try { await actions.deleteJournal(idJournal) }
-        catch (error) {
-            deleted = false;
-        };
-        if (deleted) {
-            alert("El diario se ha eliminado exitosamente.");
-            location.reload();
+        if (confirm("¿Confirmas que quieres borrar este diario?") == true) {
+            let deleted = true;
+            try { await actions.deleteJournal(idJournal) }
+            catch (error) {
+                deleted = false;
+            };
+            if (deleted) {
+                alert("El diario se ha eliminado exitosamente.");
+                location.reload();
+            }
+            else {
+                alert("Ha ocurrido un error")
+            }
         }
         else {
-            alert("Ha ocurrido un error")
+            alert("No se borró el diario.")
         }
     }
 
