@@ -9,6 +9,7 @@ import { ComoFunciona } from "./pages/comofunciona";
 import { Dashboard } from "./pages/dashboard";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
+import { Herramientas} from "./pages/herramientas";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -31,6 +32,7 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<LogIn />} path="/login" />
                         <Route element={<ComoFunciona />} path="/comofunciona" />
+                        <Route element={<Herramientas />} path="/herramientas" />
                         <Route element={<Dashboard />} path="/dashboard" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />

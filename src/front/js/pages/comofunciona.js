@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
+import React from "react";
 import "../../styles/comofunciona.css";
 import How1 from "../../img/How1.jpg";
 import test from "../../img/test.png";
 
 export const ComoFunciona = () => {
-	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="howContainer">
