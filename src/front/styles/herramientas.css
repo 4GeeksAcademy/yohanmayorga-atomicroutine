@@ -7,11 +7,57 @@
     align-items: center;
 }
 
+.toolsHeaderContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%
+}
+
 #workTools {
     max-height: 30lvh;
 }
 
-.lefttToolsContainer {
+.leftToolsContainer {
     width: 50%;
-    background: green;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: start;
+    color: white;
+}
+
+.rightToolsContainer {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toolsBodyContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.bodyToolscard {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.bodyToolsIMG {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bodyToolsText {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: start;
+    text-align: justify;
 }
