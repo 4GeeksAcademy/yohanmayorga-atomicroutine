@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { useNavigate } from "react-router-dom";
 import "../../styles/dashboard.css";
 import "../../styles/diarios.css";
 import "../../styles/listas.css";
@@ -33,7 +32,6 @@ export const Listas = () => {
         };
         if (done) {
             alert("La lista se ha actualizado exitosamente");
-            location.reload();
         }
         else {
             alert("Ha ocurrido un error")
@@ -249,10 +247,10 @@ export const Listas = () => {
                         {filteredLists.length == 0 && <p className="emptyAlert">Selecciona el botón "Crear lista nueva" para crear tu primera lista de tareas. Puedes colocarle
                             el nombre que quieras, y podrás comenzar a trabajar en ella. Cuando la tengas, en esta sección se mostrará un breve resumen estadístico de tu progreso.</p>}
                         {filteredLists.length != 0 && filteredTasks == 0 && (
-                            <p>Comienza a agregar tareas a tus listas para comenzar a generar tus estadísticas.</p>
+                            <p className="card-title2">Comienza a agregar tareas a tus listas para comenzar a generar tus estadísticas.</p>
                         )}
                         {filteredLists.length != 0 && filteredTasks.length > 0 && (<><div className="habitsContainer">
-                            <h4 className="card-title2">Porcentaje de eficiencia:</h4>
+                            <h4 className="card-title2">Porcentaje de cumplimiento:</h4>
                             <ProgressBar variant="info" now={tasksPercentage} label={`${tasksPercentage}%`} />
                             {!isNaN(tasksPercentage) ? <p className="habitsSummary">{store.profile ? store.profile.name : "Hola"}, 
                             tu porcentaje de cumplimiento con respecto a tus tareas es del {tasksPercentage}%. Este cálculo se

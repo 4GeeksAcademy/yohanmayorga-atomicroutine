@@ -107,6 +107,7 @@ p.habitListText {
 .cardHabitButtonIcon {
     font-size: 50px;
     margin-bottom: 0;
+    opacity: 0.5;
 }
 
 .cardHabitButtonBottom {

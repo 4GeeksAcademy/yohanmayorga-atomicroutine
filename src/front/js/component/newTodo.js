@@ -18,7 +18,7 @@ export const NewTodo = ({ list_id, open, close }) => {
         };
         if (created) {
             alert("La tarea se ha añadido exitosamente");
-            location.reload();
+            {close(false)}
         }
         else {
             alert("Ha ocurrido un error")
