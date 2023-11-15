@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import test from "../../img/test.png";
-import list from "../../img/list.png";
+import atom from "../../img/atom.png";
+import lists from "../../img/lists.png";
 import "../../styles/home.css";
 
 export const Home = () => {
@@ -32,7 +33,7 @@ export const Home = () => {
 							</div>
 						</div>
 						<div id="rightContainer">
-							<img src={list} id="homeImg" />
+							<img src={atom} id="homeImg" />
 						</div>
 					</div>
 				</div>

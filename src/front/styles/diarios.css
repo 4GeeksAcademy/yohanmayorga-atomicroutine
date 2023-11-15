@@ -13,8 +13,7 @@ input[type="color"] {
 }
 
 .CardImg {
-    height: 150px;
-    padding: 10px;
+    height: 200px;
 }
 
 .cardBody {
@@ -44,16 +43,16 @@ input[type="color"] {
     justify-content: center;
     align-items: center;
     flex-grow: 30;
+    margin-top: 15px;
 }
 
 .journalTextPreview {
     text-align: center;
-    width: 90%;
+    margin: 5%;
 }
 
 .cardBody:hover {
-    margin-top: -5px;
-    margin-bottom: -5px;
+    cursor: pointer;
 }
 
 .desktopMainButton {

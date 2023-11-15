@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/dashboard.css";
 import "../../styles/diarios.css";
 import books from "../../img/books.png";
+import journal1 from "../../img/journal.png";
 import { Journal } from "./../component/journal.js";
 
 export const Diarios = () => {
@@ -113,7 +114,7 @@ export const Diarios = () => {
                                 <div className="cardBody" onClick={() => { handleClick(item) }} >
                                 <div className="componentCardHeader" style={{ background: `${item.color}` }}></div>
                                     <h5 className="card-title">{item.name}</h5>
-                                    <img src={books} className="CardImg" />
+                                    <img src={journal1} className="CardImg" />
                                     <div className="journalTextPreview">
                                             <p className="journalTextPreview">{item.text != null ? item.text.substr(0, 20) + "\n" + " ...leer más." : "Selecciona para comenzar a escribir."}</p>
                                     </div>
