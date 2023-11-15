@@ -128,13 +128,41 @@ class Habit(db.Model):
         self.date = date
 
     def __repr__(self):
-        return f'<TodoItem {self.name}>'
+        return f'<Habit {self.name}>'
 
     def serialize(self):
         return {
             "id": self.id,
             "name": self.name,
             "completed": self.completed,
+            "author": self.author.serialize(),
+            "author_id": self.author_id,
+            "description": self.description,
+            "date": self.date
+        }
+
+class Emotion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    description = db.Column(db.String(5000))
+    date = db.Column(db.Date, nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    author = db.relationship("User", backref="emotions")
+
+    def __init__(self, name, author, author_id, description, date):
+        self.name = name
+        self.author = author
+        self.author_id = author_id
+        self.description = description
+        self.date = date
+
+    def __repr__(self):
+        return f'<Emotion {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
             "author": self.author.serialize(),
             "author_id": self.author_id,
             "description": self.description,

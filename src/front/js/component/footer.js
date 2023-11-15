@@ -22,8 +22,8 @@ export const Footer = () => (
 					<h5>RRSS.</h5>
 					<div className="footersn">
 						<h3><a href="https://www.instagram.com/atomicroutine" target="_blank"><i className="fa-brands fa-instagram"></i></a></h3>
-						<h3><a href="#"><i class="fa-brands fa-x-twitter ms-2"></i></a></h3>
-						<h3><a href="#"><i class="fa-brands fa-tiktok ms-2"></i></a></h3>
+						<h3><a href="#"><i className="fa-brands fa-x-twitter ms-2"></i></a></h3>
+						<h3><a href="#"><i className="fa-brands fa-tiktok ms-2"></i></a></h3>
 					</div>
 				</div>
 			</div>

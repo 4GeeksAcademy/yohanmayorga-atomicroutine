@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Journal, TodoList, TodoItem, Habit
+from api.models import db, User, Journal, TodoList, TodoItem, Habit, Emotion
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -150,6 +150,24 @@ def create_list():
         return "error:" + str(error), 500
     return {"list": new_list.serialize()}, 200
 
+@api.route('/createemotion', methods=['POST'])
+@jwt_required()
+def create_emotion():
+    body = request.get_json()
+    name = body.get("name", None)
+    email = get_jwt_identity()
+    description = body.get("description", None)
+    date = body.get("date", None)
+    author = User.query.filter_by(email=email).one_or_none()
+    author_id = User.id
+    try: 
+        new_emotion = Emotion(name=name, author=author, author_id=author_id, description=description, date=date)
+        db.session.add(new_emotion)
+        db.session.commit()
+    except Exception as error:
+        return "error:" + str(error), 500
+    return {"emotion": new_list.serialize()}, 200
+
 # POST PARA CREAR UNA NUEVA TAREA
 
 @api.route('/addtodo', methods=['POST'])
@@ -220,6 +238,20 @@ def delete_todo():
 
     return "Todo deleted successfully", 200
 
+# DELETE PARA BORRAR UN REGISTRO DE EMOCIÓN
+@api.route('/deleteemotion', methods=['DELETE'])
+def delete_emotion():
+    text = request.json.get("emotionId")
+    id = Emotion.query.get(text)
+    if id is None:
+        return "Register not found", 404
+    try:
+        db.session.delete(id)
+        db.session.commit()
+    except Exception as error:
+        return "error:" + str(error), 500
+    return "Register deleted successfully", 200
+
 # DELETE PARA BORRAR UN HÁBITO
 @api.route('/deletehabit', methods=['DELETE'])
 def delete_habit():
@@ -264,6 +296,13 @@ def get_customer_journals():
 def get_journals():
     journals = Journal.query.all()
     return jsonify([journal.serialize() for journal in journals])
+
+# GET PARA OBTENER TODAS LAS EMOCIONES
+
+@api.route('/emotions', methods=['GET'])
+def get_emotions():
+    emotions = Emotion.query.all()
+    return jsonify([emotion.serialize() for emotion in emotions])
 
 # GET PARA OBTENER TODAS LAS LISTAS
 

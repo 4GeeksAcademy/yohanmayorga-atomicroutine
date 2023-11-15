@@ -42,9 +42,6 @@ export const HabitDetail = ({ habitName, habitDescription, habitId, open, close,
         } else {
             alert("No se borró el hábito.")
         }
-
-
-
     }
 
     return (

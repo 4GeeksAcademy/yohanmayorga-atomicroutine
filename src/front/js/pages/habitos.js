@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { useNavigate } from "react-router-dom";
 import "../../styles/dashboard.css";
 import "../../styles/habitos.css";
 import Calendar from 'react-calendar';

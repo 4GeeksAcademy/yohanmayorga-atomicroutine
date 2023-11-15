@@ -92,7 +92,7 @@ export const Listas = () => {
         }
     }
 
-    /* Función para la creación de un diario nuevo (action)*/
+    /* Función para la creación de una lista nueva (action)*/
     async function createList() {
         let created = true;
         try { await actions.createList(list) }
@@ -233,7 +233,7 @@ export const Listas = () => {
                                                                     <input type="checkbox" name="task" value={todo.id} checked={todo.completed} onChange={() => handleTaskClick(todo.id, todo.completed)} />
                                                                 </div>
                                                                 <div className="deleteIndividualItem">
-                                                                    <i class="fa-solid fa-trash-can ms-2" onClick={() => deleteTodoTask(todo.id)}></i>
+                                                                    <i className="fa-solid fa-trash-can ms-2" onClick={() => deleteTodoTask(todo.id)}></i>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -255,7 +255,7 @@ export const Listas = () => {
                                                                     <input type="checkbox" name="task" value={todo.id} checked={todo.completed} onChange={() => handleTaskClick(todo.id, todo.completed)} />
                                                                 </div>
                                                                 <div className="deleteIndividualItem">
-                                                                    <i class="fa-solid fa-trash-can ms-2" onClick={() => deleteTodoTask(todo.id)}></i>
+                                                                    <i className="fa-solid fa-trash-can ms-2" onClick={() => deleteTodoTask(todo.id)}></i>
                                                                 </div>
                                                             </div>
                                                         </div>

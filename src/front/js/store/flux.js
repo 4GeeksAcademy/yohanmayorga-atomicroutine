@@ -9,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			lists: [],
 			todos: [],
 			habits: [],
+			emotions: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -193,6 +194,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			deleteEmotion: async (emotionId) => {
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/deleteemotion", {
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ emotionId }),
+					});
+
+					if (resp.status === 200) {
+						// El registro se eliminó correctamente
+						return true;
+					} else {
+						// Hubo un error al eliminar el registro
+						throw new Error(resp.statusText);
+					}
+				} catch (error) {
+					// Hubo un error al hacer el fetch
+					return false;
+				}
+			},
+
 
 			updateJournal: async (idJournal, textJournal) => {
 				const store = getStore();
@@ -317,6 +341,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false}
 			},
 
+			createEmotion: async (emotionItem) => {
+				const store = getStore()
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/createemotion",
+						{
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+								"Authorization": "Bearer " + store.token
+							},
+							body: JSON.stringify(emotionItem)
+						})
+					const data = await resp.json()
+					setStore({ ...store, emotions: [...store.emotions, data.emotionItem] })
+					return true
+				} catch (error) {
+					return false}
+			},
+
 			createHabit: async (habitItem) => {
 				const store = getStore()
 				try {
@@ -362,6 +405,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/journals")
 					const data = await resp.json()
 					setStore({ ...store, journals: [...data] })
+					return true;
+				} catch (error) {
+					console.log(error)
+				}
+			},
+
+			getEmotions: async () => {
+				const store = getStore()
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/emotions")
+					const data = await resp.json()
+					setStore({ ...store, emotions: [...data] })
 					return true;
 				} catch (error) {
 					console.log(error)
