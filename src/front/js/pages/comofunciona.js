@@ -1,6 +1,8 @@
 import React from "react";
 import "../../styles/comofunciona.css";
 import How1 from "../../img/How1.jpg";
+import How2 from "../../img/How2.jpg";
+import How3 from "../../img/How3.jpg";
 import test from "../../img/test.png";
 
 export const ComoFunciona = () => {
@@ -29,28 +31,17 @@ export const ComoFunciona = () => {
 							<p>Puede crear nuevos hábito, comenzar un diario nuevo, crear nuevas listas de cosas pendientes por hacer, o hacer seguimiento a su estado de ánimo.</p>
 						</div>
 						<div className="howImage2">
-							<img src={test} id="homeImg" />
+							<img src={How2} id="homeImg" />
 						</div>
 					</div>
 
 					<div className="HowBoxColumn">
 						<div className="howImage3">
-							<img src={test} id="homeImg" />
+							<img src={How3} id="homeImg" />
 						</div>
 						<div className="howTextBox3">
 							<h4>Haga el seguimiento</h4>
 							<p>Una vez haya establecido sus objetivos, vaya llevando registro de su progreso. Cada vez que haya cumplido con una meta, lleve el control de su avance. Así la plataforma podrá elaborar las estadísticas.</p>
-						</div>
-					</div>
-
-					<div className="HowBoxColumn">
-
-						<div className="howTextBox4">
-							<h4>Comparta</h4>
-							<p>Si lo desea, puede descargar su progreso, para llevar un seguimiento más personalizado. Recuerde que también cuenta con nosotros en las redes sociales. No olvide compartir con sus amigos.</p>
-						</div>
-						<div className="howImage4">
-							<img src={test} id="homeImg" />
 						</div>
 					</div>
 

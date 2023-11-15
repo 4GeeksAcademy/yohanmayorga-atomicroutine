@@ -8,7 +8,7 @@ export const Footer = () => (
 		<div className="container">
 			<div className="footerBox">
 				<div className="footerSecondaryBox">
-					<img src={atom} className="desktopCardImg" />
+					<a href="/"><img src={atom} className="desktopCardImg"/></a>
 					<h5>Atomic Routine</h5>
 					<p>Caracas | Venezuela</p>
 				</div>

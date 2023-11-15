@@ -5,45 +5,45 @@ import "../../styles/dashboard.css";
 import "../../styles/habitos.css";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import How1 from "../../img/How1.jpg";
+import habit from "../../img/habit.png";
 import { HabitDetail } from "./../component/habitdetail.js";
 import { HabitsFAQ } from "./../component/habitsfaq.js";
 import { HabitStacs } from "./../component/habitsstacs.js";
+import { ProgressBar } from 'react-bootstrap';
 
 export const Habitos = () => {
 
-    const [date, setDate] = useState(new Date())
+    /* Declaración de variables varias */
+    const [date, setDate] = useState(new Date());
     const { store, actions } = useContext(Context);
+    const [habitSet, setHabitSet] = useState("");
+    const [showHabit, setShowHabit] = useState(false);
+    const [showHabitFaq, setShowHabitFaq] = useState(false);
+    const [showHabitStacs, setShowHabitStacs] = useState(false);
+    const [itemHabit, setItemHabit] = useState("");
     const [habitItem, setHabitItem] = useState({
         name: "",
         description: "",
         date: "",
         completed: false
     });
-    const [habitSet, setHabitSet] = useState("")
 
-    const [showHabit, setShowHabit] = useState(false);
-    const [showHabitFaq, setShowHabitFaq] = useState(false);
-    const [showHabitStacs, setShowHabitStacs] = useState(false);
-    const [itemHabit, setItemHabit] = useState("");
-
-    /* Esta función muestra u oculta un hábito específico seleccionado*/
-    const handleClick = (habit) => {
-        { showHabit ? setShowHabit(false) : setShowHabit(true) };
-        setItemHabit(habit);
-    };
-
-
-    const onChange = (date) => {
-        setDate(date)
-    }
-
+    /* Se ejecuta al cargar la página */
     useEffect(() => {
         setDate(new Date)
         actions.getHabits();
     }, [])
 
+    /* Esta función muestra u oculta un hábito específico seleccionado */
+    const handleClick = (habit) => {
+        { showHabit ? setShowHabit(false) : setShowHabit(true) };
+        setItemHabit(habit);
+    };
 
+    /* Esta función cambia la fecha del calendario cuando se selecciona */
+    const onChange = (date) => { setDate(date) }
+
+    /* Cuando se crea un hábito para varias fechas, esta función agrega un día a la fecha para crearla las veces indicadas */
     function updateDate(habitItem) {
         const date = new Date(habitItem.date);
         date.setDate(date.getDate() + 1);
@@ -54,43 +54,29 @@ export const Habitos = () => {
     /* Función para la creación de un hábito nuevo (action)*/
     async function createHabit(habitSet) {
         let created = true;
-
         for (let i = 0; i < habitSet; i++) {
-            if (i === 0) {
-                await actions.createHabit(habitItem);
-            } else {
-                await actions.createHabit(updateDate(habitItem));
-            }
+            if (i === 0) { await actions.createHabit(habitItem) }
+            else { await actions.createHabit(updateDate(habitItem)) }
         }
-
         if (created) {
             alert("El hábito se ha creado exitosamente");
             location.reload();
-        } else {
-            alert("Ha ocurrido un error");
-        }
+        } else { alert("Ha ocurrido un error") }
     }
 
     /* Función para marcar hecho un hábito (action)*/
     async function handleHabitClick(habitId, completed) {
-
         let done = true;
         try { await actions.markHabitCompleted(habitId, !completed) }
-        catch (error) {
-            done = false;
-        };
+        catch (error) { done = false };
         if (done) {
             alert("El hábito se ha actualizado exitosamente");
             location.reload();
         }
-        else {
-            alert("Ha ocurrido un error")
-        }
+        else { alert("Ha ocurrido un error") }
     }
 
-    
-
-    /* Filtro que se aplica para mostrar sólo los hábitos que corresponden al usuario*/
+    /* Filtros varios que declaran variables a usar en la página*/
     const filteredHabits = store.habits.filter((habit) => habit.author.id === store.profile.id);
     const filteredCompletedHabits = store.habits.filter((habit) => habit.author.id === store.profile.id && habit.completed === true && new Date(habit.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) <= new Date().toLocaleDateString());
     const filteredToDateHabits = store.habits.filter((habit) => habit.author.id === store.profile.id && new Date(habit.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) <= new Date().toLocaleDateString());
@@ -100,16 +86,16 @@ export const Habitos = () => {
     return (
         <div className="dashboard">
             <div className="dashboardContainerbox">
+
                 {/* Encabezado del componente de los hábitos*/}
                 <h4><i className="fa-solid fa-chart-column"></i> Hábitos</h4>
                 <div className="desktopHeader">
                     <h1>Bienvenid@ {store.profile ? store.profile.name : ""}</h1>
                     <p>En esta sección, podrás crear y hacer seguimiento a tus hábitos. Para crear un nuevo hábito, haz clic en el botón "crear hábito nuevo". A continuación, ingresa un nombre para tu hábito, una descripción opcional y la frecuencia con la que deseas realizarlo.</p>
                     {!isNaN(totalPercentage) ? <p>Hasta la fecha, tu porcentaje de eficiencia es del {totalPercentage}%.</p> : <p>No hay estadísticas disponibles.</p>}
-                    {habitsToday.length == 0 ? <p>No tienes tareas pendientes para hoy.</p> : <p>Tienes {habitsToday.length} {habitsToday.length == 1 ? "tarea pendiente para hoy." : "tareas pendientes para hoy."}</p>}
                 </div>
 
-                {/* Acá se muestra el hábito específico que el usuario abra*/}
+                {/* Acá se muestra el hábito específico que el usuario abra */}
                 {<HabitDetail
                     habitId={itemHabit.id}
                     habitName={itemHabit.name}
@@ -118,12 +104,12 @@ export const Habitos = () => {
                     open={showHabit}
                     close={setShowHabit} />}
 
-                    {/* Acá se muestra el hábito específico que el usuario abra*/}
+                {/* Acá se muestra el hábito específico que el usuario abra */}
                 {<HabitsFAQ
                     open={showHabitFaq}
                     close={setShowHabitFaq} />}
 
-                     {/* Acá se muestra las estadísticas*/}
+                {/* Acá se muestra las estadísticas */}
                 {<HabitStacs
                     proSummary={totalPercentage}
                     toToday={filteredToDateHabits.length}
@@ -134,23 +120,15 @@ export const Habitos = () => {
                     open={showHabitStacs}
                     close={setShowHabitStacs} />}
 
-
-
+                {/* Cuerpo de la página de hábitos (todo lo que está debajo del header) */}
                 <div className="habitsBoxUnderHeader">
+
+                    {/* Lado izquiero del cuerpo de la página de hábitos */}
                     <div className="leftHabitsSide">
                         <div className="leftHabitsSideBox">
                             <div className="leftHabitsSideBoxHeader">
-                                <div className="HeaderStatistics">
-                                    <h5>Resumen de progreso</h5>
-                                    {!isNaN(totalPercentage) ? <h1 className="habitsPercentage">{totalPercentage}%</h1> : <h5>No hay datos</h5>}
-                                    {!isNaN(totalPercentage) ? <p className="habitsSummary">{store.profile ? store.profile.name : "Hola"}, hasta la fecha,
-                                    tu porcentaje de eficiencia con respecto al cumplimiento de tus hábitos es del {totalPercentage}%. Este cálculo se
-                                    realiza tomando en cuenta todos los hábitos programados hasta la fecha actual y aquellos ya marcados como hechos. </p> :
-                                    <p className="habitsSummary">No se han encontrado resultados de progreso de cumplimiento de hábitos. Esto puede deberse
-                                    a que todavía no has creado un hábito nuevo para hacerle seguimiento, que no has marcado ninguno como hecho, o de un
-                                    error en el cálculo.</p>}
-                                </div>
 
+                                {/* Botones superiores */}
                                 <div className="HeaderButtons">
                                     <div className="cardHabitButton" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal4">
                                         <div className="cardHabitButtonHeader">
@@ -166,7 +144,14 @@ export const Habitos = () => {
                                         <h5>Preguntas frecuentes</h5>
                                         <p className="cardHabitButtonBottom">Haz click para revisar las F.A.Q. de los hábitos.</p>
                                     </div>
-                                    <div className="cardHabitButton" onClick={() => { showHabitStacs ? setShowHabitStacs(false) : setShowHabitStacs(true) }}>  
+                                    <div className="cardHabitButton" onClick={() => { showHabitStacs ? setShowHabitStacs(false) : setShowHabitStacs(true) }}>
+                                        <div className="cardHabitButtonHeader">
+                                            <p className="cardHabitButtonIcon"><i className="fa-solid fa-chart-pie"></i></p>
+                                        </div>
+                                        <h5>Estadísticas</h5>
+                                        <p className="cardHabitButtonBottom">Haz click para ver el resumen de tus estadísticas.</p>
+                                    </div>
+                                    <div className="cardHabitButton" onClick={() => { showHabitStacs ? setShowHabitStacs(false) : setShowHabitStacs(true) }}>
                                         <div className="cardHabitButtonHeader">
                                             <p className="cardHabitButtonIcon"><i className="fa-solid fa-chart-pie"></i></p>
                                         </div>
@@ -174,13 +159,51 @@ export const Habitos = () => {
                                         <p className="cardHabitButtonBottom">Haz click para ver el resumen de tus estadísticas.</p>
                                     </div>
                                 </div>
+
+                                {/* Barra de progreso */}
+                                <div className="habitsMainProBar">
+                                    <h4>Barra de progreso</h4>
+                                    <ProgressBar animated variant="info" now={totalPercentage} />
+                                    <p>La barra refleja el porcentaje de hábitos ya marcados como completados hasta la fecha actual.
+                                    </p>
+                                </div>
+
+                                {/* Cuadro inferior */}
+                                <div className="HeaderStatistics">
+                                    <div className="HeaderStatisticsFirst">
+                                        <img src={habit} id="workTools" />
+                                    </div>
+                                    <div className="HeaderStatisticsSecond">
+
+                                        <div className="HeaderStatisticsSecondOne">
+                                            <h5>Resumen de progreso</h5>
+                                            {!isNaN(totalPercentage) ? <h1 className="habitsPercentage">{totalPercentage}%</h1> : <h5>No hay datos</h5>}
+                                            {!isNaN(totalPercentage) ? <p className="habitsSummary">{store.profile ? store.profile.name : "Hola"}, hasta la fecha,
+                                                tu <strong>porcentaje de eficiencia</strong> con respecto al cumplimiento de tus hábitos es del <strong>{totalPercentage}%</strong>. Este cálculo se
+                                                realiza tomando en cuenta todos los hábitos programados <strong>hasta la fecha actual</strong> y aquellos ya marcados como hechos. </p> :
+                                                <p className="habitsSummary"><strong>No se han encontrado resultados</strong> de progreso de cumplimiento de hábitos. Esto puede deberse
+                                                    a que todavía <strong>no has creado un hábito nuevo para hacerle seguimiento</strong>, que no has marcado ninguno como hecho, o de un
+                                                    error en el cálculo.</p>}
+                                        </div>
+
+                                        <div className="HeaderStatisticsSecondTwo">
+                                            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal4" id="homeButton1">
+                                                Crear un hábito nuevo
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
                             </div>
                         </div>
-
                     </div>
 
+                    {/* Lado derecho del cuerpo de la página de hábitos */}
                     <div className="rightHabitsSide">
                         <h1>Hábitos</h1>
+                        {/* Calendario de react */}
                         <div>
                             <Calendar onChange={onChange} value={date} />
                         </div>
@@ -188,16 +211,17 @@ export const Habitos = () => {
                             <p className="rightSideDate">{date.toLocaleDateString()} </p>
                         </div>
 
+                        {/* Acá se muestran los hábitos debajo del calendario */}
                         <div className="habitsContainer">
-                            <div >
 
-
+                            {/* Título del listado de hábitos */}
+                            <div>
                                 {filteredHabits.filter((habit) => {
                                     return new Date(habit.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) == date.toLocaleDateString()
                                 })?.length > 0 ? <h5 className="habitListTitle">Tareas programadas</h5> : <h5 className="emptyHabitAlert">No hay nada programado para hoy</h5>}
                             </div>
 
-
+                            {/* Listado de hábitos debajo del calendario */}
                             {filteredHabits.filter((habit) => {
                                 return new Date(habit.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) == date.toLocaleDateString();
                             }).map((habit) => (<>
@@ -221,10 +245,6 @@ export const Habitos = () => {
                             ))}
                         </div>
                     </div>
-
-
-
-
 
                     {/* Modal que se abre para crear hábito nuevo */}
                     <div className="modal fade" id="exampleModal4" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

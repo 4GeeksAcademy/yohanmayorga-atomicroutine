@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/navbar.css";
+import atom from "../../img/atom.png";
 
 export const Navbar = () => {
 	const [isNavbarVisible, setIsNavbarVisible] = useState(true);
@@ -20,7 +21,7 @@ export const Navbar = () => {
 		<nav className="navbar navbar-expand-sm navbar-light bg-light" >
 			<div className="container">
 				<a href="/" className="navbar-brand mb-0">
-					Atomic Routine 
+					<img src={atom} className="desktopCardImg"/>
 				</a>
 				<button
 					type="button"
