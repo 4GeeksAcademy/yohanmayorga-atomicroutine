@@ -29,6 +29,7 @@ input[type="color"] {
     -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
     height: 100%;
     margin-top: 15px;
+    background: rgb(255, 255, 184)
 }
 
 .journalsContainer {
@@ -50,8 +51,9 @@ input[type="color"] {
     width: 90%;
 }
 
-.ComponentCard:hover {
+.cardBody:hover {
     margin-top: -5px;
+    margin-bottom: -5px;
 }
 
 .desktopMainButton {
@@ -83,4 +85,11 @@ input[type="color"] {
 .emptyAlert {
     display: flex;
     justify-content: center;
+}
+
+.componentCardHeader {
+    min-height: 10%;
+    width: 100%;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
 }

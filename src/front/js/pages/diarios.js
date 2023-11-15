@@ -109,7 +109,9 @@ export const Diarios = () => {
                     {filteredJournals.length != 0 &&
                         filteredJournals.map(item => (
                             <div className="ComponentCard" key={item.id} >
-                                <div className="cardBody" style={{ background: `linear-gradient(to bottom, ${item.color} 0,1%, white)` }} onClick={() => { handleClick(item) }} >
+                                
+                                <div className="cardBody" onClick={() => { handleClick(item) }} >
+                                <div className="componentCardHeader" style={{ background: `${item.color}` }}></div>
                                     <h5 className="card-title">{item.name}</h5>
                                     <img src={books} className="CardImg" />
                                     <div className="journalTextPreview">
