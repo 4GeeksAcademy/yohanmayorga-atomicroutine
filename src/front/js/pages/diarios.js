@@ -54,7 +54,10 @@ export const Diarios = () => {
                 <h4><i className="fa-solid fa-book"/> Diarios</h4>
                 <div className="desktopHeader">
                     <h1>Bienvenid@ {store.profile ? store.profile.name : ""}</h1>
-                    <p>Aquí podrás crear y consultar diarios personales. Crea un nuevo diario, asignale un nombre, personalízalo con un color y ¡listo! Podrás verlo en esta pantalla. Seleccionalo y comienza a escribir. ¡Puedes crear tantos diarios como desees, y cada uno será un espacio único para ti! Los diarios personales son una forma perfecta para registrar tus pensamientos, sentimientos y experiencias.</p>
+                    <p>Aquí podrás crear y consultar <strong>diarios personales</strong>. Crea un nuevo diario, asignale un nombre, personalízalo con un
+                    color y ¡listo! Podrás verlo en esta pantalla. Seleccionalo y <strong>comienza a escribir</strong>. ¡Puedes crear tantos diarios como
+                    desees, y cada uno será un <strong>espacio único para ti</strong>! Los diarios personales son una <strong>forma perfecta para registrar tus
+                    pensamientos</strong>, sentimientos y experiencias.</p>
                     {filteredJournals.length == 0 ? <p>Actualmente no tienes ningún diario.</p> : <p>Actualmente tienes {filteredJournals.length} {filteredJournals.length == 1 ? "diario creado." : "diarios creados."}</p>}
                 </div>
                 <div className="desktopMainButton">

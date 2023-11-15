@@ -122,7 +122,9 @@ export const Listas = () => {
                 <h4><i className="fa-solid fa-list-check"></i> Listas</h4>
                 <div className="desktopHeader">
                     <h1>Bienvenid@ {store.profile ? store.profile.name : ""}</h1>
-                    <p>Aquí podrás crear y consultar listas de pendientes. Crea una nueva lista, asignale un título, agrega tareas y ¡listo! Podrás verla en esta pantalla. Seleccionala y comienza a trabajar en ella. ¡Puedes crear tantas listas como desees! Las listas de pendientes son una forma perfecta para organizar tus tareas y mantenerte al día con tus objetivos.</p>
+                    <p>Aquí podrás crear y consultar <strong>listas de pendientes</strong>. Crea una nueva lista, asignale un título, agrega tareas y ¡listo! Podrás verla en
+                        esta pantalla. Seleccionala y <strong>comienza a trabajar en ella</strong>. ¡Puedes crear <strong>tantas listas como desees</strong>! Las listas de
+                        pendientes son una <strong>forma perfecta para organizar tus tareas</strong> y mantenerte al día con tus <strong>objetivos</strong>.</p>
                     {!isNaN(tasksPercentage) ? <p>Tu porcentaje de cumplimiento es del {tasksPercentage}%.</p> : <p>No hay estadísticas disponibles.</p>}
                 </div>
 
@@ -229,11 +231,10 @@ export const Listas = () => {
                                                             <div className="endListTexts">
                                                                 <div className="custom-radio">
                                                                     <input type="checkbox" name="task" value={todo.id} checked={todo.completed} onChange={() => handleTaskClick(todo.id, todo.completed)} />
-                                                                    
                                                                 </div>
                                                                 <div className="deleteIndividualItem">
-                                                                        <i class="fa-solid fa-trash-can ms-2" onClick={() => deleteTodoTask(todo.id)}></i>
-                                                                    </div>
+                                                                    <i class="fa-solid fa-trash-can ms-2" onClick={() => deleteTodoTask(todo.id)}></i>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     ))}
@@ -249,9 +250,13 @@ export const Listas = () => {
                                                     }).map(todo => (
                                                         <div className="tasksList" key={todo.id} >
                                                             <p className="tasksListText">{todo.name}</p>
-                                                            <div className="custom-radio">
-                                                                <input type="checkbox" name="task" value={todo.id} checked={todo.completed} onChange={() => handleTaskClick(todo.id, todo.completed)} />
-                                                                <div className="checkmark"></div>
+                                                            <div className="endListTexts">
+                                                                <div className="custom-radio">
+                                                                    <input type="checkbox" name="task" value={todo.id} checked={todo.completed} onChange={() => handleTaskClick(todo.id, todo.completed)} />
+                                                                </div>
+                                                                <div className="deleteIndividualItem">
+                                                                    <i class="fa-solid fa-trash-can ms-2" onClick={() => deleteTodoTask(todo.id)}></i>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     ))}

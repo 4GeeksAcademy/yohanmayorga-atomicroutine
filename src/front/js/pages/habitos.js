@@ -91,8 +91,9 @@ export const Habitos = () => {
                 <h4><i className="fa-solid fa-chart-column"></i> Hábitos</h4>
                 <div className="desktopHeader">
                     <h1>Bienvenid@ {store.profile ? store.profile.name : ""}</h1>
-                    <p>En esta sección, podrás crear y hacer seguimiento a tus hábitos. Para crear un nuevo hábito, haz clic en el botón "crear hábito nuevo". A continuación, ingresa un nombre para tu hábito, una descripción opcional y la frecuencia con la que deseas realizarlo.</p>
-                    {!isNaN(totalPercentage) ? <p>Hasta la fecha, tu porcentaje de eficiencia es del {totalPercentage}%.</p> : <p>No hay estadísticas disponibles.</p>}
+                    <p>En esta sección, podrás crear y <strong>hacer seguimiento a tus hábitos</strong>. Para crear un nuevo hábito, haz clic en el botón <strong>"crear hábito nuevo"</strong>.
+                        A continuación, ingresa un nombre para tu hábito, una descripción opcional y la frecuencia con la que deseas realizarlo.</p>
+                    {!isNaN(totalPercentage) ? <p>Hasta la fecha, tu porcentaje de eficiencia es del <strong>{totalPercentage}%.</strong></p> : <p>No hay estadísticas disponibles.</p>}
                 </div>
 
                 {/* Acá se muestra el hábito específico que el usuario abra */}
@@ -160,13 +161,7 @@ export const Habitos = () => {
                                     </div>
                                 </div>
 
-                                {/* Barra de progreso */}
-                                <div className="habitsMainProBar">
-                                    <h4>Barra de progreso</h4>
-                                    <ProgressBar animated variant="info" now={totalPercentage} />
-                                    <p>La barra refleja el porcentaje de hábitos ya marcados como completados hasta la fecha actual.
-                                    </p>
-                                </div>
+
 
                                 {/* Cuadro inferior */}
                                 <div className="HeaderStatistics">
@@ -177,6 +172,7 @@ export const Habitos = () => {
 
                                         <div className="HeaderStatisticsSecondOne">
                                             <h5>Resumen de progreso</h5>
+
                                             {!isNaN(totalPercentage) ? <h1 className="habitsPercentage">{totalPercentage}%</h1> : <h5>No hay datos</h5>}
                                             {!isNaN(totalPercentage) ? <p className="habitsSummary">{store.profile ? store.profile.name : "Hola"}, hasta la fecha,
                                                 tu <strong>porcentaje de eficiencia</strong> con respecto al cumplimiento de tus hábitos es del <strong>{totalPercentage}%</strong>. Este cálculo se
@@ -191,6 +187,11 @@ export const Habitos = () => {
                                                 Crear un hábito nuevo
                                             </button>
                                         </div>
+
+                                        <h4>Barra de progreso</h4>
+                                        <ProgressBar variant="info" now={totalPercentage} />
+                                        <p>La barra refleja el porcentaje de hábitos ya <strong>marcados como completados</strong> hasta la fecha actual.
+                                        </p>
 
                                     </div>
 
