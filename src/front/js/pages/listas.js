@@ -43,6 +43,26 @@ export const Listas = () => {
         actions.getTasks();
     }, [])
 
+    async function deleteTodoTask(taskId) {
+        if (confirm("¿Confirmas que quieres borrar esta tarea?") == true) {
+            let deleted = true;
+            try { await actions.deletetodo(taskId) }
+            catch (error) {
+                deleted = false;
+            };
+            if (deleted) {
+                alert("La tarea se ha eliminado exitosamente.");
+                location.reload();
+            }
+            else {
+                alert("Ha ocurrido un error")
+            }
+        }
+        else {
+            alert("No se borró la tarea.")
+        }
+    }
+
     async function deleteList(listId) {
         if (confirm("¿Confirmas que quieres borrar esta lista y las tareas que contenga?") == true) {
             let deleted = true;
@@ -195,6 +215,7 @@ export const Listas = () => {
                                                     </p>
                                                 )}
 
+                                            {/*Renderizo todas las tareas por hacer dentro de cada lista */}
                                             <div className="tab-content2" id="pills-tabContent">
                                                 <div className="tab-pane fade show active" id={`pills-false-${item.id}`} role="tabpanel" aria-labelledby="pills-false-tab" tabIndex="0">
                                                     {filteredTasks.filter((todo) => {
@@ -205,15 +226,20 @@ export const Listas = () => {
                                                     }).map(todo => (
                                                         <div className="tasksList" key={todo.id} >
                                                             <p className="tasksListText me-2">{todo.name}</p>
-                                                            <div className="custom-radio">
-                                                                <input type="checkbox" name="task" value={todo.id} checked={todo.completed} onChange={() => handleTaskClick(todo.id, todo.completed)} />
-                                                                <div className="checkmark"></div>
+                                                            <div className="endListTexts">
+                                                                <div className="custom-radio">
+                                                                    <input type="checkbox" name="task" value={todo.id} checked={todo.completed} onChange={() => handleTaskClick(todo.id, todo.completed)} />
+                                                                    
+                                                                </div>
+                                                                <div className="deleteIndividualItem">
+                                                                        <i class="fa-solid fa-trash-can ms-2" onClick={() => deleteTodoTask(todo.id)}></i>
+                                                                    </div>
                                                             </div>
                                                         </div>
                                                     ))}
                                                 </div>
 
-
+                                                {/*Renderizo todas las tareas hechas dentro de cada lista */}
                                                 <div className="tab-pane fade" id={`pills-true-${item.id}`} role="tabpanel" aria-labelledby="pills-true-tab" tabIndex="0">
                                                     {filteredTasks.filter((todo) => {
                                                         return todo.list_id === item.id && todo.completed;
