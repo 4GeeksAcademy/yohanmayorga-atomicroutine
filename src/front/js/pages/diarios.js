@@ -88,7 +88,7 @@ export const Diarios = () => {
                                         onChange={(e) => setJournal({ ...journal, name: e.target.value })}
                                         required />
                                     <label htmlFor="colorpicker" className="form-label">Color principal</label>
-                                    <input type="color" id="colorpicker" onChange={(e) => setJournal({ ...journal, color: e.target.value })} />
+                                    <input type="color" id="colorpicker" onChange={(e) => setJournal({ ...journal, color: e.target.value })} value="#1074a2"/>
                                 </div>
                             </div>
                             <div className="modal-footer">

@@ -3,6 +3,8 @@ import { Context } from "../store/appContext";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import "../../styles/dashboard.css";
+import "../../styles/emociones.css";
+import journal1 from "../../img/journal.png";
 
 export const Emociones = () => {
 
@@ -19,33 +21,49 @@ export const Emociones = () => {
 
     /* Filtro que se aplica para mostrar el registro de emociones que corresponden al usuario*/
     const filteredEmotions = store.emotions.filter((emotion) => emotion.author.id === store.profile.id);
+    const filteredHappy = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "feliz");
+    const filteredSad = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "triste");
+    const filteredUn = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "indiferente");
+    const filteredAngry = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "enojado");
+    const filteredAnx = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "ansiedad");
+    const filteredNerv = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "nervioso");
+
+    const countValues = (recieved) => {
+        let totalValues = 0;
+        for (const item of recieved) {
+            const values = item.description.split(",");
+            totalValues += values.length;
+        }
+        return totalValues;
+    };
 
     const handleChange = (e) => {
         const selectedOption = e.target.value;
         // Agrega la opción elegida a la lista
         if (selectedOptions.indexOf(selectedOption) === -1) {
-          // Actualiza las opciones
-          setSelectedOptions([...selectedOptions, selectedOption]);
-          // Actualiza emotionItem.description al unirla con el valor existente
-          setEmotionItem((prevEmotionItem) => ({
-            ...prevEmotionItem,
-            description: [...prevEmotionItem.description, selectedOption],
-          }));
+            // Actualiza las opciones
+            setSelectedOptions([...selectedOptions, selectedOption]);
+            // Actualiza emotionItem.description al unirla con el valor existente
+            setEmotionItem((prevEmotionItem) => ({
+                ...prevEmotionItem,
+                description: [...prevEmotionItem.description, selectedOption],
+            }));
         } else {
-          // Actualiza selectedOptions
-          setSelectedOptions(selectedOptions.filter((option) => option !== selectedOption));
-          // Actualiza emotionItem.description al filtrarla
-          setEmotionItem((prevEmotionItem) => ({
-            ...prevEmotionItem,
-            description: prevEmotionItem.description.filter((option) => option !== selectedOption),
-          }));
+            // Actualiza selectedOptions
+            setSelectedOptions(selectedOptions.filter((option) => option !== selectedOption));
+            // Actualiza emotionItem.description al filtrarla
+            setEmotionItem((prevEmotionItem) => ({
+                ...prevEmotionItem,
+                description: prevEmotionItem.description.filter((option) => option !== selectedOption),
+            }));
         }
-      };
+    };
 
     /* Se ejecuta al cargar la página */
     useEffect(() => {
         setDate(new Date)
         actions.getEmotions();
+
     }, [])
 
     /* Esta función cambia la fecha del calendario cuando se selecciona */
@@ -65,6 +83,10 @@ export const Emociones = () => {
         else {
             alert("Ha ocurrido un error")
         }
+    }
+
+    function renderParagraph(text) {
+        return <p className="detailedListStacts">{text}</p>;
     }
 
     return (
@@ -93,7 +115,160 @@ export const Emociones = () => {
                     <div className="leftHabitsSide">
                         <div className="leftHabitsSideBox">
                             <div className="leftHabitsSideBoxHeader">
+                                {/* Acá se muestra la lista completa de diarios*/}
+                                <div className="feelingsContainer">
 
+                                    {/* FELIZ */}
+                                    <div className="ComponentEmotion">
+                                        <div className="cardEmotionBody" >
+                                            <h5 className="card-title">Feliz</h5>
+                                            <img src={journal1} className="CardImg" />
+                                            <h5>Registros: {filteredHappy.length}</h5>
+                                            <div className="emotionsStacsDetails">
+                                                {(filteredHappy.filter((item) => item.description.includes("Trabajo"))).length > 0 ?
+                                                    renderParagraph("Trabajo: " + ((filteredHappy.filter((item) => item.description.includes("Trabajo")).length / countValues(filteredHappy)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredHappy.filter((item) => item.description.includes("Familia"))).length > 0 ?
+                                                    renderParagraph("Familia: " + ((filteredHappy.filter((item) => item.description.includes("Familia")).length / countValues(filteredHappy)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredHappy.filter((item) => item.description.includes("Pareja"))).length > 0 ?
+                                                    renderParagraph("Pareja: " + ((filteredHappy.filter((item) => item.description.includes("Pareja")).length / countValues(filteredHappy)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredHappy.filter((item) => item.description.includes("Salud"))).length > 0 ?
+                                                    renderParagraph("Salud: " + ((filteredHappy.filter((item) => item.description.includes("Salud")).length / countValues(filteredHappy)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredHappy.filter((item) => item.description.includes("Dinero"))).length > 0 ?
+                                                    renderParagraph("Dinero: " + ((filteredHappy.filter((item) => item.description.includes("Dinero")).length / countValues(filteredHappy)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredHappy.filter((item) => item.description.includes("Amistades"))).length > 0 ?
+                                                    renderParagraph("Amistades: " + ((filteredHappy.filter((item) => item.description.includes("Amistades")).length / countValues(filteredHappy)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredHappy.filter((item) => item.description.includes("Estudios"))).length > 0 ?
+                                                    renderParagraph("Estudios: " + ((filteredHappy.filter((item) => item.description.includes("Estudios")).length / countValues(filteredHappy)) * 100).toFixed(0) + "%") : null}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* TRISTE */}
+                                    <div className="ComponentEmotion">
+                                        <div className="cardEmotionBody" >
+                                            <h5 className="card-title">Triste</h5>
+                                            <img src={journal1} className="CardImg" />
+                                            <h5>Registros: {filteredSad.length}</h5>
+                                            <div className="emotionsStacsDetails">
+                                                {(filteredSad.filter((item) => item.description.includes("Trabajo"))).length > 0 ?
+                                                    renderParagraph("Trabajo: " + ((filteredSad.filter((item) => item.description.includes("Trabajo")).length / countValues(filteredSad)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredSad.filter((item) => item.description.includes("Familia"))).length > 0 ?
+                                                    renderParagraph("Familia: " + ((filteredSad.filter((item) => item.description.includes("Familia")).length / countValues(filteredSad)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredSad.filter((item) => item.description.includes("Pareja"))).length > 0 ?
+                                                    renderParagraph("Pareja: " + ((filteredSad.filter((item) => item.description.includes("Pareja")).length / countValues(filteredSad)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredSad.filter((item) => item.description.includes("Salud"))).length > 0 ?
+                                                    renderParagraph("Salud: " + ((filteredSad.filter((item) => item.description.includes("Salud")).length / countValues(filteredSad)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredSad.filter((item) => item.description.includes("Dinero"))).length > 0 ?
+                                                    renderParagraph("Dinero: " + ((filteredSad.filter((item) => item.description.includes("Dinero")).length / countValues(filteredSad)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredSad.filter((item) => item.description.includes("Amistades"))).length > 0 ?
+                                                    renderParagraph("Amistades: " + ((filteredSad.filter((item) => item.description.includes("Amistades")).length / countValues(filteredSad)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredSad.filter((item) => item.description.includes("Estudios"))).length > 0 ?
+                                                    renderParagraph("Estudios: " + ((filteredSad.filter((item) => item.description.includes("Estudios")).length / countValues(filteredSad)) * 100).toFixed(0) + "%") : null}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Indiferente */}
+                                    <div className="ComponentEmotion">
+                                        <div className="cardEmotionBody" >
+                                            <h5 className="card-title">Indiferente</h5>
+                                            <img src={journal1} className="CardImg" />
+                                            <h5>Registros: {filteredUn.length}</h5>
+                                            <div className="emotionsStacsDetails">
+                                                {(filteredUn.filter((item) => item.description.includes("Trabajo"))).length > 0 ?
+                                                    renderParagraph("Trabajo: " + ((filteredUn.filter((item) => item.description.includes("Trabajo")).length / countValues(filteredUn)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredUn.filter((item) => item.description.includes("Familia"))).length > 0 ?
+                                                    renderParagraph("Familia: " + ((filteredUn.filter((item) => item.description.includes("Familia")).length / countValues(filteredUn)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredUn.filter((item) => item.description.includes("Pareja"))).length > 0 ?
+                                                    renderParagraph("Pareja: " + ((filteredUn.filter((item) => item.description.includes("Pareja")).length / countValues(filteredUn)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredUn.filter((item) => item.description.includes("Salud"))).length > 0 ?
+                                                    renderParagraph("Salud: " + ((filteredUn.filter((item) => item.description.includes("Salud")).length / countValues(filteredUn)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredUn.filter((item) => item.description.includes("Dinero"))).length > 0 ?
+                                                    renderParagraph("Dinero: " + ((filteredUn.filter((item) => item.description.includes("Dinero")).length / countValues(filteredUn)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredUn.filter((item) => item.description.includes("Amistades"))).length > 0 ?
+                                                    renderParagraph("Amistades: " + ((filteredUn.filter((item) => item.description.includes("Amistades")).length / countValues(filteredUn)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredUn.filter((item) => item.description.includes("Estudios"))).length > 0 ?
+                                                    renderParagraph("Estudios: " + ((filteredUn.filter((item) => item.description.includes("Estudios")).length / countValues(filteredUn)) * 100).toFixed(0) + "%") : null}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Enojado */}
+                                    <div className="ComponentEmotion">
+                                        <div className="cardEmotionBody" >
+                                            <h5 className="card-title">Enojado</h5>
+                                            <img src={journal1} className="CardImg" />
+                                            <h5>Registros: {filteredAngry.length}</h5>
+                                            <div className="emotionsStacsDetails">
+                                                {(filteredAngry.filter((item) => item.description.includes("Trabajo"))).length > 0 ?
+                                                    renderParagraph("Trabajo: " + ((filteredAngry.filter((item) => item.description.includes("Trabajo")).length / countValues(filteredAngry)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredAngry.filter((item) => item.description.includes("Familia"))).length > 0 ?
+                                                    renderParagraph("Familia: " + ((filteredAngry.filter((item) => item.description.includes("Familia")).length / countValues(filteredAngry)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredAngry.filter((item) => item.description.includes("Pareja"))).length > 0 ?
+                                                    renderParagraph("Pareja: " + ((filteredAngry.filter((item) => item.description.includes("Pareja")).length / countValues(filteredAngry)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredAngry.filter((item) => item.description.includes("Salud"))).length > 0 ?
+                                                    renderParagraph("Salud: " + ((filteredAngry.filter((item) => item.description.includes("Salud")).length / countValues(filteredAngry)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredAngry.filter((item) => item.description.includes("Dinero"))).length > 0 ?
+                                                    renderParagraph("Dinero: " + ((filteredAngry.filter((item) => item.description.includes("Dinero")).length / countValues(filteredAngry)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredAngry.filter((item) => item.description.includes("Amistades"))).length > 0 ?
+                                                    renderParagraph("Amistades: " + ((filteredAngry.filter((item) => item.description.includes("Amistades")).length / countValues(filteredAngry)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredAngry.filter((item) => item.description.includes("Estudios"))).length > 0 ?
+                                                    renderParagraph("Estudios: " + ((filteredAngry.filter((item) => item.description.includes("Estudios")).length / countValues(filteredAngry)) * 100).toFixed(0) + "%") : null}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Ansiedad */}
+                                    <div className="ComponentEmotion">
+                                        <div className="cardEmotionBody" >
+                                            <h5 className="card-title">Ansiedad</h5>
+                                            <img src={journal1} className="CardImg" />
+                                            <h5>Registros: {filteredAnx.length}</h5>
+                                            <div className="emotionsStacsDetails">
+                                                {(filteredAnx.filter((item) => item.description.includes("Trabajo"))).length > 0 ?
+                                                    renderParagraph("Trabajo: " + ((filteredAnx.filter((item) => item.description.includes("Trabajo")).length / countValues(filteredAnx)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredAnx.filter((item) => item.description.includes("Familia"))).length > 0 ?
+                                                    renderParagraph("Familia: " + ((filteredAnx.filter((item) => item.description.includes("Familia")).length / countValues(filteredAnx)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredAnx.filter((item) => item.description.includes("Pareja"))).length > 0 ?
+                                                    renderParagraph("Pareja: " + ((filteredAnx.filter((item) => item.description.includes("Pareja")).length / countValues(filteredAnx)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredAnx.filter((item) => item.description.includes("Salud"))).length > 0 ?
+                                                    renderParagraph("Salud: " + ((filteredAnx.filter((item) => item.description.includes("Salud")).length / countValues(filteredAnx)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredAnx.filter((item) => item.description.includes("Dinero"))).length > 0 ?
+                                                    renderParagraph("Dinero: " + ((filteredAnx.filter((item) => item.description.includes("Dinero")).length / countValues(filteredAnx)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredAnx.filter((item) => item.description.includes("Amistades"))).length > 0 ?
+                                                    renderParagraph("Amistades: " + ((filteredAnx.filter((item) => item.description.includes("Amistades")).length / countValues(filteredAnx)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredAnx.filter((item) => item.description.includes("Estudios"))).length > 0 ?
+                                                    renderParagraph("Estudios: " + ((filteredAnx.filter((item) => item.description.includes("Estudios")).length / countValues(filteredAnx)) * 100).toFixed(0) + "%") : null}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Nervioso */}
+                                    <div className="ComponentEmotion">
+                                        <div className="cardEmotionBody" >
+                                            <h5 className="card-title">Nervioso</h5>
+                                            <img src={journal1} className="CardImg" />
+                                            <h5>Registros: {filteredNerv.length}</h5>
+                                            <div className="emotionsStacsDetails">
+                                                {(filteredNerv.filter((item) => item.description.includes("Trabajo"))).length > 0 ?
+                                                    renderParagraph("Trabajo: " + ((filteredNerv.filter((item) => item.description.includes("Trabajo")).length / countValues(filteredNerv)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredNerv.filter((item) => item.description.includes("Familia"))).length > 0 ?
+                                                    renderParagraph("Familia: " + ((filteredNerv.filter((item) => item.description.includes("Familia")).length / countValues(filteredNerv)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredNerv.filter((item) => item.description.includes("Pareja"))).length > 0 ?
+                                                    renderParagraph("Pareja: " + ((filteredNerv.filter((item) => item.description.includes("Pareja")).length / countValues(filteredNerv)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredNerv.filter((item) => item.description.includes("Salud"))).length > 0 ?
+                                                    renderParagraph("Salud: " + ((filteredNerv.filter((item) => item.description.includes("Salud")).length / countValues(filteredNerv)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredNerv.filter((item) => item.description.includes("Dinero"))).length > 0 ?
+                                                    renderParagraph("Dinero: " + ((filteredNerv.filter((item) => item.description.includes("Dinero")).length / countValues(filteredNerv)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredNerv.filter((item) => item.description.includes("Amistades"))).length > 0 ?
+                                                    renderParagraph("Amistades: " + ((filteredNerv.filter((item) => item.description.includes("Amistades")).length / countValues(filteredNerv)) * 100).toFixed(0) + "%") : null}
+                                                {(filteredNerv.filter((item) => item.description.includes("Estudios"))).length > 0 ?
+                                                    renderParagraph("Estudios: " + ((filteredNerv.filter((item) => item.description.includes("Estudios")).length / countValues(filteredNerv)) * 100).toFixed(0) + "%") : null}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -124,7 +299,7 @@ export const Emociones = () => {
                                 <div className="journalModalBox">
                                     {/*Estado de ánimo*/}
                                     <label htmlFor="fullName4" className="form-label">¿Cómo te sientes?</label>
-                                    <select name="fullName4" onChange={(e) => setEmotionItem({ ...emotionItem, name: e.target.options[e.target.selectedIndex].value })} required>
+                                    <select name="fullName4" id="fullName4" onChange={(e) => setEmotionItem({ ...emotionItem, name: e.target.options[e.target.selectedIndex].value })} required>
                                         <option value="feliz">Feliz</option>
                                         <option value="indiferente">Indiferente</option>
                                         <option value="triste">Triste</option>
