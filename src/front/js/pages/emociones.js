@@ -85,6 +85,26 @@ export const Emociones = () => {
         }
     }
 
+    async function deleteEmotion(emotionId) {
+        if (confirm("¿Confirmas que quieres borrar este registro?") == true) {
+            let deleted = true;
+            try { await actions.deleteEmotion(emotionId) }
+            catch (error) {
+                deleted = false;
+            };
+            if (deleted) {
+                alert("El registro se eliminó exitosamente.");
+                location.reload();
+            }
+            else {
+                alert("Ha ocurrido un error")
+            }
+        }
+        else {
+            alert("No se borró el registro.")
+        }
+    }
+
     function renderParagraph(text) {
         return <p className="detailedListStacts">{text}</p>;
     }
@@ -282,6 +302,31 @@ export const Emociones = () => {
                         </div>
                         <div className="rightSideDateBox">
                             <p className="rightSideDate">{date.toLocaleDateString()} </p>
+                        </div>
+
+                        {/* Título del listado de emociones */}
+                        <div>
+                                {filteredEmotions.filter((emotion) => {
+                                    return new Date(emotion.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) == date.toLocaleDateString()
+                                })?.length > 0 ? <h5 className="habitListTitle">Registros de este día</h5> : <h5 className="emptyHabitAlert">No hay registros para esta fecha.</h5>}
+                            </div>
+
+                        {/* Acá se muestran las emociones debajo del calendario */}
+                        <div className="emotionsContainer">
+
+                            
+
+                            {/* Listado de emociones debajo del calendario */}
+                            {filteredEmotions.filter((emotion) => {
+                                return new Date(emotion.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) == date.toLocaleDateString();
+                            }).map((emotion) => (<>
+                                <div className="habitList" key={emotion.id}>
+                                    <li className="habitListText">{emotion.name}</li>
+                                    <i className="fa-solid fa-trash-can ms-2" onClick={() => deleteEmotion(emotion.id)}></i>
+
+                                </div>
+                            </>
+                            ))}
                         </div>
                     </div>
                 </div>
