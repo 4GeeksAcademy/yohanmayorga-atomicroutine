@@ -14,19 +14,19 @@ export const Emociones = () => {
     const [options, setOptions] = useState(["Trabajo", "Familia", "Pareja", "Salud", "Dinero", "Amistades", "Estudios"]);
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [emotionItem, setEmotionItem] = useState({
-        name: "feliz",
+        name: "Feliz",
         description: "",
         date: "",
     });
 
     /* Filtro que se aplica para mostrar el registro de emociones que corresponden al usuario*/
     const filteredEmotions = store.emotions.filter((emotion) => emotion.author.id === store.profile.id);
-    const filteredHappy = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "feliz");
-    const filteredSad = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "triste");
-    const filteredUn = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "indiferente");
-    const filteredAngry = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "enojado");
-    const filteredAnx = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "ansiedad");
-    const filteredNerv = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "nervioso");
+    const filteredHappy = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "Feliz");
+    const filteredSad = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "Triste");
+    const filteredUn = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "Indiferente");
+    const filteredAngry = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "Enojado");
+    const filteredAnx = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "Ansiedad");
+    const filteredNerv = store.emotions.filter((emotion) => emotion.author.id === store.profile.id && emotion.name == "Nervioso");
 
     const countValues = (recieved) => {
         let totalValues = 0;
@@ -119,6 +119,7 @@ export const Emociones = () => {
                     <p>En esta sección, podrás llevar un registro de <strong>cómo te has sentido</strong> en los últimos días. Este registro te ayudará a <strong>crear tu propia estadística
                         y podrás ubicar patrones</strong> que te permitirán saber qué está afectando positiva o negativamente en la manera en la que te sientes. Esta herramienta
                         puede ser de gran ayuda para aprovechar aquello que te hace <strong>sentir mejor</strong>, y mejorar aquellos aspectos que no.</p>
+                        {filteredEmotions.length == 0 ? <p>Actualmente no tienes ningún registro creado.</p> : <p>Actualmente tienes {filteredEmotions.length} {filteredEmotions.length == 1 ? "registro creado." : "registros creados."}</p>}
                 </div>
 
                 <div className="desktopMainButton">
@@ -142,7 +143,7 @@ export const Emociones = () => {
                                     <div className="ComponentEmotion">
                                         <div className="cardEmotionBody" >
                                             <h5 className="card-title">Feliz</h5>
-                                            <img src={journal1} className="CardImg" />
+                                            <h1>😌</h1>
                                             <h5>Registros: {filteredHappy.length}</h5>
                                             <div className="emotionsStacsDetails">
                                                 {(filteredHappy.filter((item) => item.description.includes("Trabajo"))).length > 0 ?
@@ -167,7 +168,7 @@ export const Emociones = () => {
                                     <div className="ComponentEmotion">
                                         <div className="cardEmotionBody" >
                                             <h5 className="card-title">Triste</h5>
-                                            <img src={journal1} className="CardImg" />
+                                            <h1>😕</h1>
                                             <h5>Registros: {filteredSad.length}</h5>
                                             <div className="emotionsStacsDetails">
                                                 {(filteredSad.filter((item) => item.description.includes("Trabajo"))).length > 0 ?
@@ -192,7 +193,7 @@ export const Emociones = () => {
                                     <div className="ComponentEmotion">
                                         <div className="cardEmotionBody" >
                                             <h5 className="card-title">Indiferente</h5>
-                                            <img src={journal1} className="CardImg" />
+                                            <h1>😐</h1>
                                             <h5>Registros: {filteredUn.length}</h5>
                                             <div className="emotionsStacsDetails">
                                                 {(filteredUn.filter((item) => item.description.includes("Trabajo"))).length > 0 ?
@@ -217,7 +218,7 @@ export const Emociones = () => {
                                     <div className="ComponentEmotion">
                                         <div className="cardEmotionBody" >
                                             <h5 className="card-title">Enojado</h5>
-                                            <img src={journal1} className="CardImg" />
+                                            <h1>😠</h1>
                                             <h5>Registros: {filteredAngry.length}</h5>
                                             <div className="emotionsStacsDetails">
                                                 {(filteredAngry.filter((item) => item.description.includes("Trabajo"))).length > 0 ?
@@ -242,7 +243,7 @@ export const Emociones = () => {
                                     <div className="ComponentEmotion">
                                         <div className="cardEmotionBody" >
                                             <h5 className="card-title">Ansiedad</h5>
-                                            <img src={journal1} className="CardImg" />
+                                            <h1>😩</h1>
                                             <h5>Registros: {filteredAnx.length}</h5>
                                             <div className="emotionsStacsDetails">
                                                 {(filteredAnx.filter((item) => item.description.includes("Trabajo"))).length > 0 ?
@@ -267,7 +268,7 @@ export const Emociones = () => {
                                     <div className="ComponentEmotion">
                                         <div className="cardEmotionBody" >
                                             <h5 className="card-title">Nervioso</h5>
-                                            <img src={journal1} className="CardImg" />
+                                            <h1>😰</h1>
                                             <h5>Registros: {filteredNerv.length}</h5>
                                             <div className="emotionsStacsDetails">
                                                 {(filteredNerv.filter((item) => item.description.includes("Trabajo"))).length > 0 ?
@@ -289,6 +290,22 @@ export const Emociones = () => {
                                     </div>
 
                                 </div>
+
+                                <div className="underEmotionTextBox">
+                                    <h4>¿Cómo usar esta herramienta?</h4>
+                                    <p>La idea es <strong>muy simple</strong>: sólo debes hacer click en el botón <strong>"Crear nuevo registro"</strong> y seleccionar cómo te sientes
+                                    de una lista de opciones. Luego, debes seleccionar <strong>qué te ha hecho sentir así</strong> (hay una serie de opciones predeterminadas, aunque
+                                    pronto se agregarán otras nuevas) y, finalmente, la <strong>fecha de ese registro</strong>. una vez que hayas cargado los datos, <strong>podrás ver
+                                    las estadísticas</strong> en los cuadros superiores.
+                                    </p>
+                                    <h4>¿Para qué sirve esto?</h4>
+                                    <p>La idea de esta herramienta es <strong>ver cómo te has sentido</strong> principalmente en función de todos tus registros. Por ejemplo,
+                                    si "Feliz" tiene 2 registros, eso quiere decir que en dos oportunidades has registrado ese estado de ánimo, y si "Nervioso" tiene 5 registros,
+                                    quiere decir que durante 5 veces has registrado haberte sentido nervioso. El objetivo es que logres ver, <strong>de manera simplificada</strong>,
+                                    qué te ha hecho sentir así. Si tienes un número alto de registro en "Nervioso", y el mayor porcentaje de ese registro es atribuido a "Estudios",
+                                    por ejemplo, sabrás identificar de manera clara qué te hace sentir así principalmente, y podrás <strong>comenzar a trabajar en ello</strong>.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -306,16 +323,13 @@ export const Emociones = () => {
 
                         {/* Título del listado de emociones */}
                         <div>
-                                {filteredEmotions.filter((emotion) => {
-                                    return new Date(emotion.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) == date.toLocaleDateString()
-                                })?.length > 0 ? <h5 className="habitListTitle">Registros de este día</h5> : <h5 className="emptyHabitAlert">No hay registros para esta fecha.</h5>}
-                            </div>
+                            {filteredEmotions.filter((emotion) => {
+                                return new Date(emotion.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) == date.toLocaleDateString()
+                            })?.length > 0 ? <h5 className="habitListTitle">Registros de este día</h5> : <h5 className="emptyHabitAlert">No hay registros para esta fecha.</h5>}
+                        </div>
 
                         {/* Acá se muestran las emociones debajo del calendario */}
                         <div className="emotionsContainer">
-
-                            
-
                             {/* Listado de emociones debajo del calendario */}
                             {filteredEmotions.filter((emotion) => {
                                 return new Date(emotion.date).toLocaleDateString('es-VE', { timeZone: "UTC" }) == date.toLocaleDateString();
@@ -323,7 +337,6 @@ export const Emociones = () => {
                                 <div className="habitList" key={emotion.id}>
                                     <li className="habitListText">{emotion.name}</li>
                                     <i className="fa-solid fa-trash-can ms-2" onClick={() => deleteEmotion(emotion.id)}></i>
-
                                 </div>
                             </>
                             ))}
@@ -345,12 +358,12 @@ export const Emociones = () => {
                                     {/*Estado de ánimo*/}
                                     <label htmlFor="fullName4" className="form-label">¿Cómo te sientes?</label>
                                     <select name="fullName4" id="fullName4" onChange={(e) => setEmotionItem({ ...emotionItem, name: e.target.options[e.target.selectedIndex].value })} required>
-                                        <option value="feliz">Feliz</option>
-                                        <option value="indiferente">Indiferente</option>
-                                        <option value="triste">Triste</option>
-                                        <option value="enojado">Enojado</option>
-                                        <option value="ansiedad">Con ansiedad</option>
-                                        <option value="nervioso">Nervioso</option>
+                                        <option value="Feliz">Feliz</option>
+                                        <option value="Indiferente">Indiferente</option>
+                                        <option value="Triste">Triste</option>
+                                        <option value="Enojado">Enojado</option>
+                                        <option value="Ansiedad">Con ansiedad</option>
+                                        <option value="Nervioso">Nervioso</option>
                                     </select>
 
                                     {/*Descripción del ánimo*/}
