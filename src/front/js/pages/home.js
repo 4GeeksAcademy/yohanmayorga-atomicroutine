@@ -2,7 +2,10 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import test from "../../img/test.png";
 import atom from "../../img/atom.png";
-import lists from "../../img/lists.png";
+import How2 from "../../img/How2.jpg";
+import How6 from "../../img/How6.jpg";
+import How4 from "../../img/How4.jpg";
+import How5 from "../../img/How5.jpg";
 import "../../styles/home.css";
 
 export const Home = () => {
@@ -68,7 +71,7 @@ export const Home = () => {
 					<div className="tab-content" id="pills-tabContent">
 						<div className="tab-pane fade show active" id="pills-habits" role="tabpanel" aria-labelledby="pills-habits-tab" tabindex="0">
 							<div className="navTabCard">
-								<img src={test} id="homeImg" />
+								<img src={How2} id="homeImg" />
 								<div className="navTabCardButton">
 									<h3>Haz seguimiento</h3>
 									<p>Crea los hábitos que quieres incorporar en tu día a día, y haz seguimiento del nivel de cumplimiento. Revisa el historial de tus hábitos.</p>
@@ -77,7 +80,7 @@ export const Home = () => {
 						</div>
 						<div className="tab-pane fade" id="pills-journal" role="tabpanel" aria-labelledby="pills-journal-tab" tabindex="0">
 							<div className="navTabCard">
-								<img src={test} id="homeImg" />
+								<img src={How6} id="homeImg" />
 								<div className="navTabCardButton">
 									<h3>Crea diarios</h3>
 									<p>Ya sea para un tema en específico, o para un tema en general, está comprobado que llevar un diario donde dejes un registro de tus pensamientos es muy beneficioso para ti.</p>
@@ -86,7 +89,7 @@ export const Home = () => {
 						</div>
 						<div className="tab-pane fade" id="pills-todo" role="tabpanel" aria-labelledby="pills-todo-tab" tabindex="0">
 							<div className="navTabCard">
-								<img src={test} id="homeImg" />
+								<img src={How4} id="homeImg" />
 								<div className="navTabCardButton">
 									<h3>Que no se te pase nada por alto</h3>
 									<p>Crea listas de tareas pendientes, divididas por temas o listas generales, y lleva un registro de lo que tienes pendientes por hacer. Mejora el uso de tu tiempo.</p>
@@ -95,7 +98,7 @@ export const Home = () => {
 						</div>
 						<div className="tab-pane fade" id="pills-emotion" role="tabpanel" aria-labelledby="pills-emotion-tab" tabindex="0">
 							<div className="navTabCard">
-								<img src={test} id="homeImg" />
+								<img src={How5} id="homeImg" />
 								<div className="navTabCardButton">
 									<h3>Controla tus emociones</h3>
 									<p>¿Sientes que las emociones controlan tu forma de pensar? Lleva un registro de tus estados de ánimo, y observa qué tienen en común los momentos felices y los tristes, aprende a identificar patrones y mejora el control de tus emociones.</p>

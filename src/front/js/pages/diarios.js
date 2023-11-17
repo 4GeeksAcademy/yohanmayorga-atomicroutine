@@ -12,7 +12,7 @@ export const Diarios = () => {
     const { store, actions } = useContext(Context);
     const [journal, setJournal] = useState({
         name: "",
-        color: "",
+        color: "#1074a2",
     });
     const [showJournal, setShowJournal] = useState(false);
     const [itemJournal, setItemJournal] = useState("");
@@ -88,7 +88,7 @@ export const Diarios = () => {
                                         onChange={(e) => setJournal({ ...journal, name: e.target.value })}
                                         required />
                                     <label htmlFor="colorpicker" className="form-label">Color principal</label>
-                                    <input type="color" id="colorpicker" onChange={(e) => setJournal({ ...journal, color: e.target.value })} value="#1074a2"/>
+                                    <input type="color" id="colorpicker" onChange={(e) => setJournal({ ...journal, color: e.target.value })} />
                                 </div>
                             </div>
                             <div className="modal-footer">

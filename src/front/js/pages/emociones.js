@@ -295,7 +295,7 @@ export const Emociones = () => {
                                     <h4>¿Cómo usar esta herramienta?</h4>
                                     <p>La idea es <strong>muy simple</strong>: sólo debes hacer click en el botón <strong>"Crear nuevo registro"</strong> y seleccionar cómo te sientes
                                     de una lista de opciones. Luego, debes seleccionar <strong>qué te ha hecho sentir así</strong> (hay una serie de opciones predeterminadas, aunque
-                                    pronto se agregarán otras nuevas) y, finalmente, la <strong>fecha de ese registro</strong>. una vez que hayas cargado los datos, <strong>podrás ver
+                                    pronto se agregarán otras nuevas) y, finalmente, la <strong>fecha de ese registro</strong>. Una vez que hayas cargado los datos, <strong>podrás ver
                                     las estadísticas</strong> en los cuadros superiores.
                                     </p>
                                     <h4>¿Para qué sirve esto?</h4>
