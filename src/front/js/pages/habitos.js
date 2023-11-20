@@ -70,7 +70,6 @@ export const Habitos = () => {
         catch (error) { done = false };
         if (done) {
             alert("El hábito se ha actualizado exitosamente");
-            location.reload();
         }
         else { alert("Ha ocurrido un error") }
     }
@@ -153,8 +152,6 @@ export const Habitos = () => {
                                     </div>
                                 </div>
 
-
-
                                 {/* Cuadro inferior */}
                                 <div className="HeaderStatistics">
                                     <div className="HeaderStatisticsFirst">
@@ -164,7 +161,6 @@ export const Habitos = () => {
 
                                         <div className="HeaderStatisticsSecondOne">
                                             <h5>Resumen de progreso</h5>
-
                                             {!isNaN(totalPercentage) ? <h1 className="habitsPercentage">{totalPercentage}%</h1> : <h5>No hay datos</h5>}
                                             {!isNaN(totalPercentage) ? <p className="habitsSummary">{store.profile ? store.profile.name : "Hola"}, hasta la fecha,
                                                 tu <strong>porcentaje de eficiencia</strong> con respecto al cumplimiento de tus hábitos es del <strong>{totalPercentage}%</strong>. Este cálculo se
