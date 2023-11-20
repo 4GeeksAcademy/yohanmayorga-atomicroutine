@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import test from "../../img/test.png";
 import atom from "../../img/atom.png";
 import How2 from "../../img/How2.jpg";
 import How6 from "../../img/How6.jpg";

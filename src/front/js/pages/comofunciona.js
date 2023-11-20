@@ -3,7 +3,7 @@ import "../../styles/comofunciona.css";
 import How1 from "../../img/How1.jpg";
 import How2 from "../../img/How2.jpg";
 import How3 from "../../img/How3.jpg";
-import test from "../../img/test.png";
+
 
 export const ComoFunciona = () => {
 
