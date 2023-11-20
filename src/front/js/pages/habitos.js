@@ -59,7 +59,6 @@ export const Habitos = () => {
         }
         if (created) {
             alert("El hábito se ha creado exitosamente");
-            location.reload();
         } else { alert("Ha ocurrido un error") }
     }
 
@@ -277,7 +276,7 @@ export const Habitos = () => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                    <button type="button" className="btn btn-primary" onClick={() => createHabit(habitSet)}>Guardar</button>
+                                    <button type="button" className="btn btn-primary" onClick={() => createHabit(habitSet)} data-bs-dismiss="modal">Guardar</button>
                                 </div>
                             </div>
                         </div>
